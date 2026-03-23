@@ -7,6 +7,9 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:#c0c0c0; font-family:'Segoe UI',Tahoma,sans-serif; display:flex; justify-content:center; align-items:center; min-height:100vh; }
+body.embed { min-height:auto; align-items:flex-start; }
+body.embed .game-window { border:none; box-shadow:none; }
+body.embed .titlebar { display:none; }
 
 .game-window {
   border:2px solid; border-color:#fff #0a0a0a #0a0a0a #fff;
@@ -202,6 +205,7 @@ draw=function draw2() {
     ctx.beginPath(); ctx.arc(food.x*CELL+CELL/2,food.y*CELL+CELL/2,CELL/2-2,0,Math.PI*2); ctx.fill();
   }
 };
+if(location.search.indexOf('embed')!==-1) document.body.classList.add('embed');
 </script>
 </body>
 </html>

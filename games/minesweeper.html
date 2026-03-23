@@ -7,6 +7,9 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:#c0c0c0; font-family:'Segoe UI',Tahoma,sans-serif; display:flex; justify-content:center; align-items:center; min-height:100vh; }
+body.embed { min-height:auto; align-items:flex-start; }
+body.embed .game-window { border:none; box-shadow:none; }
+body.embed .titlebar, body.embed .menubar { display:none; }
 
 .game-window {
   border:2px solid; border-color:#fff #0a0a0a #0a0a0a #fff;
@@ -217,6 +220,7 @@ function onRightClick(e) {
 
 function tick() { seconds++; document.getElementById('timer').textContent=String(Math.min(seconds,999)).padStart(3,'0'); }
 
+if(location.search.indexOf('embed')!==-1) document.body.classList.add('embed');
 init(9,9,10,null);
 </script>
 </body>

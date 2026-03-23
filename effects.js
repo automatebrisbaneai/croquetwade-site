@@ -83,6 +83,38 @@
     el.textContent = String(count).replace(/\B(?=(\d{3})+(?!\d))/g, ',').padStart(7, '0');
   }
 
+  /* ── Draggable Windows ────────────────────────────────── */
+
+  function initDrag() {
+    var titlebars = document.querySelectorAll('[data-drag]');
+    titlebars.forEach(function (bar) {
+      var winId = bar.getAttribute('data-drag');
+      var win = document.getElementById(winId);
+      var offsetX = 0, offsetY = 0, dragging = false;
+
+      bar.addEventListener('mousedown', function (e) {
+        if (e.target.closest('.window-btn')) return;
+        dragging = true;
+        offsetX = e.clientX - win.offsetLeft;
+        offsetY = e.clientY - win.offsetTop;
+        win.style.zIndex = ++floatZ;
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', function (e) {
+        if (!dragging) return;
+        win.style.left = (e.clientX - offsetX) + 'px';
+        win.style.top = (e.clientY - offsetY) + 'px';
+      });
+
+      document.addEventListener('mouseup', function () {
+        dragging = false;
+      });
+    });
+  }
+
+  var floatZ = 50;
+
   /* ── Init ────────────────────────────────────────────── */
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -90,5 +122,21 @@
     initSmoothScroll();
     initClock();
     initVisitorCounter();
+    initDrag();
   });
 })();
+
+/* ── Global: open/close floating apps ──────────────────── */
+
+function openApp(id) {
+  var win = document.getElementById(id);
+  if (!win) return;
+  win.classList.add('open');
+  win.style.zIndex = 51;
+}
+
+function closeApp(id) {
+  var win = document.getElementById(id);
+  if (!win) return;
+  win.classList.remove('open');
+}

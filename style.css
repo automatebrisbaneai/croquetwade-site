@@ -699,6 +699,39 @@ a:active {
   height: 44px;
 }
 
+/* ── Floating Windows (games, apps) ──────────────────────── */
+.float-window {
+  position: fixed;
+  z-index: 50;
+  display: none;
+  border-radius: var(--window-radius);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--window-border);
+}
+
+.float-window.open {
+  display: block;
+}
+
+.float-window .window-titlebar {
+  cursor: grab;
+}
+
+.float-window .window-titlebar:active {
+  cursor: grabbing;
+}
+
+.float-window .window-btn-close {
+  cursor: pointer;
+}
+
+.float-window iframe {
+  display: block;
+  border: none;
+  background: #c0c0c0;
+}
+
 /* ── Section fade-in ─────────────────────────────────────── */
 .fade-in {
   opacity: 0;
