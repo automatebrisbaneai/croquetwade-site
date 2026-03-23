@@ -1,22 +1,33 @@
 /* ═══════════════════════════════════════════════════════════
-   croquetwade.com — "The Future. But 1990."
-   Retrofuturist terminal aesthetic. Pure B&W. ASCII art.
+   croquetwade.com — Win98 Retro
+   Light, nostalgic, friendly. Office vibes, not hacker vibes.
    ═══════════════════════════════════════════════════════════ */
 
 /* ── Palette ─────────────────────────────────────────────── */
 :root {
-  --bg: #000000;
-  --fg: #FFFFFF;
-  --fg-dim: #AAAAAA;
-  --fg-muted: #555555;
-  --accent: #55FF55;
+  --bg: #008080;
+  --bg-panel: #c0c0c0;
+  --bg-window: #ffffff;
+  --bg-titlebar: #000080;
+  --bg-titlebar-inactive: #808080;
 
-  --font-body: 'Sometype Mono', monospace;
-  --font-display: 'VT323', monospace;
+  --fg: #000000;
+  --fg-dim: #444444;
+  --fg-muted: #808080;
+  --fg-titlebar: #ffffff;
 
-  --max-width: 720px;
+  --border-lightest: #ffffff;
+  --border-light: #dfdfdf;
+  --border-dark: #808080;
+  --border-darkest: #0a0a0a;
+
+  --font-display: 'Handjet', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'VT323', monospace;
+
+  --max-width: 780px;
   --gutter: 1.5rem;
-  --section-gap: 6rem;
+  --section-gap: 1.5rem;
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
@@ -26,15 +37,37 @@
   box-sizing: border-box;
 }
 
-/* ── Hide scrollbars — viewport = terminal ───────────────── */
-*::-webkit-scrollbar { display: none; }
-* { scrollbar-width: none; }
+/* ── Custom Scrollbar (Win98 style) ──────────────────────── */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-panel);
+  border: 1px solid;
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4d0c8;
+}
+
+::-webkit-scrollbar-button {
+  display: block;
+  height: 16px;
+  background: var(--bg-panel);
+  border: 1px solid;
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+}
 
 /* ── Base ────────────────────────────────────────────────── */
 html {
   font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -42,258 +75,343 @@ body {
   color: var(--fg);
   font-family: var(--font-body);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.6;
   padding: var(--gutter);
-  overflow-x: hidden;
+  min-height: 100vh;
 }
 
 ::selection {
-  color: var(--bg);
-  background-color: var(--fg);
+  color: var(--fg-titlebar);
+  background-color: var(--bg-titlebar);
 }
 
-/* ── CRT Scanline Overlay ────────────────────────────────── */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.15) 2px,
-    rgba(0, 0, 0, 0.15) 4px
-  );
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.06;
-}
-
-/* ── Noise / Grain Overlay ───────────────────────────────── */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
-  background-size: 256px 256px;
-  animation: grain 0.5s steps(1) infinite;
-}
-
-@keyframes grain {
-  0%   { background-position: 0 0; }
-  20%  { background-position: -50px 30px; }
-  40%  { background-position: 70px -20px; }
-  60%  { background-position: -30px 60px; }
-  80%  { background-position: 40px -40px; }
-  100% { background-position: 0 0; }
-}
-
-/* ── Layout ──────────────────────────────────────────────── */
-.container {
+/* ── Desktop Container ───────────────────────────────────── */
+.desktop {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
-section {
+/* ── Win98 Raised Panel ──────────────────────────────────── */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid;
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+  box-shadow:
+    inset 1px 1px 0 var(--border-light),
+    inset -1px -1px 0 var(--border-dark);
+  padding: 3px;
+}
+
+/* ── Win98 Window ────────────────────────────────────────── */
+.window {
+  background: var(--bg-panel);
+  border: 1px solid;
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+  box-shadow:
+    inset 1px 1px 0 var(--border-light),
+    inset -1px -1px 0 var(--border-dark);
   margin-bottom: var(--section-gap);
 }
 
-/* ── Typography ──────────────────────────────────────────── */
-h1, h2, h3 {
+.window-titlebar {
+  background: var(--bg-titlebar);
+  color: var(--fg-titlebar);
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: 0.05em;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 3px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
 }
 
+.window-titlebar-text {
+  flex: 1;
+  padding-left: 2px;
+}
+
+.window-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.window-btn {
+  width: 16px;
+  height: 14px;
+  background: var(--bg-panel);
+  border: 1px solid;
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+  box-shadow:
+    inset 1px 1px 0 var(--border-light),
+    inset -1px -1px 0 var(--border-dark);
+  font-size: 9px;
+  line-height: 12px;
+  text-align: center;
+  color: var(--fg);
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.window-body {
+  background: var(--bg-window);
+  padding: 1.25rem 1.5rem;
+  border: 1px solid;
+  border-color: var(--border-dark) var(--border-lightest) var(--border-lightest) var(--border-dark);
+  margin: 3px;
+}
+
+/* ── Win98 Recessed Panel (for stats, inputs) ────────────── */
+.recessed {
+  background: var(--bg-window);
+  border: 1px solid;
+  border-color: var(--border-dark) var(--border-lightest) var(--border-lightest) var(--border-dark);
+  box-shadow:
+    inset 1px 1px 0 var(--border-darkest),
+    inset -1px -1px 0 var(--border-light);
+  padding: 0.75rem 1rem;
+}
+
+/* ── Typography ──────────────────────────────────────────── */
 h1 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.5rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  color: var(--fg);
 }
 
 h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
   color: var(--fg);
 }
 
 h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.75rem;
-  color: var(--fg-dim);
-}
-
-p {
-  margin-bottom: 1.2rem;
-  max-width: 65ch;
-}
-
-/* ── ASCII Art ───────────────────────────────────────────── */
-.ascii-art {
-  font-family: var(--font-display);
-  line-height: 1.1;
-  letter-spacing: 0.05em;
-  white-space: pre;
-  overflow-x: auto;
-  margin-bottom: 2rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
   color: var(--fg);
 }
 
-.ascii-art-small {
-  font-size: 0.75rem;
-  line-height: 1;
+p {
+  margin-bottom: 0.8rem;
+  max-width: 65ch;
+  font-size: 0.9rem;
 }
 
-/* ── Section Dividers ────────────────────────────────────── */
-.divider {
+/* ── Stat Readout (mono, in recessed panel) ──────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+}
+
+.stat-label {
   color: var(--fg-muted);
-  font-family: var(--font-body);
-  margin: var(--section-gap) 0;
-  white-space: pre;
-  overflow: hidden;
-  user-select: none;
+}
+
+.stat-value {
+  color: var(--fg);
+  font-weight: 400;
 }
 
 /* ── Links ───────────────────────────────────────────────── */
 a {
-  color: var(--fg);
-  text-decoration: none;
-  border-bottom: 1px solid var(--fg-muted);
-  transition: border-color 0.2s;
+  color: #0000ff;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #800080;
 }
 
 a:hover {
-  border-bottom-color: var(--fg);
+  color: #ff0000;
 }
 
-.terminal-link {
-  border: none;
-  color: var(--fg-dim);
+a:active {
+  color: #ff0000;
+}
+
+/* ── Win98 Button ────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: 4px 16px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--fg);
+  background: var(--bg-panel);
+  border: 1px solid;
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+  box-shadow:
+    inset 1px 1px 0 var(--border-light),
+    inset -1px -1px 0 var(--border-dark);
   cursor: pointer;
-  transition: color 0.15s;
+  text-decoration: none;
+  text-align: center;
+  min-width: 75px;
 }
 
-.terminal-link:hover {
+.btn:hover {
   color: var(--fg);
 }
 
-.terminal-link::before {
-  content: "[";
-  color: var(--fg-muted);
+.btn:active {
+  border-color: var(--border-darkest) var(--border-lightest) var(--border-lightest) var(--border-darkest);
+  box-shadow:
+    inset 1px 1px 0 var(--border-dark),
+    inset -1px -1px 0 var(--border-light);
+  padding: 5px 15px 3px 17px;
 }
 
-.terminal-link::after {
-  content: "]";
-  color: var(--fg-muted);
-}
-
-/* ── Stat Readout ────────────────────────────────────────── */
-.stat-line {
-  font-family: var(--font-body);
-  color: var(--fg-dim);
-  margin-bottom: 0.3rem;
-}
-
-.stat-line .stat-label {
-  color: var(--fg-muted);
-}
-
-.stat-line .stat-value {
-  color: var(--fg);
-  font-weight: 500;
-}
-
-/* ── Project Section ─────────────────────────────────────── */
-.project {
-  margin-bottom: 4rem;
-}
-
-.project-header {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  color: var(--fg);
-  margin-bottom: 0.5rem;
-}
-
-.project-summary {
-  color: var(--fg-dim);
-  margin-bottom: 0.75rem;
-}
-
-.project-stat {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: var(--fg-muted);
-  margin-bottom: 0.5rem;
-}
-
-.read-more {
-  font-size: 0.85rem;
-  color: var(--fg-muted);
-  border: none;
-}
-
-.read-more:hover {
-  color: var(--fg);
-}
-
-/* ── Nav (minimal) ───────────────────────────────────────── */
-.nav-top,
-.nav-bottom {
+/* ── Project summary ─────────────────────────────────────── */
+.project-meta {
   font-size: 0.8rem;
   color: var(--fg-muted);
-  margin-bottom: 3rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
 }
 
-.nav-bottom {
-  margin-top: var(--section-gap);
-  margin-bottom: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--fg-muted);
+/* ── Hero Window ─────────────────────────────────────────── */
+.hero-body {
+  padding: 2rem 2rem;
 }
 
-.nav-top a,
-.nav-bottom a {
-  color: var(--fg-muted);
-  border: none;
-  margin-right: 1.5rem;
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--fg-dim);
+  margin-bottom: 1.25rem;
+  max-width: 55ch;
 }
 
-.nav-top a:hover,
-.nav-bottom a:hover {
+/* ── Taskbar (footer) ────────────────────────────────────── */
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-panel);
+  border-top: 1px solid;
+  border-color: var(--border-lightest);
+  box-shadow: inset 0 1px 0 var(--border-light);
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 100;
+  height: 32px;
+}
+
+.start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--fg);
+  background: var(--bg-panel);
+  border: 1px solid;
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+  box-shadow:
+    inset 1px 1px 0 var(--border-light),
+    inset -1px -1px 0 var(--border-dark);
+  cursor: pointer;
+  text-decoration: none;
+  height: 24px;
+}
+
+.start-btn:hover {
   color: var(--fg);
 }
 
-/* ── Back Link (deep-dive pages) ─────────────────────────── */
-.back-link {
-  font-size: 0.85rem;
-  color: var(--fg-muted);
-  border: none;
-  display: inline-block;
-  margin-bottom: 3rem;
+.start-btn:active {
+  border-color: var(--border-darkest) var(--border-lightest) var(--border-lightest) var(--border-darkest);
+  box-shadow:
+    inset 1px 1px 0 var(--border-dark),
+    inset -1px -1px 0 var(--border-light);
 }
 
-.back-link:hover {
+.taskbar-divider {
+  width: 1px;
+  height: 20px;
+  border-left: 1px solid var(--border-dark);
+  border-right: 1px solid var(--border-lightest);
+  margin: 0 2px;
+}
+
+.taskbar-links {
+  display: flex;
+  gap: 2px;
+}
+
+.taskbar-link {
+  padding: 2px 8px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--fg);
+  text-decoration: none;
+  background: var(--bg-panel);
+  border: 1px solid;
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+  box-shadow:
+    inset 1px 1px 0 var(--border-light),
+    inset -1px -1px 0 var(--border-dark);
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.taskbar-link:hover {
   color: var(--fg);
 }
 
-/* ── Typewriter target (hidden until revealed) ───────────── */
-.typewriter {
-  visibility: hidden;
+.taskbar-clock {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--fg);
+  padding: 2px 8px;
+  border: 1px solid;
+  border-color: var(--border-dark) var(--border-lightest) var(--border-lightest) var(--border-dark);
+  box-shadow:
+    inset 1px 1px 0 var(--border-darkest),
+    inset -1px -1px 0 var(--border-light);
+  height: 24px;
+  display: flex;
+  align-items: center;
 }
 
-.typewriter.revealed {
-  visibility: visible;
+/* ── Spacer for fixed taskbar ────────────────────────────── */
+.taskbar-spacer {
+  height: 40px;
 }
 
 /* ── Section fade-in ─────────────────────────────────────── */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .fade-in.visible {
@@ -301,48 +419,46 @@ a:hover {
   transform: translateY(0);
 }
 
-/* ── Phosphor glow (key headings only) ───────────────────── */
-.glow {
-  text-shadow:
-    0 0 7px rgba(255, 255, 255, 0.4),
-    0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-/* ── Footer ──────────────────────────────────────────────── */
-.footer {
-  margin-top: var(--section-gap);
-  padding-top: 2rem;
-  border-top: 1px solid var(--fg-muted);
-  font-size: 0.8rem;
-  color: var(--fg-muted);
+/* ── Back Link (deep-dive pages) ─────────────────────────── */
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
 }
 
 /* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   :root {
-    --gutter: 1rem;
-    --section-gap: 4rem;
+    --gutter: 0.5rem;
   }
 
-  .ascii-art {
-    font-size: 0.55rem;
-    letter-spacing: 0;
+  h1 {
+    font-size: 2.5rem;
   }
 
-  h1 { font-size: 1.5rem; }
-  h2 { font-size: 1.2rem; }
+  .hero-body {
+    padding: 1.25rem;
+  }
+
+  .window-body {
+    padding: 1rem;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .taskbar-links {
+    display: none;
+  }
 }
 
 @media (max-width: 375px) {
-  :root {
-    --gutter: 0.75rem;
+  h1 {
+    font-size: 2rem;
   }
 
   body {
-    font-size: 0.9rem;
-  }
-
-  .ascii-art {
-    font-size: 0.45rem;
+    padding: 0.25rem;
   }
 }
