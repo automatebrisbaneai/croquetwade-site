@@ -12,515 +12,285 @@
 </head>
 <body>
 
-<div class="desktop-wrap">
+<!-- ═══ DESKTOP ICONS ═══ -->
+<nav class="desktop-icons" aria-label="Desktop shortcuts">
+  <a onclick="openApp('hero-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="4" y="6" width="24" height="18" rx="2" fill="#ece9d8" stroke="#000" stroke-width="1"/><rect x="6" y="8" width="20" height="12" fill="#3a6ea5"/><rect x="12" y="24" width="8" height="2" fill="#808080"/><rect x="10" y="26" width="12" height="1" fill="#aca899"/></svg>
+    <span class="desktop-icon-label">My Computer</span>
+  </a>
+  <a onclick="openApp('mycroquet-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><rect x="5" y="10" width="22" height="1" fill="#e8c838"/></svg>
+    <span class="desktop-icon-label">MyCroquet</span>
+  </a>
+  <a onclick="openApp('comeandtry-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><rect x="5" y="10" width="22" height="1" fill="#e8c838"/></svg>
+    <span class="desktop-icon-label">Come & Try</span>
+  </a>
+  <a onclick="openApp('ideals-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="5" y="2" width="22" height="28" rx="1" fill="#fff" stroke="#808080" stroke-width="1"/><line x1="8" y1="7" x2="24" y2="7" stroke="#0066cc" stroke-width="1.5"/><line x1="8" y1="11" x2="22" y2="11" stroke="#ccc" stroke-width="1"/><line x1="8" y1="15" x2="24" y2="15" stroke="#ccc" stroke-width="1"/><line x1="8" y1="19" x2="20" y2="19" stroke="#ccc" stroke-width="1"/></svg>
+    <span class="desktop-icon-label">Ideals & Aims</span>
+  </a>
+  <a onclick="openApp('postcode-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="9" fill="#4a90d9" stroke="#2060a0" stroke-width="1"/><path d="M16 21l-4 8h8l-4-8z" fill="#c00"/><circle cx="16" cy="12" r="4" fill="#fff"/></svg>
+    <span class="desktop-icon-label">Club Finder</span>
+  </a>
+  <a onclick="openApp('emails-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" fill="#f0ede1" stroke="#808080" stroke-width="1"/><path d="M3 7l13 10L29 7" stroke="#0066cc" stroke-width="1.5" fill="none"/></svg>
+    <span class="desktop-icon-label">Email Sequence</span>
+  </a>
+  <a onclick="openApp('messaging-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><path d="M4 5h24v16H14l-5 5v-5H4V5z" fill="#a0d8a0" stroke="#408040" stroke-width="1"/></svg>
+    <span class="desktop-icon-label">Messaging</span>
+  </a>
+  <a onclick="openApp('news-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="4" width="28" height="24" rx="2" fill="#006644" stroke="#004422" stroke-width="1"/><text x="16" y="22" text-anchor="middle" fill="#fff" font-size="20" font-weight="bold" font-family="serif">N</text></svg>
+    <span class="desktop-icon-label">Netscape</span>
+  </a>
+  <a onclick="openApp('identity-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="1" fill="#fff" stroke="#808080" stroke-width="1"/><rect x="4" y="4" width="8" height="6" fill="#f00"/><rect x="13" y="4" width="8" height="6" fill="#0a0"/><rect x="4" y="11" width="8" height="6" fill="#00f"/><rect x="13" y="11" width="8" height="6" fill="#ff0"/></svg>
+    <span class="desktop-icon-label">Paint</span>
+  </a>
+  <a onclick="openApp('contact-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="8" width="28" height="18" rx="1" fill="#fff" stroke="#0066cc" stroke-width="1.5"/><path d="M3 9l13 10L29 9" stroke="#0066cc" stroke-width="1.5" fill="none"/></svg>
+    <span class="desktop-icon-label">Email Wade</span>
+  </a>
+  <a onclick="openApp('games-win')" class="desktop-icon">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><text x="16" y="24" text-anchor="middle" fill="#806000" font-size="10" font-weight="bold">🎮</text></svg>
+    <span class="desktop-icon-label">Games</span>
+  </a>
+  <a class="desktop-icon" style="margin-top:auto;">
+    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><path d="M6 6h20l-3 20H9L6 6z" fill="#ece9d8" stroke="#808080" stroke-width="1"/><rect x="10" y="2" width="12" height="5" fill="none" stroke="#808080" stroke-width="1" rx="1"/><line x1="12" y1="10" x2="12" y2="23" stroke="#aca899"/><line x1="16" y1="10" x2="16" y2="23" stroke="#aca899"/><line x1="20" y1="10" x2="20" y2="23" stroke="#aca899"/></svg>
+    <span class="desktop-icon-label">Recycle Bin</span>
+  </a>
+</nav>
 
-  <!-- ═══ DESKTOP ICONS ═══ -->
-  <nav class="desktop-icons" aria-label="Desktop shortcuts">
-    <!-- Project folders -->
-    <a onclick="scrollToWin('mycroquet')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><rect x="5" y="10" width="22" height="1" fill="#e8c838"/></svg>
-      <span class="desktop-icon-label">MyCroquet</span>
-    </a>
-    <a onclick="scrollToWin('comeandtry')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><rect x="5" y="10" width="22" height="1" fill="#e8c838"/></svg>
-      <span class="desktop-icon-label">Come & Try</span>
-    </a>
-    <a onclick="scrollToWin('ideals')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="5" y="2" width="22" height="28" rx="1" fill="#fff" stroke="#808080" stroke-width="1"/><line x1="8" y1="7" x2="24" y2="7" stroke="#0066cc" stroke-width="1.5"/><line x1="8" y1="11" x2="22" y2="11" stroke="#ccc" stroke-width="1"/><line x1="8" y1="15" x2="24" y2="15" stroke="#ccc" stroke-width="1"/><line x1="8" y1="19" x2="20" y2="19" stroke="#ccc" stroke-width="1"/><line x1="8" y1="23" x2="22" y2="23" stroke="#ccc" stroke-width="1"/></svg>
-      <span class="desktop-icon-label">Ideals & Aims</span>
-    </a>
-    <a onclick="scrollToWin('postcode')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="9" fill="#4a90d9" stroke="#2060a0" stroke-width="1"/><path d="M16 21l-4 8h8l-4-8z" fill="#c00"/><circle cx="16" cy="12" r="4" fill="#fff"/></svg>
-      <span class="desktop-icon-label">Club Finder</span>
-    </a>
-    <a onclick="scrollToWin('emails')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" fill="#f0ede1" stroke="#808080" stroke-width="1"/><path d="M3 7l13 10L29 7" stroke="#0066cc" stroke-width="1.5" fill="none"/></svg>
-      <span class="desktop-icon-label">Email Sequence</span>
-    </a>
-    <a onclick="scrollToWin('messaging')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><path d="M4 5h24v16H14l-5 5v-5H4V5z" fill="#a0d8a0" stroke="#408040" stroke-width="1"/></svg>
-      <span class="desktop-icon-label">Messaging</span>
-    </a>
-    <a onclick="scrollToWin('news')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="4" width="28" height="24" rx="2" fill="#006644" stroke="#004422" stroke-width="1"/><text x="16" y="22" text-anchor="middle" fill="#fff" font-size="20" font-weight="bold" font-family="serif">N</text></svg>
-      <span class="desktop-icon-label">Netscape</span>
-    </a>
-    <a onclick="scrollToWin('identity')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="1" fill="#fff" stroke="#808080" stroke-width="1"/><rect x="4" y="4" width="8" height="6" fill="#f00"/><rect x="13" y="4" width="8" height="6" fill="#0a0"/><rect x="4" y="11" width="8" height="6" fill="#00f"/><rect x="13" y="11" width="8" height="6" fill="#ff0"/><rect x="22" y="4" width="6" height="13" fill="#f0f"/><circle cx="14" cy="24" r="5" fill="#0aa"/></svg>
-      <span class="desktop-icon-label">Paint</span>
-    </a>
-    <a href="#contact" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="8" width="28" height="18" rx="1" fill="#fff" stroke="#0066cc" stroke-width="1.5"/><path d="M3 9l13 10L29 9" stroke="#0066cc" stroke-width="1.5" fill="none"/></svg>
-      <span class="desktop-icon-label">Email Wade</span>
-    </a>
-    <!-- Games folder -->
-    <a onclick="openApp('games-win')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><rect x="5" y="10" width="22" height="1" fill="#e8c838"/><text x="16" y="24" text-anchor="middle" fill="#806000" font-size="10" font-weight="bold">🎮</text></svg>
-      <span class="desktop-icon-label">Games</span>
-    </a>
-    <!-- Bottom -->
-    <a class="desktop-icon" style="margin-top:auto;">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><path d="M6 6h20l-3 20H9L6 6z" fill="#ece9d8" stroke="#808080" stroke-width="1"/><rect x="10" y="2" width="12" height="5" fill="none" stroke="#808080" stroke-width="1" rx="1"/><line x1="12" y1="10" x2="12" y2="23" stroke="#aca899" stroke-width="1"/><line x1="16" y1="10" x2="16" y2="23" stroke="#aca899" stroke-width="1"/><line x1="20" y1="10" x2="20" y2="23" stroke="#aca899" stroke-width="1"/></svg>
-      <span class="desktop-icon-label">Recycle Bin</span>
-    </a>
-  </nav>
-
-  <!-- ═══ WINDOWS COLUMN ═══ -->
-  <div class="desktop-windows">
-
-    <!-- ═══ HERO — My Computer style ═══ -->
-    <div class="window">
-      <div class="window-titlebar">
-        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="2" y="3" width="12" height="9" rx="1" fill="#ece9d8" stroke="#000" stroke-width=".5"/><rect x="3" y="4" width="10" height="6" fill="#3a6ea5"/><rect x="6" y="12" width="4" height="1" fill="#808080"/></svg>
-        <span class="window-titlebar-text">CroquetWade — Growth Consultancy</span>
-        <div class="window-buttons">
-          <span class="window-btn window-btn-minimize">─</span>
-          <span class="window-btn window-btn-maximize">□</span>
-          <span class="window-btn window-btn-close">×</span>
-        </div>
-      </div>
-      <div class="window-menubar">
-        <a>File</a><a>Edit</a><a>View</a><a>Favourites</a><a>Tools</a><a>Help</a>
-      </div>
-      <div class="window-addressbar">
-        <span class="addressbar-label">Address</span>
-        <span class="addressbar-input">C:\CroquetWade\Growth Consultancy</span>
-        <span class="addressbar-go">Go</span>
-      </div>
-      <div class="window-frame">
-        <div class="window-body hero-body">
-          <h1>CroquetWade</h1>
-          <p class="hero-subtitle">Croquet growth systems for Queensland. Strategy, technology, and membership — built from the ground up for the Croquet Association of Queensland.</p>
-          <p style="font-size: 0.85rem; color: var(--fg-dim);">Wade Hart — CAQ Growth Consultancy</p>
-
-          <div class="recessed" style="margin-top: 1.5rem;">
-            <div class="stat-grid">
-              <div class="stat-item"><span class="stat-label">Clubs connected</span><span class="stat-value">41</span></div>
-              <div class="stat-item"><span class="stat-label">Members indexed</span><span class="stat-value">1,777</span></div>
-              <div class="stat-item"><span class="stat-label">Pipeline stages</span><span class="stat-value">6</span></div>
-              <div class="stat-item"><span class="stat-label">Systems built</span><span class="stat-value">8</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ MYCROQUET — Explorer window ═══ -->
-    <div class="window fade-in" id="mycroquet">
-      <div class="window-titlebar">
-        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="2" width="14" height="12" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width=".5"/><rect x="1" y="2" width="7" height="2" rx="1" fill="#e8c838"/></svg>
-        <span class="window-titlebar-text">My Projects\MyCroquet</span>
-        <div class="window-buttons">
-          <span class="window-btn window-btn-minimize">─</span>
-          <span class="window-btn window-btn-maximize">□</span>
-          <span class="window-btn window-btn-close">×</span>
-        </div>
-      </div>
-      <div class="window-menubar">
-        <a>File</a><a>Edit</a><a>View</a><a>Help</a>
-      </div>
-      <div class="window-frame">
-        <div class="window-body">
-          <h2>MyCroquet — Membership Portal</h2>
-          <p class="project-meta">41 clubs · all active members · 6 alpha sessions</p>
-          <p>Passwordless membership portal. Replaces handwritten forms and direct database access with a clean interface that validates, logs, and audits every change.</p>
-          <p>Club secretaries enter data once. It flows through the system. Zero double-entry. Every change logged with full audit trail.</p>
-          <a href="mycroquet.html" class="btn">Open</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ COME AND TRY ═══ -->
-    <div class="window fade-in" id="comeandtry">
-      <div class="window-titlebar">
-        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="2" width="14" height="12" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width=".5"/><rect x="1" y="2" width="7" height="2" rx="1" fill="#e8c838"/></svg>
-        <span class="window-titlebar-text">My Projects\Come & Try</span>
-        <div class="window-buttons">
-          <span class="window-btn window-btn-minimize">─</span>
-          <span class="window-btn window-btn-maximize">□</span>
-          <span class="window-btn window-btn-close">×</span>
-        </div>
-      </div>
-      <div class="window-menubar">
-        <a>File</a><a>Edit</a><a>View</a><a>Help</a>
-      </div>
-      <div class="window-frame">
-        <div class="window-body">
-          <h2>Come & Try — Unified Sign-Up System</h2>
-          <p class="project-meta">single shared pipeline · committee-wide visibility</p>
-          <p>One website for every club in Queensland. Small regional clubs get parity with large city ones. When someone signs up, their details land where any committee member can see and follow up.</p>
-          <p>No more warm leads going cold because the right person was on holiday.</p>
-          <a href="come-and-try.html" class="btn">Open</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ IDEALS & AIMS ═══ -->
-    <div class="window fade-in" id="ideals">
-      <div class="window-titlebar">
-        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="2" y="1" width="12" height="14" rx="1" fill="#fff" stroke="#808080" stroke-width=".5"/><line x1="4" y1="4" x2="12" y2="4" stroke="#0066cc" stroke-width="1"/><line x1="4" y1="7" x2="12" y2="7" stroke="#808080" stroke-width=".5"/><line x1="4" y1="9" x2="12" y2="9" stroke="#808080" stroke-width=".5"/><line x1="4" y1="11" x2="10" y2="11" stroke="#808080" stroke-width=".5"/></svg>
-        <span class="window-titlebar-text">Ideals & Aims — WordPad</span>
-        <div class="window-buttons">
-          <span class="window-btn window-btn-minimize">─</span>
-          <span class="window-btn window-btn-maximize">□</span>
-          <span class="window-btn window-btn-close">×</span>
-        </div>
-      </div>
-      <div class="window-menubar">
-        <a>File</a><a>Edit</a><a>View</a><a>Insert</a><a>Format</a><a>Help</a>
-      </div>
-      <div class="window-frame">
-        <div class="window-body">
-          <h2>Strategic Framework</h2>
-          <p class="project-meta">4 ideals · 6 aims · quarterly priority system</p>
-          <p>Four ideals govern how CAQ operates. Six aims define what it builds toward. Developed from a Management Committee workshop.</p>
-          <p>The aims form a cascade: strong admin enables external promotion, which brings people to the door, which feeds member growth, which strengthens clubs, which develops play, which opens room for innovation.</p>
-          <a href="ideals-and-aims.html" class="btn">Open</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ ONE POSTCODE ═══ -->
-    <div class="window fade-in" id="postcode">
-      <div class="window-titlebar">
-        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><circle cx="8" cy="6" r="5" fill="#4a90d9" stroke="#2060a0" stroke-width=".5"/><path d="M8 11l-2 4h4l-2-4z" fill="#c00" stroke="#800" stroke-width=".5"/><circle cx="8" cy="6" r="2" fill="#fff"/></svg>
-        <span class="window-titlebar-text">One Postcode — Club Finder</span>
-        <div class="window-buttons">
-          <span class="window-btn window-btn-minimize">─</span>
-          <span class="window-btn window-btn-maximize">□</span>
-          <span class="window-btn window-btn-close">×</span>
-        </div>
-      </div>
-      <div class="window-frame">
-        <div class="window-body">
-          <h2>Club Finder</h2>
-          <p class="project-meta">deployed · integrates with Come & Try pipeline</p>
-          <p>Type a postcode, get your nearest club and Come & Try times. Removes the discovery barrier entirely — someone curious about croquet doesn't have to search 20 different club websites.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ EMAIL SEQUENCE — Outlook Express style ═══ -->
-    <div class="window fade-in" id="emails">
-      <div class="window-titlebar">
-        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="4" width="14" height="9" rx="1" fill="#f0ede1" stroke="#808080" stroke-width=".5"/><path d="M2 5l6 5 6-5" stroke="#0066cc" stroke-width="1" fill="none"/></svg>
-        <span class="window-titlebar-text">The Email Sequence — Outlook Express</span>
-        <div class="window-buttons">
-          <span class="window-btn window-btn-minimize">─</span>
-          <span class="window-btn window-btn-maximize">□</span>
-          <span class="window-btn window-btn-close">×</span>
-        </div>
-      </div>
-      <div class="window-menubar">
-        <a>File</a><a>Edit</a><a>View</a><a>Tools</a><a>Message</a><a>Help</a>
-      </div>
-      <div class="window-frame">
-        <div class="window-body">
-          <h2>Automated Nurture</h2>
-          <p class="project-meta">28 days · fully automatic · zero volunteer effort</p>
-          <p>Automated 28-day email series after Come & Try sign-up. Alternates game knowledge and club life stories. Ends with a direct join invitation.</p>
-          <p>Keeps croquet present in the gap between visits — the window where people drift away. The system handles the nurture; the club handles the personal touch.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ MESSAGING — Windows Messenger style ═══ -->
-    <div class="window fade-in" id="messaging">
-      <div class="window-titlebar">
-        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><path d="M2 3h12v8H8l-3 3v-3H2V3z" fill="#a0d8a0" stroke="#408040" stroke-width=".5"/></svg>
-        <span class="window-titlebar-text">Messaging — Windows Messenger</span>
-        <div class="window-buttons">
-          <span class="window-btn window-btn-minimize">─</span>
-          <span class="window-btn window-btn-maximize">□</span>
-          <span class="window-btn window-btn-close">×</span>
-        </div>
-      </div>
-      <div class="window-frame">
-        <div class="window-body">
-          <h2>Shared Enquiry Tracking</h2>
-          <p class="project-meta">3-week visibility · committee accountability</p>
-          <p>Club contact goes to one system, not one person's email inbox. Any committee member can see who enquired and follow up. Solves the "person on holiday" problem.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ NEWS SITE — Internet Explorer ═══ -->
-    <div class="window fade-in" id="news">
-      <div class="window-titlebar">
-        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="1" width="14" height="14" rx="2" fill="#006644" stroke="#004422" stroke-width=".5"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold" font-family="serif">N</text></svg>
-        <span class="window-titlebar-text">The News Site — Netscape Navigator</span>
-        <div class="window-buttons">
-          <span class="window-btn window-btn-minimize">─</span>
-          <span class="window-btn window-btn-maximize">□</span>
-          <span class="window-btn window-btn-close">×</span>
-        </div>
-      </div>
-      <div class="window-menubar">
-        <a>File</a><a>Edit</a><a>View</a><a>Favourites</a><a>Tools</a><a>Help</a>
-      </div>
-      <div class="window-addressbar">
-        <span class="addressbar-label">Address</span>
-        <span class="addressbar-input">https://news.croquetqld.org</span>
-        <span class="addressbar-go">Go</span>
-      </div>
-      <div class="window-frame">
-        <div class="window-body">
-          <h2>Write Once, Publish Everywhere</h2>
-          <p class="project-meta">2,000+ members reached · content stays findable</p>
-          <p>Authors write in plain text, articles appear on the news site, then get reused across emails, newsletters, and AI search results. No code, no design tools — anyone who can write a page can publish.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ VISUAL IDENTITY — Paint! ═══ -->
-    <div class="window fade-in" id="identity">
-      <div class="window-titlebar">
-        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="1" width="14" height="14" rx="1" fill="#fff" stroke="#808080" stroke-width=".5"/><rect x="3" y="3" width="4" height="3" fill="#f00"/><rect x="8" y="3" width="4" height="3" fill="#0a0"/><rect x="3" y="7" width="4" height="3" fill="#00f"/><rect x="8" y="7" width="4" height="3" fill="#ff0"/></svg>
-        <span class="window-titlebar-text">Visual Identity — Paint</span>
-        <div class="window-buttons">
-          <span class="window-btn window-btn-minimize">─</span>
-          <span class="window-btn window-btn-maximize">□</span>
-          <span class="window-btn window-btn-close">×</span>
-        </div>
-      </div>
-      <div class="window-menubar">
-        <a>File</a><a>Edit</a><a>View</a><a>Image</a><a>Colours</a><a>Help</a>
-      </div>
-      <div style="display:flex;">
-        <!-- Paint toolbar (left) -->
-        <div class="paint-toolbar" style="flex-direction:column; border-bottom:none; border-right: 1px solid #aca899;">
-          <span class="paint-tool">✏️</span>
-          <span class="paint-tool active">🖌️</span>
-          <span class="paint-tool">🪣</span>
-          <span class="paint-tool">✂️</span>
-          <span class="paint-tool">🔍</span>
-          <span class="paint-tool">📝</span>
-          <span class="paint-tool">⬜</span>
-          <span class="paint-tool">⭕</span>
-        </div>
-        <!-- Canvas area -->
-        <div style="flex:1; display:flex; flex-direction:column;">
-          <div class="paint-canvas">
-            <h2>Unified Design System</h2>
-            <p class="project-meta" style="margin-bottom:0.5rem;">QLD Maroon · lawn green · Inter · hand-sketched illustrations</p>
-            <p>One colour palette, one typeface, one illustration style across all internal and external materials. A person who sees a Come & Try poster, an email, and a website recognises they're all part of the same organisation.</p>
-          </div>
-        </div>
-      </div>
-      <!-- Colour palette (bottom) -->
-      <div class="paint-palette">
-        <div class="paint-color-preview">
-          <div class="paint-color-fg"></div>
-          <div class="paint-color-bg"></div>
-        </div>
-        <div class="paint-colors">
-          <span class="paint-swatch" style="background:#000"></span>
-          <span class="paint-swatch" style="background:#808080"></span>
-          <span class="paint-swatch" style="background:#800000"></span>
-          <span class="paint-swatch" style="background:#808000"></span>
-          <span class="paint-swatch" style="background:#008000"></span>
-          <span class="paint-swatch" style="background:#008080"></span>
-          <span class="paint-swatch" style="background:#000080"></span>
-          <span class="paint-swatch" style="background:#800080"></span>
-          <span class="paint-swatch" style="background:#808040"></span>
-          <span class="paint-swatch" style="background:#004040"></span>
-          <span class="paint-swatch" style="background:#0000ff"></span>
-          <span class="paint-swatch" style="background:#004080"></span>
-          <span class="paint-swatch" style="background:#4000ff"></span>
-          <span class="paint-swatch" style="background:#804000"></span>
-          <span class="paint-swatch" style="background:#fff"></span>
-          <span class="paint-swatch" style="background:#c0c0c0"></span>
-          <span class="paint-swatch" style="background:#ff0000"></span>
-          <span class="paint-swatch" style="background:#ffff00"></span>
-          <span class="paint-swatch" style="background:#00ff00"></span>
-          <span class="paint-swatch" style="background:#00ffff"></span>
-          <span class="paint-swatch" style="background:#0000ff"></span>
-          <span class="paint-swatch" style="background:#ff00ff"></span>
-          <span class="paint-swatch" style="background:#ffff80"></span>
-          <span class="paint-swatch" style="background:#00ff80"></span>
-          <span class="paint-swatch" style="background:#80ffff"></span>
-          <span class="paint-swatch" style="background:#8080ff"></span>
-          <span class="paint-swatch" style="background:#ff0080"></span>
-          <span class="paint-swatch" style="background:#ff8040"></span>
-        </div>
-      </div>
-      <div class="paint-statusbar">
-        <span>For Help, click Help Topics on the Help Menu.</span>
-        <span style="margin-left:auto;">780 x 120 px</span>
-      </div>
-    </div>
-
-    <!-- ═══ CONTACT — Email window ═══ -->
-    <div class="window fade-in" id="contact">
-      <div class="window-titlebar">
-        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="4" width="14" height="9" rx="1" fill="#f0ede1" stroke="#808080" stroke-width=".5"/><path d="M2 5l6 5 6-5" stroke="#0066cc" stroke-width="1" fill="none"/></svg>
-        <span class="window-titlebar-text">New Message</span>
-        <div class="window-buttons">
-          <span class="window-btn window-btn-minimize">─</span>
-          <span class="window-btn window-btn-maximize">□</span>
-          <span class="window-btn window-btn-close">×</span>
-        </div>
-      </div>
-      <div class="window-menubar">
-        <a>File</a><a>Edit</a><a>View</a><a>Insert</a><a>Format</a><a>Tools</a><a>Help</a>
-      </div>
-      <div class="window-frame">
-        <div class="window-body">
-          <div style="border-bottom: 1px solid #aca899; padding-bottom: 0.5rem; margin-bottom: 1rem;">
-            <p style="margin-bottom:0.3rem;font-size:0.85rem;"><strong>To:</strong> <a href="mailto:me@croquetwade.com">me@croquetwade.com</a></p>
-            <p style="margin-bottom:0.3rem;font-size:0.85rem;"><strong>From:</strong> You</p>
-            <p style="margin-bottom:0;font-size:0.85rem;"><strong>Subject:</strong> Let's talk about croquet growth</p>
-          </div>
-          <p><strong>Wade Hart</strong><br>CAQ Growth Consultancy — Queensland, Australia</p>
-          <p style="color: var(--fg-dim); font-size: 0.85rem;">Hit reply. I'd love to hear from you.</p>
-          <a href="mailto:me@croquetwade.com" class="btn" style="margin-top: 0.5rem;">Send</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ VISITOR COUNTER (90s flair) ═══ -->
-    <div style="text-align:center; margin: 1rem 0; font-family:var(--font-mono); font-size:0.85rem; color:white; text-shadow:1px 1px 2px rgba(0,0,0,0.6);">
-      <span style="display:inline-block; background:#000; color:#0f0; padding:2px 8px; border:2px inset #808080; font-family:'VT323',monospace; font-size:1.1rem; letter-spacing:2px;">
-        ☆ You are visitor #<span id="visitor-count">004,271</span> ☆
-      </span>
-      <br>
-      <span style="font-size:0.7rem; color:rgba(255,255,255,0.7);">Best viewed in Internet Explorer 6.0 at 1024×768</span>
-    </div>
-
-    <div class="taskbar-spacer"></div>
-
-  </div><!-- /desktop-windows -->
-
-</div><!-- /desktop-wrap -->
-
-<!-- ═══ TASKBAR ═══ -->
-<div class="taskbar">
-  <a href="#" class="start-btn"><span class="start-btn-logo">⊞</span> start</a>
-  <div class="taskbar-divider"></div>
-  <div class="taskbar-links">
-    <a href="#mycroquet" class="taskbar-link">📋 MyCroquet</a>
-    <a href="#comeandtry" class="taskbar-link">🎯 Come&Try</a>
-    <a href="#ideals" class="taskbar-link">📄 Ideals</a>
-    <a href="#contact" class="taskbar-link">✉️ Contact</a>
-    <a onclick="openApp('games-win')" class="taskbar-link" style="cursor:pointer">🎮 Games</a>
-  </div>
-  <div class="systray">
-    <span class="systray-icon" title="Volume">🔊</span>
-    <span class="systray-icon" title="Network">📶</span>
-    <span class="systray-icon" title="Security">🛡️</span>
-    <span class="systray-divider"></span>
-    <span class="taskbar-clock"></span>
-  </div>
-</div>
-
-<!-- ═══ FLOATING GAME WINDOWS ═══ -->
-
-<div class="float-window" id="minesweeper-win" style="top:60px; left:calc(50% - 170px);">
-  <div class="window-titlebar" data-drag="minesweeper-win">
-    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><circle cx="8" cy="8" r="5" fill="#000"/><line x1="8" y1="3" x2="8" y2="1" stroke="#000" stroke-width="1.5"/><line x1="8" y1="13" x2="8" y2="15" stroke="#000" stroke-width="1.5"/><line x1="3" y1="8" x2="1" y2="8" stroke="#000" stroke-width="1.5"/><line x1="13" y1="8" x2="15" y2="8" stroke="#000" stroke-width="1.5"/></svg>
-    <span class="window-titlebar-text">Minesweeper</span>
+<!-- ═══ HERO WINDOW (open on load) ═══ -->
+<div class="float-window open" id="hero-win" style="top:30px;left:120px;width:680px;">
+  <div class="window-titlebar" data-drag="hero-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="2" y="3" width="12" height="9" rx="1" fill="#ece9d8" stroke="#000" stroke-width=".5"/><rect x="3" y="4" width="10" height="6" fill="#3a6ea5"/><rect x="6" y="12" width="4" height="1" fill="#808080"/></svg>
+    <span class="window-titlebar-text">CroquetWade — Growth Consultancy</span>
     <div class="window-buttons">
       <span class="window-btn window-btn-minimize">─</span>
       <span class="window-btn window-btn-maximize">□</span>
-      <span class="window-btn window-btn-close" onclick="closeApp('minesweeper-win')">×</span>
+      <span class="window-btn window-btn-close" onclick="closeApp('hero-win')">×</span>
     </div>
   </div>
-  <iframe src="games/minesweeper.html?embed=1" width="340" height="420"></iframe>
+  <div class="window-menubar"><a>File</a><a>Edit</a><a>View</a><a>Favourites</a><a>Tools</a><a>Help</a></div>
+  <div class="window-addressbar"><span class="addressbar-label">Address</span><span class="addressbar-input">C:\CroquetWade\Growth Consultancy</span><span class="addressbar-go">Go</span></div>
+  <div class="window-frame"><div class="window-body hero-body">
+    <h1>CroquetWade</h1>
+    <p class="hero-subtitle">Croquet growth systems for Queensland. Strategy, technology, and membership — built from the ground up for the Croquet Association of Queensland.</p>
+    <p style="font-size:0.85rem;color:var(--fg-dim);">Wade Hart — CAQ Growth Consultancy</p>
+    <div class="recessed" style="margin-top:1.5rem;"><div class="stat-grid">
+      <div class="stat-item"><span class="stat-label">Clubs connected</span><span class="stat-value">41</span></div>
+      <div class="stat-item"><span class="stat-label">Members indexed</span><span class="stat-value">1,777</span></div>
+      <div class="stat-item"><span class="stat-label">Pipeline stages</span><span class="stat-value">6</span></div>
+      <div class="stat-item"><span class="stat-label">Systems built</span><span class="stat-value">8</span></div>
+    </div></div>
+  </div></div>
 </div>
 
-<div class="float-window" id="snake-win" style="top:40px; left:calc(50% - 100px);">
-  <div class="window-titlebar" data-drag="snake-win">
-    <span style="margin-right:4px; font-size:14px;">🐍</span>
-    <span class="window-titlebar-text">Snake</span>
-    <div class="window-buttons">
-      <span class="window-btn window-btn-minimize">─</span>
-      <span class="window-btn window-btn-maximize">□</span>
-      <span class="window-btn window-btn-close" onclick="closeApp('snake-win')">×</span>
+<!-- ═══ PROJECT WINDOWS (hidden, open from desktop) ═══ -->
+
+<div class="float-window" id="mycroquet-win" style="top:50px;left:150px;width:620px;">
+  <div class="window-titlebar" data-drag="mycroquet-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="2" width="14" height="12" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width=".5"/><rect x="1" y="2" width="7" height="2" rx="1" fill="#e8c838"/></svg>
+    <span class="window-titlebar-text">My Projects\MyCroquet</span>
+    <div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('mycroquet-win')">×</span></div>
+  </div>
+  <div class="window-menubar"><a>File</a><a>Edit</a><a>View</a><a>Help</a></div>
+  <div class="window-frame"><div class="window-body">
+    <h2>MyCroquet — Membership Portal</h2>
+    <p class="project-meta">41 clubs · all active members · 6 alpha sessions</p>
+    <p>Passwordless membership portal. Replaces handwritten forms and direct database access with a clean interface that validates, logs, and audits every change.</p>
+    <p>Club secretaries enter data once. It flows through the system. Zero double-entry. Every change logged with full audit trail.</p>
+    <a href="mycroquet.html" class="btn">Open Full Detail</a>
+  </div></div>
+</div>
+
+<div class="float-window" id="comeandtry-win" style="top:70px;left:180px;width:620px;">
+  <div class="window-titlebar" data-drag="comeandtry-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="2" width="14" height="12" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width=".5"/><rect x="1" y="2" width="7" height="2" rx="1" fill="#e8c838"/></svg>
+    <span class="window-titlebar-text">My Projects\Come & Try</span>
+    <div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('comeandtry-win')">×</span></div>
+  </div>
+  <div class="window-menubar"><a>File</a><a>Edit</a><a>View</a><a>Help</a></div>
+  <div class="window-frame"><div class="window-body">
+    <h2>Come & Try — Unified Sign-Up System</h2>
+    <p class="project-meta">single shared pipeline · committee-wide visibility</p>
+    <p>One website for every club in Queensland. Small regional clubs get parity with large city ones. When someone signs up, their details land where any committee member can see and follow up.</p>
+    <p>No more warm leads going cold because the right person was on holiday.</p>
+    <a href="come-and-try.html" class="btn">Open Full Detail</a>
+  </div></div>
+</div>
+
+<div class="float-window" id="ideals-win" style="top:40px;left:200px;width:620px;">
+  <div class="window-titlebar" data-drag="ideals-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="2" y="1" width="12" height="14" rx="1" fill="#fff" stroke="#808080" stroke-width=".5"/><line x1="4" y1="4" x2="12" y2="4" stroke="#0066cc" stroke-width="1"/><line x1="4" y1="7" x2="12" y2="7" stroke="#808080" stroke-width=".5"/><line x1="4" y1="9" x2="12" y2="9" stroke="#808080" stroke-width=".5"/></svg>
+    <span class="window-titlebar-text">Ideals & Aims — WordPad</span>
+    <div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('ideals-win')">×</span></div>
+  </div>
+  <div class="window-menubar"><a>File</a><a>Edit</a><a>View</a><a>Insert</a><a>Format</a><a>Help</a></div>
+  <div class="window-frame"><div class="window-body">
+    <h2>Strategic Framework</h2>
+    <p class="project-meta">4 ideals · 6 aims · quarterly priority system</p>
+    <p>Four ideals govern how CAQ operates. Six aims define what it builds toward. Developed from a Management Committee workshop.</p>
+    <p>The aims form a cascade: strong admin enables external promotion, which brings people to the door, which feeds member growth, which strengthens clubs, which develops play, which opens room for innovation.</p>
+    <a href="ideals-and-aims.html" class="btn">Open Full Detail</a>
+  </div></div>
+</div>
+
+<div class="float-window" id="postcode-win" style="top:60px;left:160px;width:580px;">
+  <div class="window-titlebar" data-drag="postcode-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><circle cx="8" cy="6" r="5" fill="#4a90d9" stroke="#2060a0" stroke-width=".5"/><path d="M8 11l-2 4h4l-2-4z" fill="#c00"/><circle cx="8" cy="6" r="2" fill="#fff"/></svg>
+    <span class="window-titlebar-text">One Postcode — Club Finder</span>
+    <div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('postcode-win')">×</span></div>
+  </div>
+  <div class="window-frame"><div class="window-body">
+    <h2>Club Finder</h2>
+    <p class="project-meta">deployed · integrates with Come & Try pipeline</p>
+    <p>Type a postcode, get your nearest club and Come & Try times. Removes the discovery barrier entirely — someone curious about croquet doesn't have to search 20 different club websites.</p>
+  </div></div>
+</div>
+
+<div class="float-window" id="emails-win" style="top:80px;left:140px;width:620px;">
+  <div class="window-titlebar" data-drag="emails-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="4" width="14" height="9" rx="1" fill="#f0ede1" stroke="#808080" stroke-width=".5"/><path d="M2 5l6 5 6-5" stroke="#0066cc" stroke-width="1" fill="none"/></svg>
+    <span class="window-titlebar-text">The Email Sequence — Outlook Express</span>
+    <div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('emails-win')">×</span></div>
+  </div>
+  <div class="window-menubar"><a>File</a><a>Edit</a><a>View</a><a>Tools</a><a>Message</a><a>Help</a></div>
+  <div class="window-frame"><div class="window-body">
+    <h2>Automated Nurture</h2>
+    <p class="project-meta">28 days · fully automatic · zero volunteer effort</p>
+    <p>Automated 28-day email series after Come & Try sign-up. Alternates game knowledge and club life stories. Ends with a direct join invitation.</p>
+    <p>Keeps croquet present in the gap between visits — the window where people drift away. The system handles the nurture; the club handles the personal touch.</p>
+  </div></div>
+</div>
+
+<div class="float-window" id="messaging-win" style="top:90px;left:170px;width:560px;">
+  <div class="window-titlebar" data-drag="messaging-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><path d="M2 3h12v8H8l-3 3v-3H2V3z" fill="#a0d8a0" stroke="#408040" stroke-width=".5"/></svg>
+    <span class="window-titlebar-text">Messaging — Windows Messenger</span>
+    <div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('messaging-win')">×</span></div>
+  </div>
+  <div class="window-frame"><div class="window-body">
+    <h2>Shared Enquiry Tracking</h2>
+    <p class="project-meta">3-week visibility · committee accountability</p>
+    <p>Club contact goes to one system, not one person's email inbox. Any committee member can see who enquired and follow up. Solves the "person on holiday" problem.</p>
+  </div></div>
+</div>
+
+<div class="float-window" id="news-win" style="top:45px;left:190px;width:640px;">
+  <div class="window-titlebar" data-drag="news-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="1" width="14" height="14" rx="2" fill="#006644" stroke="#004422" stroke-width=".5"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold" font-family="serif">N</text></svg>
+    <span class="window-titlebar-text">The News Site — Netscape Navigator</span>
+    <div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('news-win')">×</span></div>
+  </div>
+  <div class="window-menubar"><a>File</a><a>Edit</a><a>View</a><a>Favourites</a><a>Tools</a><a>Help</a></div>
+  <div class="window-addressbar"><span class="addressbar-label">Address</span><span class="addressbar-input">https://news.croquetqld.org</span><span class="addressbar-go">Go</span></div>
+  <div class="window-frame"><div class="window-body">
+    <h2>Write Once, Publish Everywhere</h2>
+    <p class="project-meta">2,000+ members reached · content stays findable</p>
+    <p>Authors write in plain text, articles appear on the news site, then get reused across emails, newsletters, and AI search results. No code, no design tools — anyone who can write a page can publish.</p>
+  </div></div>
+</div>
+
+<div class="float-window" id="identity-win" style="top:55px;left:130px;width:640px;">
+  <div class="window-titlebar" data-drag="identity-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="1" width="14" height="14" rx="1" fill="#fff" stroke="#808080" stroke-width=".5"/><rect x="3" y="3" width="4" height="3" fill="#f00"/><rect x="8" y="3" width="4" height="3" fill="#0a0"/><rect x="3" y="7" width="4" height="3" fill="#00f"/><rect x="8" y="7" width="4" height="3" fill="#ff0"/></svg>
+    <span class="window-titlebar-text">Visual Identity — Paint</span>
+    <div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('identity-win')">×</span></div>
+  </div>
+  <div class="window-menubar"><a>File</a><a>Edit</a><a>View</a><a>Image</a><a>Colours</a><a>Help</a></div>
+  <div style="display:flex;">
+    <div class="paint-toolbar" style="flex-direction:column;border-bottom:none;border-right:1px solid #aca899;"><span class="paint-tool">✏️</span><span class="paint-tool active">🖌️</span><span class="paint-tool">🪣</span><span class="paint-tool">✂️</span><span class="paint-tool">🔍</span><span class="paint-tool">📝</span><span class="paint-tool">⬜</span><span class="paint-tool">⭕</span></div>
+    <div style="flex:1;"><div class="paint-canvas">
+      <h2>Unified Design System</h2>
+      <p class="project-meta" style="margin-bottom:0.5rem;">QLD Maroon · lawn green · Inter · hand-sketched illustrations</p>
+      <p>One colour palette, one typeface, one illustration style across all internal and external materials. A person who sees a Come & Try poster, an email, and a website recognises they're all part of the same organisation.</p>
+    </div></div>
+  </div>
+  <div class="paint-palette">
+    <div class="paint-color-preview"><div class="paint-color-fg"></div><div class="paint-color-bg"></div></div>
+    <div class="paint-colors">
+      <span class="paint-swatch" style="background:#000"></span><span class="paint-swatch" style="background:#808080"></span><span class="paint-swatch" style="background:#800000"></span><span class="paint-swatch" style="background:#808000"></span><span class="paint-swatch" style="background:#008000"></span><span class="paint-swatch" style="background:#008080"></span><span class="paint-swatch" style="background:#000080"></span><span class="paint-swatch" style="background:#800080"></span><span class="paint-swatch" style="background:#808040"></span><span class="paint-swatch" style="background:#004040"></span><span class="paint-swatch" style="background:#0000ff"></span><span class="paint-swatch" style="background:#004080"></span><span class="paint-swatch" style="background:#4000ff"></span><span class="paint-swatch" style="background:#804000"></span>
+      <span class="paint-swatch" style="background:#fff"></span><span class="paint-swatch" style="background:#c0c0c0"></span><span class="paint-swatch" style="background:#ff0000"></span><span class="paint-swatch" style="background:#ffff00"></span><span class="paint-swatch" style="background:#00ff00"></span><span class="paint-swatch" style="background:#00ffff"></span><span class="paint-swatch" style="background:#0000ff"></span><span class="paint-swatch" style="background:#ff00ff"></span><span class="paint-swatch" style="background:#ffff80"></span><span class="paint-swatch" style="background:#00ff80"></span><span class="paint-swatch" style="background:#80ffff"></span><span class="paint-swatch" style="background:#8080ff"></span><span class="paint-swatch" style="background:#ff0080"></span><span class="paint-swatch" style="background:#ff8040"></span>
     </div>
   </div>
-  <iframe src="games/snake.html?embed=1" width="430" height="500"></iframe>
+  <div class="paint-statusbar"><span>For Help, click Help Topics on the Help Menu.</span></div>
+</div>
+
+<div class="float-window" id="contact-win" style="top:65px;left:210px;width:560px;">
+  <div class="window-titlebar" data-drag="contact-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="4" width="14" height="9" rx="1" fill="#f0ede1" stroke="#808080" stroke-width=".5"/><path d="M2 5l6 5 6-5" stroke="#0066cc" stroke-width="1" fill="none"/></svg>
+    <span class="window-titlebar-text">New Message</span>
+    <div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('contact-win')">×</span></div>
+  </div>
+  <div class="window-menubar"><a>File</a><a>Edit</a><a>View</a><a>Insert</a><a>Format</a><a>Tools</a><a>Help</a></div>
+  <div class="window-frame"><div class="window-body">
+    <div style="border-bottom:1px solid #aca899;padding-bottom:0.5rem;margin-bottom:1rem;">
+      <p style="margin-bottom:0.3rem;font-size:0.85rem;"><strong>To:</strong> <a href="mailto:me@croquetwade.com">me@croquetwade.com</a></p>
+      <p style="margin-bottom:0.3rem;font-size:0.85rem;"><strong>From:</strong> You</p>
+      <p style="margin-bottom:0;font-size:0.85rem;"><strong>Subject:</strong> Let's talk about croquet growth</p>
+    </div>
+    <p><strong>Wade Hart</strong><br>CAQ Growth Consultancy — Queensland, Australia</p>
+    <p style="color:var(--fg-dim);font-size:0.85rem;">Hit reply. I'd love to hear from you.</p>
+    <a href="mailto:me@croquetwade.com" class="btn" style="margin-top:0.5rem;">Send</a>
+  </div></div>
 </div>
 
 <!-- ═══ GAMES FOLDER ═══ -->
-<div class="float-window" id="games-win" style="top:80px; left:calc(50% - 200px);">
+<div class="float-window" id="games-win" style="top:80px;left:200px;width:460px;">
   <div class="window-titlebar" data-drag="games-win">
     <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="2" width="14" height="12" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width=".5"/><rect x="1" y="2" width="7" height="2" rx="1" fill="#e8c838"/></svg>
-    <span class="window-titlebar-text">C:\Games</span>
-    <div class="window-buttons">
-      <span class="window-btn window-btn-minimize">─</span>
-      <span class="window-btn window-btn-maximize">□</span>
-      <span class="window-btn window-btn-close" onclick="closeApp('games-win')">×</span>
-    </div>
+    <span class="window-titlebar-text">C:\Program Files\Games</span>
+    <div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('games-win')">×</span></div>
   </div>
-  <div style="background:#ece9d8;padding:2px 4px;font-size:12px;border-bottom:1px solid #aca899;">
-    <span style="padding:2px 8px;">File</span><span style="padding:2px 8px;">Edit</span><span style="padding:2px 8px;">View</span><span style="padding:2px 8px;">Help</span>
-  </div>
-  <div style="background:#ece9d8;padding:3px 6px;font-size:11px;border-bottom:1px solid #aca899;color:#555;">
-    <span>Address</span>
-    <span style="background:#fff;border:1px solid #7f9db9;padding:2px 6px;margin-left:4px;flex:1;display:inline-block;min-width:200px;">C:\Program Files\Games</span>
-  </div>
-  <div style="background:#fff;padding:16px 20px;border:1px solid #aca899;margin:3px;display:flex;flex-wrap:wrap;gap:16px;min-height:120px;">
-    <a onclick="closeApp('games-win');openApp('minesweeper-win')" class="desktop-icon" style="cursor:pointer;">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#c0c0c0" stroke="#808080" stroke-width="1"/><circle cx="10" cy="10" r="4" fill="#000"/><line x1="10" y1="6" x2="10" y2="3" stroke="#000" stroke-width="1.5"/><line x1="10" y1="14" x2="10" y2="17" stroke="#000" stroke-width="1.5"/><line x1="6" y1="10" x2="3" y2="10" stroke="#000" stroke-width="1.5"/><line x1="14" y1="10" x2="17" y2="10" stroke="#000" stroke-width="1.5"/><text x="24" y="14" fill="#00f" font-size="11" font-weight="bold" text-anchor="middle">1</text><text x="24" y="26" fill="#f00" font-size="11" font-weight="bold" text-anchor="middle">3</text></svg>
-      <span class="desktop-icon-label" style="color:#000;">Minesweeper</span>
-    </a>
-    <a onclick="closeApp('games-win');openApp('snake-win')" class="desktop-icon" style="cursor:pointer;">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#1a1a1a" stroke="#808080" stroke-width="1"/><rect x="6" y="14" width="4" height="4" rx="1" fill="#4caf50"/><rect x="10" y="14" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="14" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="10" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="6" width="4" height="4" rx="1" fill="#66bb6a"/><circle cx="24" cy="22" r="3" fill="#f44336"/></svg>
-      <span class="desktop-icon-label" style="color:#000;">Snake</span>
-    </a>
-    <a onclick="closeApp('games-win');openApp('solitaire-win')" class="desktop-icon" style="cursor:pointer;">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="4" y="2" width="20" height="28" rx="3" fill="#fff" stroke="#333" stroke-width="1"/><text x="9" y="14" fill="#cc0000" font-size="12" font-weight="bold">A</text><text x="14" y="26" fill="#cc0000" font-size="16">♥</text></svg>
-      <span class="desktop-icon-label" style="color:#000;">Solitaire</span>
-    </a>
-    <a onclick="closeApp('games-win');openApp('hearts-win')" class="desktop-icon" style="cursor:pointer;">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#008000" stroke="#006000" stroke-width="1"/><text x="16" y="22" text-anchor="middle" fill="#cc0000" font-size="22">♥</text></svg>
-      <span class="desktop-icon-label" style="color:#000;">Hearts</span>
-    </a>
-    <a onclick="closeApp('games-win');openApp('blackjack-win')" class="desktop-icon" style="cursor:pointer;">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#006400" stroke="#004400" stroke-width="1"/><text x="16" y="14" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">21</text><text x="16" y="26" text-anchor="middle" fill="#ffd700" font-size="14">🃏</text></svg>
-      <span class="desktop-icon-label" style="color:#000;">Blackjack</span>
-    </a>
+  <div class="window-menubar"><a>File</a><a>Edit</a><a>View</a><a>Help</a></div>
+  <div class="window-addressbar"><span class="addressbar-label">Address</span><span class="addressbar-input">C:\Program Files\Games</span><span class="addressbar-go">Go</span></div>
+  <div style="background:#fff;padding:16px 20px;border:1px solid #aca899;margin:3px;display:flex;flex-wrap:wrap;gap:16px;">
+    <a onclick="closeApp('games-win');openApp('minesweeper-win')" class="desktop-icon" style="cursor:pointer"><svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#c0c0c0" stroke="#808080"/><circle cx="10" cy="10" r="4" fill="#000"/><line x1="10" y1="6" x2="10" y2="3" stroke="#000" stroke-width="1.5"/><line x1="10" y1="14" x2="10" y2="17" stroke="#000" stroke-width="1.5"/><line x1="6" y1="10" x2="3" y2="10" stroke="#000" stroke-width="1.5"/><line x1="14" y1="10" x2="17" y2="10" stroke="#000" stroke-width="1.5"/></svg><span class="desktop-icon-label" style="color:#000">Minesweeper</span></a>
+    <a onclick="closeApp('games-win');openApp('snake-win')" class="desktop-icon" style="cursor:pointer"><svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#1a1a1a" stroke="#808080"/><rect x="6" y="14" width="4" height="4" rx="1" fill="#4caf50"/><rect x="10" y="14" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="14" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="10" width="4" height="4" rx="1" fill="#66bb6a"/><circle cx="24" cy="22" r="3" fill="#f44336"/></svg><span class="desktop-icon-label" style="color:#000">Snake</span></a>
+    <a onclick="closeApp('games-win');openApp('solitaire-win')" class="desktop-icon" style="cursor:pointer"><svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="4" y="2" width="20" height="28" rx="3" fill="#fff" stroke="#333"/><text x="9" y="14" fill="#c00" font-size="12" font-weight="bold">A</text><text x="14" y="26" fill="#c00" font-size="16">♥</text></svg><span class="desktop-icon-label" style="color:#000">Solitaire</span></a>
+    <a onclick="closeApp('games-win');openApp('hearts-win')" class="desktop-icon" style="cursor:pointer"><svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#008000" stroke="#006000"/><text x="16" y="22" text-anchor="middle" fill="#c00" font-size="22">♥</text></svg><span class="desktop-icon-label" style="color:#000">Hearts</span></a>
+    <a onclick="closeApp('games-win');openApp('blackjack-win')" class="desktop-icon" style="cursor:pointer"><svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#006400" stroke="#004400"/><text x="16" y="14" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">21</text><text x="16" y="26" text-anchor="middle" fill="#ffd700" font-size="14">🃏</text></svg><span class="desktop-icon-label" style="color:#000">Blackjack</span></a>
   </div>
   <div style="background:#ece9d8;padding:2px 8px;font-size:11px;color:#808080;border-top:1px solid #aca899;">5 objects</div>
 </div>
 
-<div class="float-window" id="solitaire-win" style="top:30px; left:calc(50% - 280px);">
-  <div class="window-titlebar" data-drag="solitaire-win">
-    <span style="margin-right:4px;">♠</span>
-    <span class="window-titlebar-text">Solitaire</span>
-    <div class="window-buttons">
-      <span class="window-btn window-btn-minimize">─</span>
-      <span class="window-btn window-btn-maximize">□</span>
-      <span class="window-btn window-btn-close" onclick="closeApp('solitaire-win')">×</span>
-    </div>
-  </div>
-  <iframe src="games/solitaire.html?embed=1" width="560" height="520"></iframe>
+<!-- ═══ GAME WINDOWS ═══ -->
+<div class="float-window" id="minesweeper-win" style="top:60px;left:calc(50% - 170px);"><div class="window-titlebar" data-drag="minesweeper-win"><span style="margin-right:4px">💣</span><span class="window-titlebar-text">Minesweeper</span><div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('minesweeper-win')">×</span></div></div><iframe src="games/minesweeper.html?embed=1" width="340" height="420"></iframe></div>
+
+<div class="float-window" id="snake-win" style="top:40px;left:calc(50% - 100px);"><div class="window-titlebar" data-drag="snake-win"><span style="margin-right:4px">🐍</span><span class="window-titlebar-text">Snake</span><div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('snake-win')">×</span></div></div><iframe src="games/snake.html?embed=1" width="430" height="500"></iframe></div>
+
+<div class="float-window" id="solitaire-win" style="top:30px;left:calc(50% - 280px);"><div class="window-titlebar" data-drag="solitaire-win"><span style="margin-right:4px">♠</span><span class="window-titlebar-text">Solitaire</span><div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('solitaire-win')">×</span></div></div><iframe src="games/solitaire.html?embed=1" width="560" height="520"></iframe></div>
+
+<div class="float-window" id="hearts-win" style="top:50px;left:calc(50% - 200px);"><div class="window-titlebar" data-drag="hearts-win"><span style="margin-right:4px;color:#c00">♥</span><span class="window-titlebar-text">Hearts</span><div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('hearts-win')">×</span></div></div><iframe src="games/hearts.html?embed=1" width="600" height="540"></iframe></div>
+
+<div class="float-window" id="blackjack-win" style="top:70px;left:calc(50% - 150px);"><div class="window-titlebar" data-drag="blackjack-win"><span style="margin-right:4px">🃏</span><span class="window-titlebar-text">Blackjack</span><div class="window-buttons"><span class="window-btn window-btn-minimize">─</span><span class="window-btn window-btn-maximize">□</span><span class="window-btn window-btn-close" onclick="closeApp('blackjack-win')">×</span></div></div><iframe src="games/blackjack.html?embed=1" width="480" height="520"></iframe></div>
+
+<!-- ═══ VISITOR COUNTER ═══ -->
+<div style="position:fixed;bottom:42px;right:8px;font-family:'VT323',monospace;font-size:0.75rem;color:rgba(255,255,255,0.5);text-align:right;">
+  <span style="background:rgba(0,0,0,.5);padding:1px 6px;border-radius:2px;">Visitor #<span id="visitor-count">004,271</span></span>
 </div>
 
-<div class="float-window" id="hearts-win" style="top:50px; left:calc(50% - 200px);">
-  <div class="window-titlebar" data-drag="hearts-win">
-    <span style="margin-right:4px; color:#cc0000;">♥</span>
-    <span class="window-titlebar-text">Hearts</span>
-    <div class="window-buttons">
-      <span class="window-btn window-btn-minimize">─</span>
-      <span class="window-btn window-btn-maximize">□</span>
-      <span class="window-btn window-btn-close" onclick="closeApp('hearts-win')">×</span>
-    </div>
+<!-- ═══ TASKBAR ═══ -->
+<div class="taskbar">
+  <a href="#" class="start-btn" onclick="openApp('hero-win');return false;"><span class="start-btn-logo">⊞</span> start</a>
+  <div class="taskbar-divider"></div>
+  <div class="taskbar-links">
+    <a onclick="openApp('hero-win')" class="taskbar-link" style="cursor:pointer">🖥️ CroquetWade</a>
+    <a onclick="openApp('games-win')" class="taskbar-link" style="cursor:pointer">🎮 Games</a>
+    <a onclick="openApp('contact-win')" class="taskbar-link" style="cursor:pointer">✉️ Contact</a>
   </div>
-  <iframe src="games/hearts.html?embed=1" width="600" height="540"></iframe>
-</div>
-
-<div class="float-window" id="blackjack-win" style="top:70px; left:calc(50% - 150px);">
-  <div class="window-titlebar" data-drag="blackjack-win">
-    <span style="margin-right:4px;">🃏</span>
-    <span class="window-titlebar-text">Blackjack</span>
-    <div class="window-buttons">
-      <span class="window-btn window-btn-minimize">─</span>
-      <span class="window-btn window-btn-maximize">□</span>
-      <span class="window-btn window-btn-close" onclick="closeApp('blackjack-win')">×</span>
-    </div>
+  <div class="systray">
+    <span class="systray-icon">🔊</span>
+    <span class="systray-icon">📶</span>
+    <span class="systray-icon">🛡️</span>
+    <span class="systray-divider"></span>
+    <span class="taskbar-clock"></span>
   </div>
-  <iframe src="games/blackjack.html?embed=1" width="480" height="520"></iframe>
 </div>
 
 <script src="effects.js"></script>

@@ -106,24 +106,20 @@ body {
   background-color: #3162d0;
 }
 
-/* ── Desktop Layout ───────────────────────────────────────── */
-.desktop-wrap {
-  display: flex;
-  gap: 1.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0.5rem 0;
-  align-items: flex-start;
-}
-
 /* ── Desktop Icons ───────────────────────────────────────── */
 .desktop-icons {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  bottom: 44px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 4px;
   padding: 4px;
-  flex-shrink: 0;
-  width: 80px;
+  width: 90px;
+  z-index: 1;
+  align-content: flex-start;
 }
 
 .desktop-icon {
@@ -163,12 +159,7 @@ body {
   font-family: var(--font-body);
 }
 
-/* ── Windows Column ──────────────────────────────────────── */
-.desktop-windows {
-  flex: 1;
-  min-width: 0;
-  max-width: var(--max-width);
-}
+/* (old column layout removed — all windows are floating now) */
 
 /* ── Window Menu Bar ─────────────────────────────────────── */
 .window-menubar {
@@ -754,7 +745,7 @@ a:active {
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 768px) {
   .desktop-icons { display: none; }
-  .desktop-wrap { max-width: var(--max-width); }
+  .float-window.open { left: 4px !important; right: 4px; width: auto !important; }
 }
 
 @media (max-width: 600px) {
