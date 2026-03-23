@@ -121,10 +121,15 @@ var floatZ = 50;
     var post = document.getElementById('bios-post');
     var content = document.getElementById('bios-content');
     if (!post || !content) return;
-    // Only run on mobile
+
+    // Always build content so it's ready if window resizes
+    buildBiosContent();
+
+    // Only animate on mobile — replace static text with animated version
     if (window.innerWidth > 768) return;
 
-    buildBiosContent();
+    post.innerHTML = '';
+    content.classList.remove('visible');
 
     var lines = [
       { text: 'CroquetWade BIOS v1.0', cls: 'bios-brand', delay: 0 },
