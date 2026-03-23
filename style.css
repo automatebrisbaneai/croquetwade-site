@@ -702,13 +702,16 @@ a:active {
   z-index: 50;
   display: none;
   border-radius: var(--window-radius);
-  overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--window-border);
+  overflow: hidden;
+  min-width: 280px;
+  min-height: 120px;
+  flex-direction: column;
 }
 
 .float-window.open {
-  display: block;
+  display: flex;
 }
 
 .float-window .window-titlebar {
@@ -728,13 +731,7 @@ a:active {
   overflow: auto;
 }
 
-.float-window {
-  overflow: hidden;
-  min-width: 280px;
-  min-height: 120px;
-  display: flex;
-  flex-direction: column;
-}
+/* (merged into .float-window above) */
 
 .resize-handle {
   height: 6px;
