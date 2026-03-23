@@ -14,7 +14,7 @@ var ICONS = {
 var WINDOWS = [
   {
     id: 'hero-win', title: 'CroquetWade — Growth Consultancy — Netscape', icon: 'netscape',
-    open: true, top: 30, left: 120, width: 680, height: 480,
+    open: true, top: 30, left: 110, width: 620, height: 640,
     menu: ['File','Edit','View','Favourites','Tools','Help'],
     address: 'C:\\CroquetWade\\Growth Consultancy',
     body: '<h1>CroquetWade</h1>'
