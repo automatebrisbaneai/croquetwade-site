@@ -196,7 +196,7 @@ function buildGamesFolder() {
   h += '<div class="window-buttons"><span class="window-btn window-btn-minimize">\u2500</span><span class="window-btn window-btn-maximize">\u25a1</span><span class="window-btn window-btn-close" onclick="closeApp(\'games-win\')">\u00d7</span></div></div>';
   h += '<div class="window-menubar"><a>File</a><a>Edit</a><a>View</a><a>Help</a></div>';
   h += '<div class="window-addressbar"><span class="addressbar-label">Address</span><span class="addressbar-input">C:\\Program Files\\Games</span><span class="addressbar-go">Go</span></div>';
-  h += '<div style="background:#fff;padding:16px 20px;border:1px solid #aca899;margin:3px;display:flex;flex-wrap:wrap;gap:16px;">';
+  h += '<div style="background:#fff;padding:30px 36px;border:1px solid #aca899;margin:3px;display:flex;flex-wrap:wrap;gap:28px;">';
 
   var gameIcons = [
     { id: 'minesweeper-win', label: 'Minesweeper', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#c0c0c0" stroke="#808080"/><circle cx="10" cy="10" r="4" fill="#000"/><line x1="10" y1="6" x2="10" y2="3" stroke="#000" stroke-width="1.5"/><line x1="10" y1="14" x2="10" y2="17" stroke="#000" stroke-width="1.5"/><line x1="6" y1="10" x2="3" y2="10" stroke="#000" stroke-width="1.5"/><line x1="14" y1="10" x2="17" y2="10" stroke="#000" stroke-width="1.5"/></svg>' },
