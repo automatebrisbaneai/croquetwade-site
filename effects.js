@@ -140,3 +140,12 @@ function closeApp(id) {
   if (!win) return;
   win.classList.remove('open');
 }
+
+function scrollToWin(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Flash highlight
+  el.style.boxShadow = '0 0 0 3px #ffff00, 0 4px 20px rgba(0,0,0,0.4)';
+  setTimeout(function() { el.style.boxShadow = ''; }, 1500);
+}

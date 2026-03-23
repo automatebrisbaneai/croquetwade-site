@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hearts</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#008000;font-family:'Segoe UI',Tahoma,sans-serif;color:#fff;min-height:100vh;display:flex;justify-content:center;}
+body.embed .game-window{border:none;box-shadow:none;}
+body.embed .titlebar,body.embed .menubar{display:none;}
+body.embed{min-height:auto;}
+
+.game-window{background:#008000;width:600px;}
+.titlebar{background:linear-gradient(180deg,#0054e3,#0f6cfc);color:#fff;padding:4px 6px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;text-shadow:0 1px 1px rgba(0,0,0,.4);border-radius:6px 6px 0 0;}
+.titlebar-btns{display:flex;gap:2px;}
+.titlebar-btn{width:21px;height:21px;border-radius:3px;border:1px solid;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;cursor:default;}
+.btn-close{background:linear-gradient(180deg,#e47c6c,#c9473b);border-color:#c04535;color:#fff;}
+.btn-other{background:linear-gradient(180deg,#3c8bea,#2663c7);border-color:#3573d6;color:#fff;}
+.menubar{background:#ece9d8;padding:2px 4px;font-size:12px;color:#000;border-bottom:1px solid #aca899;}
+.menubar span{padding:2px 8px;cursor:default;}
+.menubar span:hover{background:#3162d0;color:#fff;border-radius:2px;}
+
+.board{padding:10px;position:relative;min-height:500px;}
+.scores{display:flex;justify-content:space-around;padding:6px;background:rgba(0,0,0,0.3);border-radius:4px;margin-bottom:10px;font-size:12px;}
+.scores div{text-align:center;}
+.scores .name{font-weight:700;font-size:13px;}
+.scores .pts{color:#ffcc00;}
+
+.trick-area{display:flex;justify-content:center;align-items:center;gap:10px;min-height:120px;margin:10px 0;position:relative;}
+.trick-card{width:56px;height:80px;border-radius:5px;border:1px solid #333;background:#fff;font-size:12px;font-weight:700;display:flex;flex-direction:column;padding:3px 5px;box-shadow:1px 1px 3px rgba(0,0,0,.3);}
+.trick-card.red{color:#cc0000;}
+.trick-card.black{color:#000;}
+.trick-card .tc-suit{font-size:18px;text-align:center;margin-top:8px;}
+.trick-card-wrap{text-align:center;font-size:10px;color:rgba(255,255,255,.7);}
+.trick-card-slot{width:56px;height:80px;border:2px dashed rgba(255,255,255,.2);border-radius:5px;}
+
+.hand{display:flex;justify-content:center;flex-wrap:wrap;gap:2px;padding:10px 0;}
+.hcard{width:52px;height:76px;border-radius:5px;border:1px solid #333;background:#fff;font-size:11px;font-weight:700;display:flex;flex-direction:column;padding:3px 4px;cursor:pointer;transition:transform .1s,box-shadow .1s;box-shadow:1px 1px 2px rgba(0,0,0,.3);}
+.hcard:hover:not(.disabled){transform:translateY(-6px);box-shadow:0 4px 8px rgba(0,0,0,.4);}
+.hcard.disabled{opacity:.5;cursor:not-allowed;}
+.hcard.red{color:#cc0000;}
+.hcard.black{color:#000;}
+.hcard .hc-suit{font-size:16px;text-align:center;margin-top:4px;}
+
+.info{text-align:center;font-size:13px;padding:6px;min-height:28px;}
+.new-btn{padding:4px 14px;font-size:12px;cursor:pointer;border:2px solid;border-color:#fff #808080 #808080 #fff;background:#c0c0c0;font-family:inherit;color:#000;margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="game-window">
+  <div class="titlebar">
+    <span>♥ Hearts</span>
+    <div class="titlebar-btns">
+      <span class="titlebar-btn btn-other">─</span>
+      <span class="titlebar-btn btn-other">□</span>
+      <span class="titlebar-btn btn-close" onclick="window.close()">×</span>
+    </div>
+  </div>
+  <div class="menubar"><span>Game</span><span>Help</span></div>
+  <div class="board" id="board"></div>
+</div>
+<script>
+var SUITS=['♣','♦','♠','♥'],RANKS=['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+var NAMES=['You','West','North','East'];
+var hands,scores,trickCards,leadPlayer,currentPlayer,trickCount,heartsBroken,roundScores;
+
+function val(r){return RANKS.indexOf(r);}
+function isRed(s){return s==='♥'||s==='♦';}
+function points(c){if(c.suit==='♥')return 1;if(c.suit==='♠'&&c.rank==='Q')return 13;return 0;}
+function sortHand(h){h.sort(function(a,b){var si=SUITS.indexOf(a.suit)-SUITS.indexOf(b.suit);return si||val(a.rank)-val(b.rank);});}
+
+function newGame(){
+  scores=[0,0,0,0];startRound();
+}
+
+function startRound(){
+  var deck=[];SUITS.forEach(function(s){RANKS.forEach(function(r){deck.push({suit:s,rank:r});});});
+  for(var i=51;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=deck[i];deck[i]=deck[j];deck[j]=t;}
+  hands=[[],[],[],[]];
+  for(var i=0;i<52;i++)hands[i%4].push(deck[i]);
+  hands.forEach(sortHand);
+  trickCards=[null,null,null,null];trickCount=0;heartsBroken=false;
+  roundScores=[0,0,0,0];
+  // Find 2♣
+  leadPlayer=0;
+  for(var p=0;p<4;p++)for(var c=0;c<hands[p].length;c++)if(hands[p][c].suit==='♣'&&hands[p][c].rank==='2'){leadPlayer=p;break;}
+  currentPlayer=leadPlayer;
+  render();
+  if(currentPlayer!==0)setTimeout(aiPlay,500);
+}
+
+function validCards(p){
+  var hand=hands[p];
+  if(trickCards.every(function(c){return c===null;})){
+    // Leading
+    if(trickCount===0){return hand.filter(function(c){return c.suit==='♣'&&c.rank==='2';});}
+    if(!heartsBroken){var nh=hand.filter(function(c){return c.suit!=='♥';});return nh.length?nh:hand;}
+    return hand;
+  }
+  var leadSuit=null;for(var i=0;i<4;i++){var ci=(leadPlayer+i)%4;if(trickCards[ci]){leadSuit=trickCards[ci].suit;break;}}
+  var follow=hand.filter(function(c){return c.suit===leadSuit;});
+  if(follow.length)return follow;
+  if(trickCount===0)return hand.filter(function(c){return c.suit!=='♥'&&!(c.suit==='♠'&&c.rank==='Q');}).length?hand.filter(function(c){return c.suit!=='♥'&&!(c.suit==='♠'&&c.rank==='Q');}):hand;
+  return hand;
+}
+
+function playCard(p,card){
+  var idx=-1;hands[p].forEach(function(c,i){if(c.suit===card.suit&&c.rank===card.rank)idx=i;});
+  if(idx===-1)return;
+  hands[p].splice(idx,1);
+  trickCards[p]=card;
+  if(card.suit==='♥')heartsBroken=true;
+
+  // Check if trick complete
+  var played=trickCards.filter(function(c){return c!==null;}).length;
+  if(played===4){
+    setTimeout(resolveTrick,600);
+  } else {
+    currentPlayer=(currentPlayer+1)%4;
+    render();
+    if(currentPlayer!==0)setTimeout(aiPlay,400);
+  }
+}
+
+function resolveTrick(){
+  var leadSuit=trickCards[leadPlayer].suit;
+  var winner=leadPlayer,best=val(trickCards[leadPlayer].rank);
+  for(var i=1;i<4;i++){var p=(leadPlayer+i)%4;if(trickCards[p].suit===leadSuit&&val(trickCards[p].rank)>best){best=val(trickCards[p].rank);winner=p;}}
+  var pts=0;trickCards.forEach(function(c){pts+=points(c);});
+  roundScores[winner]+=pts;
+  trickCards=[null,null,null,null];trickCount++;leadPlayer=winner;currentPlayer=winner;
+
+  if(trickCount===13){
+    // Check shoot the moon
+    for(var p=0;p<4;p++){if(roundScores[p]===26){for(var q=0;q<4;q++)roundScores[q]=q===p?0:26;break;}}
+    for(var p=0;p<4;p++)scores[p]+=roundScores[p];
+    render();
+    var gameOver=scores.some(function(s){return s>=100;});
+    if(gameOver){renderGameOver();return;}
+    setTimeout(startRound,1500);return;
+  }
+  render();
+  if(currentPlayer!==0)setTimeout(aiPlay,400);
+}
+
+function aiPlay(){
+  if(currentPlayer===0)return;
+  var valid=validCards(currentPlayer);
+  // Simple AI: play lowest valid card, avoid points if possible
+  var safe=valid.filter(function(c){return points(c)===0;});
+  var pick=(safe.length?safe:valid)[0];
+  playCard(currentPlayer,pick);
+}
+
+function humanPlay(idx){
+  if(currentPlayer!==0)return;
+  var card=hands[0][idx];
+  var valid=validCards(0);
+  if(!valid.some(function(c){return c.suit===card.suit&&c.rank===card.rank;}))return;
+  playCard(0,card);
+}
+
+function render(){
+  var b=document.getElementById('board');
+  var h='';
+  // Scores
+  h+='<div class="scores">';
+  for(var p=0;p<4;p++){h+='<div><div class="name">'+NAMES[p]+'</div><div class="pts">'+scores[p]+' pts'+(roundScores[p]?' (+'+roundScores[p]+')':'')+'</div></div>';}
+  h+='</div>';
+  // Trick area
+  h+='<div class="trick-area">';
+  var order=[3,0,1,2]; // left,bottom,right,top visually: West,You,East,North
+  var labels=['West','You','East','North'];
+  for(var i=0;i<4;i++){
+    var pi=order[i];
+    h+='<div class="trick-card-wrap">';
+    if(trickCards[pi]){
+      var c=trickCards[pi];
+      h+='<div class="trick-card '+(isRed(c.suit)?'red':'black')+'"><span>'+c.rank+'</span><span class="tc-suit">'+c.suit+'</span></div>';
+    } else {h+='<div class="trick-card-slot"></div>';}
+    h+='<div>'+labels[i]+'</div></div>';
+  }
+  h+='</div>';
+  // Info
+  h+='<div class="info">'+(currentPlayer===0?'Your turn — click a card to play':'Waiting...')+'</div>';
+  // Player hand
+  var valid=currentPlayer===0?validCards(0):[];
+  h+='<div class="hand">';
+  hands[0].forEach(function(c,i){
+    var isValid=valid.some(function(v){return v.suit===c.suit&&v.rank===c.rank;});
+    h+='<div class="hcard '+(isRed(c.suit)?'red':'black')+(isValid?'':' disabled')+'" onclick="humanPlay('+i+')"><span>'+c.rank+'</span><span class="hc-suit">'+c.suit+'</span></div>';
+  });
+  h+='</div>';
+  b.innerHTML=h;
+}
+
+function renderGameOver(){
+  var b=document.getElementById('board');
+  var winner=0,low=scores[0];
+  for(var p=1;p<4;p++)if(scores[p]<low){low=scores[p];winner=p;}
+  var h='<div style="text-align:center;padding:40px;">';
+  h+='<div style="font-size:24px;font-weight:700;margin-bottom:16px;">Game Over!</div>';
+  h+='<div style="font-size:18px;margin-bottom:20px;">'+NAMES[winner]+' wins with '+scores[winner]+' points!</div>';
+  h+='<div class="scores" style="margin-bottom:20px;">';
+  for(var p=0;p<4;p++){h+='<div><div class="name">'+NAMES[p]+'</div><div class="pts">'+scores[p]+' pts</div></div>';}
+  h+='</div>';
+  h+='<button class="new-btn" onclick="newGame()">New Game</button></div>';
+  b.innerHTML=h;
+}
+
+if(location.search.indexOf('embed')!==-1)document.body.classList.add('embed');
+newGame();
+</script>
+</body>
+</html>
