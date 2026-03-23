@@ -106,6 +106,22 @@ body {
   background-color: #3162d0;
 }
 
+/* Subtle CRT scanlines (desktop) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
 /* ── Desktop Icons ───────────────────────────────────────── */
 .desktop-icons {
   position: fixed;
