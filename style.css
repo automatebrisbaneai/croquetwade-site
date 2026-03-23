@@ -106,11 +106,257 @@ body {
   background-color: #3162d0;
 }
 
-/* ── Desktop Container ───────────────────────────────────── */
-.desktop {
-  max-width: var(--max-width);
+/* ── Desktop Layout ───────────────────────────────────────── */
+.desktop-wrap {
+  display: flex;
+  gap: 1.5rem;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0.5rem 0;
+  align-items: flex-start;
+}
+
+/* ── Desktop Icons ───────────────────────────────────────── */
+.desktop-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px;
+  flex-shrink: 0;
+  width: 80px;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 2px;
+  border-radius: 3px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+}
+
+.desktop-icon:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.desktop-icon-img {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+.desktop-icon-label {
+  font-size: 0.65rem;
+  color: white;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+  word-break: break-word;
+  max-width: 72px;
+  font-family: var(--font-body);
+}
+
+/* ── Windows Column ──────────────────────────────────────── */
+.desktop-windows {
+  flex: 1;
+  min-width: 0;
+  max-width: var(--max-width);
+}
+
+/* ── Window Menu Bar ─────────────────────────────────────── */
+.window-menubar {
+  background: var(--window-frame);
+  padding: 2px 4px;
+  display: flex;
+  gap: 0;
+  font-size: 0.8rem;
+  border-bottom: 1px solid #aca899;
+}
+
+.window-menubar a {
+  color: var(--fg);
+  text-decoration: none;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.window-menubar a:hover {
+  background: #3162d0;
+  color: white;
+  text-decoration: none;
+}
+
+/* ── Address Bar ─────────────────────────────────────────── */
+.window-addressbar {
+  background: var(--window-frame);
+  padding: 3px 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  border-bottom: 1px solid #aca899;
+}
+
+.addressbar-label {
+  color: var(--fg);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.addressbar-input {
+  flex: 1;
+  background: white;
+  border: 1px solid #7f9db9;
+  border-radius: 1px;
+  padding: 2px 6px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--fg);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.addressbar-go {
+  padding: 1px 8px;
+  font-size: 0.7rem;
+  background: linear-gradient(180deg, #f5f3ee, #d5d2c8);
+  border: 1px solid #aca899;
+  border-radius: 2px;
+  color: var(--fg);
+  cursor: default;
+}
+
+/* ── Paint Window ────────────────────────────────────────── */
+.paint-toolbar {
+  background: var(--window-frame);
+  padding: 3px 4px;
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid #aca899;
+}
+
+.paint-tool {
+  width: 24px;
+  height: 22px;
+  background: var(--window-frame);
+  border: 1px solid transparent;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: default;
+}
+
+.paint-tool:hover {
+  border-color: #fff #aca899 #aca899 #fff;
+}
+
+.paint-tool.active {
+  border-color: #aca899 #fff #fff #aca899;
+  background: #d6d3ce;
+}
+
+.paint-palette {
+  background: var(--window-frame);
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border-top: 1px solid #aca899;
+}
+
+.paint-color-preview {
+  width: 28px;
+  height: 28px;
+  border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+  position: relative;
+  margin-right: 6px;
+}
+
+.paint-color-fg {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background: #000;
+  border: 1px solid #808080;
+}
+
+.paint-color-bg {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border: 1px solid #808080;
+}
+
+.paint-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+}
+
+.paint-swatch {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #808080;
+  cursor: default;
+}
+
+.paint-canvas {
+  background: white;
+  min-height: 120px;
+  border: 1px solid #aca899;
+  margin: 3px;
+  padding: 1.5rem 1.75rem;
+  position: relative;
+}
+
+.paint-statusbar {
+  background: var(--window-frame);
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  color: var(--fg-muted);
+  display: flex;
+  gap: 12px;
+  border-top: 1px solid #aca899;
+}
+
+.paint-statusbar span {
+  padding: 0 4px;
+}
+
+/* ── System Tray ─────────────────────────────────────────── */
+.systray {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.systray-icon {
+  font-size: 12px;
+  opacity: 0.9;
+  cursor: default;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
+}
+
+.systray-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.15);
+  margin: 0 2px;
 }
 
 /* ── XP Window ───────────────────────────────────────────── */
