@@ -440,6 +440,12 @@ body {
   background: var(--window-frame);
   padding: 3px;
   border-radius: 0 0 var(--window-radius) var(--window-radius);
+  overflow: auto;
+  flex: 1;
+}
+
+.float-window .window-frame {
+  max-height: calc(100% - 60px);
 }
 
 .window-body {
@@ -717,10 +723,24 @@ a:active {
   cursor: pointer;
 }
 
+.float-window .window-frame,
+.float-window > div:last-of-type {
+  overflow: auto;
+}
+
+.float-window {
+  resize: both;
+  overflow: hidden;
+  min-width: 280px;
+  min-height: 120px;
+}
+
 .float-window iframe {
   display: block;
   border: none;
   background: #c0c0c0;
+  width: 100%;
+  height: calc(100% - 30px);
 }
 
 /* ── Section fade-in ─────────────────────────────────────── */
