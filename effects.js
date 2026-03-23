@@ -81,10 +81,42 @@ var floatZ = 50;
     el.textContent = String(count).replace(/\B(?=(\d{3})+(?!\d))/g, ',').padStart(7, '0');
   }
 
+  /* ── Resizable Windows (bottom edge) ──────────────────── */
+
+  function initResize() {
+    document.querySelectorAll('.float-window').forEach(function (win) {
+      var handle = document.createElement('div');
+      handle.className = 'resize-handle';
+      win.appendChild(handle);
+
+      var startY = 0, startH = 0, resizing = false;
+
+      handle.addEventListener('mousedown', function (e) {
+        resizing = true;
+        startY = e.clientY;
+        startH = win.offsetHeight;
+        bringToFront(win);
+        e.preventDefault();
+        e.stopPropagation();
+      });
+
+      document.addEventListener('mousemove', function (e) {
+        if (!resizing) return;
+        var newH = Math.max(120, startH + (e.clientY - startY));
+        win.style.height = newH + 'px';
+      });
+
+      document.addEventListener('mouseup', function () {
+        resizing = false;
+      });
+    });
+  }
+
   /* ── Init ────────────────────────────────────────────── */
 
   document.addEventListener('DOMContentLoaded', function () {
     initDrag();
+    initResize();
     initClock();
     initVisitorCounter();
   });

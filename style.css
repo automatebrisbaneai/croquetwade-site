@@ -729,10 +729,32 @@ a:active {
 }
 
 .float-window {
-  resize: vertical;
   overflow: hidden;
   min-width: 280px;
   min-height: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.resize-handle {
+  height: 6px;
+  background: var(--window-frame, #ece9d8);
+  cursor: ns-resize;
+  border-top: 1px solid #aca899;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.resize-handle::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: #aca899;
+  border-radius: 1px;
 }
 
 .float-window iframe {
@@ -740,7 +762,8 @@ a:active {
   border: none;
   background: #c0c0c0;
   width: 100%;
-  height: calc(100% - 30px);
+  flex: 1;
+  min-height: 200px;
 }
 
 /* ── Section fade-in ─────────────────────────────────────── */
