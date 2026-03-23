@@ -190,7 +190,7 @@ function buildGameWindow(g) {
 }
 
 function buildGamesFolder() {
-  var h = '<div class="float-window" id="games-win" style="top:80px;left:200px;width:460px;">';
+  var h = '<div class="float-window" id="games-win" style="top:80px;left:200px;width:680px;">';
   h += '<div class="window-titlebar" data-drag="games-win">' + ICONS.folder;
   h += '<span class="window-titlebar-text">C:\\Program Files\\Games</span>';
   h += '<div class="window-buttons"><span class="window-btn window-btn-minimize">\u2500</span><span class="window-btn window-btn-maximize">\u25a1</span><span class="window-btn window-btn-close" onclick="closeApp(\'games-win\')">\u00d7</span></div></div>';
