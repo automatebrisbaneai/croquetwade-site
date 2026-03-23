@@ -14,7 +14,7 @@ var ICONS = {
 var WINDOWS = [
   {
     id: 'hero-win', title: 'CroquetWade — Growth Consultancy — Netscape', icon: 'netscape',
-    open: true, top: 30, left: 110, width: 680, height: 720,
+    open: true, top: 20, left: 110, width: 680, height: 720,
     menu: ['File','Edit','View','Favourites','Tools','Help'],
     address: 'C:\\CroquetWade\\Growth Consultancy',
     body: '<h1>CroquetWade</h1>'
@@ -130,6 +130,7 @@ function buildWindowHTML(w) {
   var cls = 'float-window' + (w.open ? ' open' : '');
   var style = 'top:' + w.top + 'px;left:' + w.left + 'px;width:' + w.width + 'px;';
   if (w.height) style += 'height:' + w.height + 'px;';
+  if (w.maxHeight) style += 'max-height:' + w.maxHeight + ';';
 
   var h = '<div class="' + cls + '" id="' + w.id + '" style="' + style + '">';
   // Titlebar

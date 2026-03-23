@@ -85,6 +85,9 @@ var floatZ = 50;
 
   function initResize() {
     document.querySelectorAll('.float-window').forEach(function (win) {
+      // Skip game iframes and games folder
+      if (win.querySelector('iframe') || win.id === 'games-win') return;
+
       var handle = document.createElement('div');
       handle.className = 'resize-handle';
       win.appendChild(handle);
