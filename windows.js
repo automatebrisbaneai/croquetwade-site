@@ -214,6 +214,30 @@ function buildGamesFolder() {
   return h;
 }
 
+// Build BIOS text-mode content from WINDOWS array (mobile fallback)
+function buildBiosContent() {
+  var el = document.getElementById('bios-content');
+  if (!el) return;
+  var html = '';
+  WINDOWS.forEach(function(w) {
+    if (w.id === 'hero-win') return; // hero is in the POST screen already
+    // Strip HTML tags for clean text, but keep structure
+    var body = w.body
+      .replace(/<h2[^>]*>/g, '<h2>')
+      .replace(/<a[^>]*class="btn"[^>]*>[^<]*<\/a>/g, '') // remove buttons
+      .replace(/<div[^>]*class="recessed"[^>]*>[\s\S]*?<\/div><\/div>/g, ''); // remove stat grids
+    html += '<div class="bios-section">';
+    html += body;
+    html += '</div>';
+  });
+  html += '<div class="bios-footer">';
+  html += '<p>Wade Hart — CAQ Growth Consultancy</p>';
+  html += '<p><a href="mailto:me@croquetwade.com">me@croquetwade.com</a></p>';
+  html += '<a class="bios-reboot" onclick="document.querySelector(\'.bios-screen\').style.display=\'none\';document.body.style.background=\'\';document.querySelector(\'.desktop-icons\').style.display=\'\';document.querySelector(\'#window-container\').style.display=\'\';document.querySelector(\'.taskbar\').style.display=\'\';openApp(\'hero-win\');">⟳ Reboot in Desktop Mode</a>';
+  html += '</div>';
+  el.innerHTML = html;
+}
+
 // Render all windows into the page
 function renderAllWindows() {
   var container = document.getElementById('window-container');

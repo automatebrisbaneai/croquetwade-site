@@ -115,6 +115,58 @@ var floatZ = 50;
     });
   }
 
+  /* ── BIOS POST Sequence (mobile) ─────────────────────── */
+
+  function initBios() {
+    var post = document.getElementById('bios-post');
+    var content = document.getElementById('bios-content');
+    if (!post || !content) return;
+    // Only run on mobile
+    if (window.innerWidth > 768) return;
+
+    buildBiosContent();
+
+    var lines = [
+      { text: 'CroquetWade BIOS v1.0', cls: 'bios-brand', delay: 0 },
+      { text: 'Copyright (C) 2026 Wade Hart\n', cls: '', delay: 100 },
+      { text: 'Checking RAM... ', cls: '', delay: 400 },
+      { text: '640K OK', cls: 'bios-ok', delay: 800 },
+      { text: '\nDetecting hard drives... ', cls: '', delay: 1000 },
+      { text: 'C:\\CroquetWade found', cls: 'bios-ok', delay: 1400 },
+      { text: '\nLoading Windows XP... ', cls: '', delay: 1800 },
+      { text: '\n', cls: '', delay: 2400 },
+      { text: 'ERROR: Display resolution too low', cls: 'bios-error', delay: 2600 },
+      { text: '\nWindows requires minimum 1024x768', cls: 'bios-error', delay: 3000 },
+      { text: '\n\nFalling back to text mode...', cls: '', delay: 3400 },
+      { text: '\n', cls: '', delay: 3800 },
+      { text: 'Tap anywhere to continue_', cls: 'bios-prompt', delay: 4000 }
+    ];
+
+    var html = '';
+    lines.forEach(function(line) {
+      setTimeout(function() {
+        if (line.cls) html += '<span class="' + line.cls + '">' + line.text + '</span>';
+        else html += line.text;
+        post.innerHTML = html;
+      }, line.delay);
+    });
+
+    // Show content on tap or after 6 seconds
+    var revealed = false;
+    function revealContent() {
+      if (revealed) return;
+      revealed = true;
+      post.innerHTML += '\n\n<span class="bios-ok">System ready.</span>\n';
+      content.classList.add('visible');
+    }
+
+    document.addEventListener('click', function() {
+      setTimeout(revealContent, 100);
+    }, { once: false });
+
+    setTimeout(revealContent, 6000);
+  }
+
   /* ── Init ────────────────────────────────────────────── */
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -122,6 +174,7 @@ var floatZ = 50;
     initResize();
     initClock();
     initVisitorCounter();
+    initBios();
   });
 })();
 

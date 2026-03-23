@@ -783,9 +783,154 @@ a:active {
 }
 
 /* ── Responsive ──────────────────────────────────────────── */
+/* ── BIOS Fallback (mobile) ───────────────────────────────── */
+.bios-screen {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .desktop-icons { display: none; }
-  .float-window.open { left: 4px !important; right: 4px; width: auto !important; }
+  .desktop-icons,
+  .float-window,
+  .taskbar,
+  #window-container { display: none !important; }
+
+  .bios-screen {
+    display: block;
+    background: #000;
+    color: #aaa;
+    font-family: 'VT323', monospace;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 16px;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Subtle CRT scanlines */
+  .bios-screen::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.12) 2px,
+      rgba(0, 0, 0, 0.12) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Subtle phosphor glow on text */
+  .bios-post .bios-ok,
+  .bios-section a,
+  .bios-footer a {
+    text-shadow: 0 0 6px rgba(85, 255, 85, 0.3);
+  }
+
+  .bios-post .bios-error {
+    text-shadow: 0 0 6px rgba(255, 85, 85, 0.3);
+  }
+
+  .bios-post .bios-brand {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+
+  body {
+    background: #000;
+    padding: 0;
+  }
+
+  .bios-post {
+    color: #aaa;
+    margin-bottom: 24px;
+    white-space: pre-wrap;
+  }
+
+  .bios-post .bios-brand {
+    color: #fff;
+    font-size: 20px;
+  }
+
+  .bios-post .bios-ok {
+    color: #55ff55;
+  }
+
+  .bios-post .bios-error {
+    color: #ff5555;
+  }
+
+  .bios-post .bios-prompt {
+    color: #ffff55;
+  }
+
+  .bios-content {
+    display: none;
+  }
+
+  .bios-content.visible {
+    display: block;
+  }
+
+  .bios-section {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+  }
+
+  .bios-section h2 {
+    color: #fff;
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .bios-section .bios-meta {
+    color: #55ff55;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .bios-section p {
+    color: #aaa;
+    font-size: 15px;
+    margin-bottom: 8px;
+    max-width: none;
+    font-family: 'VT323', monospace;
+  }
+
+  .bios-section a {
+    color: #55ff55;
+  }
+
+  .bios-divider {
+    color: #333;
+    margin: 20px 0;
+  }
+
+  .bios-footer {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid #333;
+    text-align: center;
+    color: #555;
+    font-size: 13px;
+  }
+
+  .bios-footer a {
+    color: #55ff55;
+  }
+
+  .bios-reboot {
+    display: inline-block;
+    margin-top: 16px;
+    color: #ffff55;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 600px) {
