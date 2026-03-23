@@ -1,33 +1,52 @@
 /* ═══════════════════════════════════════════════════════════
-   croquetwade.com — Win98 Retro
-   Light, nostalgic, friendly. Office vibes, not hacker vibes.
+   croquetwade.com — Windows XP Luna Theme
+   Rounded, polished, nostalgic. The good old days.
    ═══════════════════════════════════════════════════════════ */
 
 /* ── Palette ─────────────────────────────────────────────── */
 :root {
-  --bg: #008080;
-  --bg-panel: #c0c0c0;
-  --bg-window: #ffffff;
-  --bg-titlebar: #000080;
-  --bg-titlebar-inactive: #808080;
+  /* Desktop */
+  --bg-desktop: #3a6ea5;
 
+  /* Window chrome */
+  --titlebar-top: #0054e3;
+  --titlebar-bottom: #0f6cfc;
+  --titlebar-inactive-top: #7a96df;
+  --titlebar-inactive-bottom: #96b9f0;
+  --window-border: #0054e3;
+  --window-frame: #ece9d8;
+  --window-body: #ffffff;
+
+  /* Taskbar */
+  --taskbar-top: #1f55d1;
+  --taskbar-bottom: #3c81f3;
+  --start-top: #3c9a45;
+  --start-bottom: #28712e;
+  --clock-bg: #1054c9;
+
+  /* Text */
   --fg: #000000;
-  --fg-dim: #444444;
+  --fg-dim: #555555;
   --fg-muted: #808080;
   --fg-titlebar: #ffffff;
 
-  --border-lightest: #ffffff;
-  --border-light: #dfdfdf;
-  --border-dark: #808080;
-  --border-darkest: #0a0a0a;
+  /* Buttons */
+  --btn-face: #ece9d8;
+  --btn-highlight: #ffffff;
+  --btn-shadow: #aca899;
+  --btn-dark-shadow: #716f64;
+  --btn-hover: #f0ede1;
 
+  /* Fonts */
   --font-display: 'Handjet', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', 'Tahoma', sans-serif;
   --font-mono: 'VT323', monospace;
 
+  /* Layout */
   --max-width: 780px;
   --gutter: 1.5rem;
-  --section-gap: 1.5rem;
+  --section-gap: 1.25rem;
+  --window-radius: 8px;
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
@@ -37,143 +56,168 @@
   box-sizing: border-box;
 }
 
-/* ── Custom Scrollbar (Win98 style) ──────────────────────── */
+/* ── Custom Scrollbar (XP style) ─────────────────────────── */
 ::-webkit-scrollbar {
-  width: 16px;
+  width: 17px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-panel);
-  border-left: 1px solid var(--border-dark);
+  background: #d6d3ce;
+  border-left: 1px solid #aca899;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--bg-panel);
-  border: 1px solid;
-  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+  background: linear-gradient(to right, #ece9d8, #d6d3ce);
+  border: 1px solid #aca899;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4d0c8;
+  background: linear-gradient(to right, #f0ede1, #ddd9d0);
 }
 
-::-webkit-scrollbar-button {
-  display: block;
-  height: 16px;
-  background: var(--bg-panel);
-  border: 1px solid;
-  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+::-webkit-scrollbar-button:single-button {
+  height: 17px;
+  background: var(--btn-face);
+  border: 1px solid #aca899;
 }
 
 /* ── Base ────────────────────────────────────────────────── */
 html {
   font-size: 16px;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: var(--bg);
+  background: var(--bg-desktop);
+  background: linear-gradient(180deg, #245edb 0%, #3a6ea5 30%, #3a6ea5 100%);
+  background-attachment: fixed;
   color: var(--fg);
   font-family: var(--font-body);
   font-weight: 400;
   line-height: 1.6;
   padding: var(--gutter);
+  padding-bottom: 48px;
   min-height: 100vh;
 }
 
 ::selection {
-  color: var(--fg-titlebar);
-  background-color: var(--bg-titlebar);
+  color: #ffffff;
+  background-color: #3162d0;
 }
 
 /* ── Desktop Container ───────────────────────────────────── */
 .desktop {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 
-/* ── Win98 Raised Panel ──────────────────────────────────── */
-.panel {
-  background: var(--bg-panel);
-  border: 1px solid;
-  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
-  box-shadow:
-    inset 1px 1px 0 var(--border-light),
-    inset -1px -1px 0 var(--border-dark);
-  padding: 3px;
-}
-
-/* ── Win98 Window ────────────────────────────────────────── */
+/* ── XP Window ───────────────────────────────────────────── */
 .window {
-  background: var(--bg-panel);
-  border: 1px solid;
-  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
+  border-radius: var(--window-radius);
+  overflow: hidden;
   box-shadow:
-    inset 1px 1px 0 var(--border-light),
-    inset -1px -1px 0 var(--border-dark);
+    0 2px 10px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(0, 0, 0, 0.1);
   margin-bottom: var(--section-gap);
+  border: 1px solid var(--window-border);
 }
 
+/* ── Window Titlebar ─────────────────────────────────────── */
 .window-titlebar {
-  background: var(--bg-titlebar);
+  background: linear-gradient(180deg, var(--titlebar-top) 0%, var(--titlebar-bottom) 100%);
   color: var(--fg-titlebar);
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  padding: 3px 4px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 5px 6px 5px 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   user-select: none;
+  border-radius: var(--window-radius) var(--window-radius) 0 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  min-height: 30px;
+}
+
+.window-titlebar-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 }
 
 .window-titlebar-text {
   flex: 1;
-  padding-left: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* ── Window Title Buttons (XP style) ─────────────────────── */
 .window-buttons {
   display: flex;
   gap: 2px;
+  margin-left: 8px;
 }
 
 .window-btn {
-  width: 16px;
-  height: 14px;
-  background: var(--bg-panel);
+  width: 21px;
+  height: 21px;
+  border-radius: 3px;
   border: 1px solid;
-  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
-  box-shadow:
-    inset 1px 1px 0 var(--border-light),
-    inset -1px -1px 0 var(--border-dark);
-  font-size: 9px;
-  line-height: 12px;
-  text-align: center;
-  color: var(--fg);
-  cursor: default;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: default;
+  font-family: 'Segoe UI', 'Inter', sans-serif;
+}
+
+.window-btn-minimize {
+  background: linear-gradient(180deg, #3c8bea 0%, #2663c7 100%);
+  border-color: #3573d6;
+  color: white;
+}
+
+.window-btn-maximize {
+  background: linear-gradient(180deg, #3c8bea 0%, #2663c7 100%);
+  border-color: #3573d6;
+  color: white;
+}
+
+.window-btn-close {
+  background: linear-gradient(180deg, #e47c6c 0%, #c9473b 100%);
+  border-color: #c04535;
+  color: white;
+}
+
+/* ── Window Frame & Body ─────────────────────────────────── */
+.window-frame {
+  background: var(--window-frame);
+  padding: 3px;
+  border-radius: 0 0 var(--window-radius) var(--window-radius);
 }
 
 .window-body {
-  background: var(--bg-window);
-  padding: 1.25rem 1.5rem;
-  border: 1px solid;
-  border-color: var(--border-dark) var(--border-lightest) var(--border-lightest) var(--border-dark);
-  margin: 3px;
+  background: var(--window-body);
+  padding: 1.5rem 1.75rem;
+  border: 1px solid #aca899;
 }
 
-/* ── Win98 Recessed Panel (for stats, inputs) ────────────── */
+/* ── Recessed Panel (XP style) ───────────────────────────── */
 .recessed {
-  background: var(--bg-window);
-  border: 1px solid;
-  border-color: var(--border-dark) var(--border-lightest) var(--border-lightest) var(--border-dark);
-  box-shadow:
-    inset 1px 1px 0 var(--border-darkest),
-    inset -1px -1px 0 var(--border-light);
+  background: var(--window-body);
+  border: 1px solid #aca899;
+  box-shadow: inset 1px 1px 0 #d6d3ce;
   padding: 0.75rem 1rem;
+  border-radius: 2px;
 }
 
 /* ── Typography ──────────────────────────────────────────── */
@@ -190,16 +234,9 @@ h1 {
 h2 {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
   margin-bottom: 0.75rem;
-  color: var(--fg);
-}
-
-h3 {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 0.5rem;
   color: var(--fg);
 }
 
@@ -215,13 +252,13 @@ p {
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .stat-item {
   display: flex;
   justify-content: space-between;
-  padding: 0.25rem 0;
+  padding: 0.2rem 0;
 }
 
 .stat-label {
@@ -230,67 +267,63 @@ p {
 
 .stat-value {
   color: var(--fg);
-  font-weight: 400;
 }
 
 /* ── Links ───────────────────────────────────────────────── */
 a {
-  color: #0000ff;
-  text-decoration: underline;
-}
-
-a:visited {
-  color: #800080;
+  color: #0066cc;
+  text-decoration: none;
 }
 
 a:hover {
-  color: #ff0000;
+  color: #0044aa;
+  text-decoration: underline;
 }
 
 a:active {
-  color: #ff0000;
+  color: #cc3300;
 }
 
-/* ── Win98 Button ────────────────────────────────────────── */
+/* ── XP Button ───────────────────────────────────────────── */
 .btn {
   display: inline-block;
-  padding: 4px 16px;
+  padding: 4px 18px;
   font-family: var(--font-body);
   font-size: 0.85rem;
   color: var(--fg);
-  background: var(--bg-panel);
-  border: 1px solid;
-  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
-  box-shadow:
-    inset 1px 1px 0 var(--border-light),
-    inset -1px -1px 0 var(--border-dark);
+  background: linear-gradient(180deg, #f5f3ee 0%, var(--btn-face) 50%, #d5d2c8 100%);
+  border: 1px solid var(--btn-dark-shadow);
+  border-radius: 3px;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
-  min-width: 75px;
+  min-width: 80px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
 }
 
 .btn:hover {
+  background: linear-gradient(180deg, #faf8f3 0%, var(--btn-hover) 50%, #dddad0 100%);
   color: var(--fg);
+  text-decoration: none;
+  border-color: #3162d0;
 }
 
 .btn:active {
-  border-color: var(--border-darkest) var(--border-lightest) var(--border-lightest) var(--border-darkest);
-  box-shadow:
-    inset 1px 1px 0 var(--border-dark),
-    inset -1px -1px 0 var(--border-light);
-  padding: 5px 15px 3px 17px;
+  background: linear-gradient(180deg, #d5d2c8 0%, var(--btn-face) 50%, #f5f3ee 100%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  padding: 5px 17px 3px 19px;
 }
 
-/* ── Project summary ─────────────────────────────────────── */
+/* ── Project meta ────────────────────────────────────────── */
 .project-meta {
   font-size: 0.8rem;
   color: var(--fg-muted);
   margin-bottom: 0.75rem;
   font-family: var(--font-mono);
+  font-size: 0.95rem;
 }
 
-/* ── Hero Window ─────────────────────────────────────────── */
+/* ── Hero ─────────────────────────────────────────────────── */
 .hero-body {
   padding: 2rem 2rem;
 }
@@ -303,108 +336,121 @@ a:active {
   max-width: 55ch;
 }
 
-/* ── Taskbar (footer) ────────────────────────────────────── */
+/* ── Taskbar ─────────────────────────────────────────────── */
 .taskbar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--bg-panel);
-  border-top: 1px solid;
-  border-color: var(--border-lightest);
-  box-shadow: inset 0 1px 0 var(--border-light);
-  padding: 2px 4px;
+  background: linear-gradient(180deg, var(--taskbar-top) 0%, var(--taskbar-bottom) 45%, var(--taskbar-top) 100%);
+  padding: 2px 6px;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   z-index: 100;
-  height: 32px;
+  height: 36px;
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid #4c91f7;
 }
 
+/* ── Start Button (XP green) ─────────────────────────────── */
 .start-btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 2px 8px;
-  font-family: var(--font-display);
-  font-size: 0.95rem;
+  gap: 5px;
+  padding: 2px 12px 2px 6px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
   font-weight: 700;
-  color: var(--fg);
-  background: var(--bg-panel);
-  border: 1px solid;
-  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
-  box-shadow:
-    inset 1px 1px 0 var(--border-light),
-    inset -1px -1px 0 var(--border-dark);
+  font-style: italic;
+  color: white;
+  background: linear-gradient(180deg, #5db158 0%, var(--start-top) 15%, var(--start-bottom) 85%, #1a5c20 100%);
+  border: none;
+  border-radius: 0 8px 8px 0;
   cursor: pointer;
   text-decoration: none;
-  height: 24px;
+  height: 30px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.2) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.2) inset,
+    1px 0 0 rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.02em;
 }
 
 .start-btn:hover {
-  color: var(--fg);
+  background: linear-gradient(180deg, #6ec669 0%, #48ad4b 15%, #2d7d32 85%, #1f6824 100%);
+  color: white;
+  text-decoration: none;
 }
 
-.start-btn:active {
-  border-color: var(--border-darkest) var(--border-lightest) var(--border-lightest) var(--border-darkest);
-  box-shadow:
-    inset 1px 1px 0 var(--border-dark),
-    inset -1px -1px 0 var(--border-light);
+.start-btn-logo {
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1;
 }
 
 .taskbar-divider {
-  width: 1px;
-  height: 20px;
-  border-left: 1px solid var(--border-dark);
-  border-right: 1px solid var(--border-lightest);
+  width: 2px;
+  height: 24px;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.2), transparent);
   margin: 0 2px;
 }
 
+/* ── Taskbar Quick Launch / Links ────────────────────────── */
 .taskbar-links {
   display: flex;
-  gap: 2px;
+  gap: 3px;
 }
 
 .taskbar-link {
-  padding: 2px 8px;
+  padding: 3px 12px;
   font-family: var(--font-body);
   font-size: 0.75rem;
-  color: var(--fg);
+  font-weight: 500;
+  color: white;
   text-decoration: none;
-  background: var(--bg-panel);
-  border: 1px solid;
-  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest) var(--border-lightest);
-  box-shadow:
-    inset 1px 1px 0 var(--border-light),
-    inset -1px -1px 0 var(--border-dark);
-  height: 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  height: 26px;
   display: flex;
   align-items: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .taskbar-link:hover {
-  color: var(--fg);
+  background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.08) 100%);
+  color: white;
+  text-decoration: none;
 }
 
+.taskbar-link.active {
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(255,255,255,0.06) 100%);
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Taskbar Clock ───────────────────────────────────────── */
 .taskbar-clock {
   margin-left: auto;
   font-family: var(--font-body);
   font-size: 0.75rem;
-  color: var(--fg);
-  padding: 2px 8px;
-  border: 1px solid;
-  border-color: var(--border-dark) var(--border-lightest) var(--border-lightest) var(--border-dark);
-  box-shadow:
-    inset 1px 1px 0 var(--border-darkest),
-    inset -1px -1px 0 var(--border-light);
-  height: 24px;
+  color: white;
+  padding: 0 12px;
+  background: var(--clock-bg);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  height: 26px;
   display: flex;
   align-items: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 /* ── Spacer for fixed taskbar ────────────────────────────── */
 .taskbar-spacer {
-  height: 40px;
+  height: 44px;
 }
 
 /* ── Section fade-in ─────────────────────────────────────── */
@@ -419,7 +465,7 @@ a:active {
   transform: translateY(0);
 }
 
-/* ── Back Link (deep-dive pages) ─────────────────────────── */
+/* ── Back Link ───────────────────────────────────────────── */
 .back-link {
   display: inline-block;
   margin-bottom: 1rem;
@@ -432,33 +478,16 @@ a:active {
     --gutter: 0.5rem;
   }
 
-  h1 {
-    font-size: 2.5rem;
-  }
+  h1 { font-size: 2.5rem; }
 
-  .hero-body {
-    padding: 1.25rem;
-  }
+  .hero-body { padding: 1.25rem; }
+  .window-body { padding: 1rem 1.25rem; }
 
-  .window-body {
-    padding: 1rem;
-  }
-
-  .stat-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .taskbar-links {
-    display: none;
-  }
+  .stat-grid { grid-template-columns: 1fr; }
+  .taskbar-links { display: none; }
 }
 
 @media (max-width: 375px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  body {
-    padding: 0.25rem;
-  }
+  h1 { font-size: 2rem; }
+  body { padding: 0.25rem; padding-bottom: 44px; }
 }
