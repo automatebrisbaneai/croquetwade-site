@@ -53,22 +53,10 @@
       <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="8" width="28" height="18" rx="1" fill="#fff" stroke="#0066cc" stroke-width="1.5"/><path d="M3 9l13 10L29 9" stroke="#0066cc" stroke-width="1.5" fill="none"/></svg>
       <span class="desktop-icon-label">Email Wade</span>
     </a>
-    <!-- Games -->
-    <a onclick="openApp('minesweeper-win')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#c0c0c0" stroke="#808080" stroke-width="1"/><circle cx="10" cy="10" r="4" fill="#000"/><line x1="10" y1="6" x2="10" y2="3" stroke="#000" stroke-width="1.5"/><line x1="10" y1="14" x2="10" y2="17" stroke="#000" stroke-width="1.5"/><line x1="6" y1="10" x2="3" y2="10" stroke="#000" stroke-width="1.5"/><line x1="14" y1="10" x2="17" y2="10" stroke="#000" stroke-width="1.5"/><text x="24" y="14" fill="#00f" font-size="11" font-weight="bold" text-anchor="middle">1</text><text x="24" y="26" fill="#f00" font-size="11" font-weight="bold" text-anchor="middle">3</text></svg>
-      <span class="desktop-icon-label">Minesweeper</span>
-    </a>
-    <a onclick="openApp('snake-win')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#1a1a1a" stroke="#808080" stroke-width="1"/><rect x="6" y="14" width="4" height="4" rx="1" fill="#4caf50"/><rect x="10" y="14" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="14" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="10" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="6" width="4" height="4" rx="1" fill="#66bb6a"/><circle cx="24" cy="22" r="3" fill="#f44336"/></svg>
-      <span class="desktop-icon-label">Snake</span>
-    </a>
-    <a onclick="openApp('solitaire-win')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="4" y="2" width="20" height="28" rx="3" fill="#fff" stroke="#333" stroke-width="1"/><text x="9" y="14" fill="#cc0000" font-size="12" font-weight="bold">A</text><text x="14" y="26" fill="#cc0000" font-size="16">♥</text></svg>
-      <span class="desktop-icon-label">Solitaire</span>
-    </a>
-    <a onclick="openApp('hearts-win')" class="desktop-icon">
-      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#008000" stroke="#006000" stroke-width="1"/><text x="16" y="22" text-anchor="middle" fill="#cc0000" font-size="22">♥</text></svg>
-      <span class="desktop-icon-label">Hearts</span>
+    <!-- Games folder -->
+    <a onclick="openApp('games-win')" class="desktop-icon">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><rect x="5" y="10" width="22" height="1" fill="#e8c838"/><text x="16" y="24" text-anchor="middle" fill="#806000" font-size="10" font-weight="bold">🎮</text></svg>
+      <span class="desktop-icon-label">Games</span>
     </a>
     <!-- Bottom -->
     <a class="desktop-icon" style="margin-top:auto;">
@@ -414,10 +402,7 @@
     <a href="#comeandtry" class="taskbar-link">🎯 Come&Try</a>
     <a href="#ideals" class="taskbar-link">📄 Ideals</a>
     <a href="#contact" class="taskbar-link">✉️ Contact</a>
-    <a onclick="openApp('minesweeper-win')" class="taskbar-link" style="cursor:pointer">💣 Mine</a>
-    <a onclick="openApp('snake-win')" class="taskbar-link" style="cursor:pointer">🐍 Snake</a>
-    <a onclick="openApp('solitaire-win')" class="taskbar-link" style="cursor:pointer">♠ Sol</a>
-    <a onclick="openApp('hearts-win')" class="taskbar-link" style="cursor:pointer">♥ Hearts</a>
+    <a onclick="openApp('games-win')" class="taskbar-link" style="cursor:pointer">🎮 Games</a>
   </div>
   <div class="systray">
     <span class="systray-icon" title="Volume">🔊</span>
@@ -456,6 +441,49 @@
   <iframe src="games/snake.html?embed=1" width="430" height="500"></iframe>
 </div>
 
+<!-- ═══ GAMES FOLDER ═══ -->
+<div class="float-window" id="games-win" style="top:80px; left:calc(50% - 200px);">
+  <div class="window-titlebar" data-drag="games-win">
+    <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="2" width="14" height="12" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width=".5"/><rect x="1" y="2" width="7" height="2" rx="1" fill="#e8c838"/></svg>
+    <span class="window-titlebar-text">C:\Games</span>
+    <div class="window-buttons">
+      <span class="window-btn window-btn-minimize">─</span>
+      <span class="window-btn window-btn-maximize">□</span>
+      <span class="window-btn window-btn-close" onclick="closeApp('games-win')">×</span>
+    </div>
+  </div>
+  <div style="background:#ece9d8;padding:2px 4px;font-size:12px;border-bottom:1px solid #aca899;">
+    <span style="padding:2px 8px;">File</span><span style="padding:2px 8px;">Edit</span><span style="padding:2px 8px;">View</span><span style="padding:2px 8px;">Help</span>
+  </div>
+  <div style="background:#ece9d8;padding:3px 6px;font-size:11px;border-bottom:1px solid #aca899;color:#555;">
+    <span>Address</span>
+    <span style="background:#fff;border:1px solid #7f9db9;padding:2px 6px;margin-left:4px;flex:1;display:inline-block;min-width:200px;">C:\Program Files\Games</span>
+  </div>
+  <div style="background:#fff;padding:16px 20px;border:1px solid #aca899;margin:3px;display:flex;flex-wrap:wrap;gap:16px;min-height:120px;">
+    <a onclick="closeApp('games-win');openApp('minesweeper-win')" class="desktop-icon" style="cursor:pointer;">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#c0c0c0" stroke="#808080" stroke-width="1"/><circle cx="10" cy="10" r="4" fill="#000"/><line x1="10" y1="6" x2="10" y2="3" stroke="#000" stroke-width="1.5"/><line x1="10" y1="14" x2="10" y2="17" stroke="#000" stroke-width="1.5"/><line x1="6" y1="10" x2="3" y2="10" stroke="#000" stroke-width="1.5"/><line x1="14" y1="10" x2="17" y2="10" stroke="#000" stroke-width="1.5"/><text x="24" y="14" fill="#00f" font-size="11" font-weight="bold" text-anchor="middle">1</text><text x="24" y="26" fill="#f00" font-size="11" font-weight="bold" text-anchor="middle">3</text></svg>
+      <span class="desktop-icon-label" style="color:#000;">Minesweeper</span>
+    </a>
+    <a onclick="closeApp('games-win');openApp('snake-win')" class="desktop-icon" style="cursor:pointer;">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#1a1a1a" stroke="#808080" stroke-width="1"/><rect x="6" y="14" width="4" height="4" rx="1" fill="#4caf50"/><rect x="10" y="14" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="14" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="10" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="6" width="4" height="4" rx="1" fill="#66bb6a"/><circle cx="24" cy="22" r="3" fill="#f44336"/></svg>
+      <span class="desktop-icon-label" style="color:#000;">Snake</span>
+    </a>
+    <a onclick="closeApp('games-win');openApp('solitaire-win')" class="desktop-icon" style="cursor:pointer;">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="4" y="2" width="20" height="28" rx="3" fill="#fff" stroke="#333" stroke-width="1"/><text x="9" y="14" fill="#cc0000" font-size="12" font-weight="bold">A</text><text x="14" y="26" fill="#cc0000" font-size="16">♥</text></svg>
+      <span class="desktop-icon-label" style="color:#000;">Solitaire</span>
+    </a>
+    <a onclick="closeApp('games-win');openApp('hearts-win')" class="desktop-icon" style="cursor:pointer;">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#008000" stroke="#006000" stroke-width="1"/><text x="16" y="22" text-anchor="middle" fill="#cc0000" font-size="22">♥</text></svg>
+      <span class="desktop-icon-label" style="color:#000;">Hearts</span>
+    </a>
+    <a onclick="closeApp('games-win');openApp('blackjack-win')" class="desktop-icon" style="cursor:pointer;">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#006400" stroke="#004400" stroke-width="1"/><text x="16" y="14" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">21</text><text x="16" y="26" text-anchor="middle" fill="#ffd700" font-size="14">🃏</text></svg>
+      <span class="desktop-icon-label" style="color:#000;">Blackjack</span>
+    </a>
+  </div>
+  <div style="background:#ece9d8;padding:2px 8px;font-size:11px;color:#808080;border-top:1px solid #aca899;">5 objects</div>
+</div>
+
 <div class="float-window" id="solitaire-win" style="top:30px; left:calc(50% - 280px);">
   <div class="window-titlebar" data-drag="solitaire-win">
     <span style="margin-right:4px;">♠</span>
@@ -480,6 +508,19 @@
     </div>
   </div>
   <iframe src="games/hearts.html?embed=1" width="600" height="540"></iframe>
+</div>
+
+<div class="float-window" id="blackjack-win" style="top:70px; left:calc(50% - 150px);">
+  <div class="window-titlebar" data-drag="blackjack-win">
+    <span style="margin-right:4px;">🃏</span>
+    <span class="window-titlebar-text">Blackjack</span>
+    <div class="window-buttons">
+      <span class="window-btn window-btn-minimize">─</span>
+      <span class="window-btn window-btn-maximize">□</span>
+      <span class="window-btn window-btn-close" onclick="closeApp('blackjack-win')">×</span>
+    </div>
+  </div>
+  <iframe src="games/blackjack.html?embed=1" width="480" height="520"></iframe>
 </div>
 
 <script src="effects.js"></script>
