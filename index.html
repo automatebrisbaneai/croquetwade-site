@@ -7,165 +7,216 @@
   <meta name="description" content="Wade Hart. Croquet growth systems for the Croquet Association of Queensland. Strategy, technology, membership.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;700&family=Inter:wght@400;500;600&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+<div class="desktop">
 
-  <!-- ═══ NAV TOP ═══ -->
-  <nav class="nav-top" aria-label="Section links">
-    <a href="#system" class="scramble">system</a>
-    <a href="#mycroquet" class="scramble">mycroquet</a>
-    <a href="#comeandtry" class="scramble">come&try</a>
-    <a href="#ideals" class="scramble">ideals</a>
-    <a href="#contact" class="scramble">contact</a>
-  </nav>
-
-  <!-- ═══ HERO ═══ -->
-  <header>
-    <pre class="ascii-art glow" role="img" aria-label="CroquetWade">
- ██████╗██████╗  ██████╗  ██████╗ ██╗   ██╗███████╗████████╗
-██╔════╝██╔══██╗██╔═══██╗██╔═══██╗██║   ██║██╔════╝╚══██╔══╝
-██║     ██████╔╝██║   ██║██║   ██║██║   ██║█████╗     ██║
-██║     ██╔══██╗██║   ██║██║▄▄ ██║██║   ██║██╔══╝     ██║
-╚██████╗██║  ██║╚██████╔╝╚██████╔╝╚██████╔╝███████╗   ██║
- ╚═════╝╚═╝  ╚═╝ ╚═════╝  ╚══▀▀═╝  ╚═════╝ ╚══════╝   ╚═╝
-██╗    ██╗ █████╗ ██████╗ ███████╗
-██║    ██║██╔══██╗██╔══██╗██╔════╝
-██║ █╗ ██║███████║██║  ██║█████╗
-██║███╗██║██╔══██║██║  ██║██╔══╝
-╚███╔███╔╝██║  ██║██████╔╝███████╗
- ╚══╝╚══╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝</pre>
-
-    <p class="typewriter">Croquet growth systems for Queensland. Strategy, technology, membership — built from the ground up for the Croquet Association of Queensland.</p>
-
-    <p style="color: var(--fg-muted); font-size: 0.85rem;">Wade Hart — CAQ Growth Consultancy<span class="cursor-blink" style="color: var(--fg);">_</span></p>
-  </header>
-
-  <!-- ═══ DIVIDER ═══ -->
-  <div class="divider" aria-hidden="true">════════════════════════════════════════════════════════════════</div>
-
-  <!-- ═══ SYSTEM OVERVIEW ═══ -->
-  <section id="system" class="fade-in">
-    <h2>// SYSTEM STATUS</h2>
-
-    <p>Eight connected systems. One growth engine. Every piece feeds the next — from the moment someone discovers croquet to the day they renew their membership.</p>
-
-    <div style="margin: 2rem 0;">
-      <div class="stat-line"><span class="stat-label">clubs connected  </span><span class="stat-value">41</span></div>
-      <div class="stat-line"><span class="stat-label">members indexed   </span><span class="stat-value">1,777</span></div>
-      <div class="stat-line"><span class="stat-label">pipeline stages   </span><span class="stat-value">6</span></div>
-      <div class="stat-line"><span class="stat-label">systems built     </span><span class="stat-value">8</span></div>
+  <!-- ═══ HERO WINDOW ═══ -->
+  <div class="window">
+    <div class="window-titlebar">
+      <span class="window-titlebar-text">CroquetWade — Growth Consultancy</span>
+      <div class="window-buttons">
+        <span class="window-btn">─</span>
+        <span class="window-btn">□</span>
+        <span class="window-btn">×</span>
+      </div>
     </div>
+    <div class="window-body hero-body">
+      <h1>CroquetWade</h1>
+      <p class="hero-subtitle">Croquet growth systems for Queensland. Strategy, technology, and membership — built from the ground up for the Croquet Association of Queensland.</p>
+      <p style="font-size: 0.85rem; color: var(--fg-dim);">Wade Hart — CAQ Growth Consultancy</p>
 
-    <p style="color: var(--fg-dim); font-size: 0.85rem;">Below: each system, what it does, and how it connects.</p>
-  </section>
-
-  <!-- ═══ DIVIDER ═══ -->
-  <div class="divider" aria-hidden="true">────────────────────────────────────────────────────────────────</div>
+      <div class="recessed" style="margin-top: 1.5rem;">
+        <div class="stat-grid">
+          <div class="stat-item"><span class="stat-label">Clubs connected</span><span class="stat-value">41</span></div>
+          <div class="stat-item"><span class="stat-label">Members indexed</span><span class="stat-value">1,777</span></div>
+          <div class="stat-item"><span class="stat-label">Pipeline stages</span><span class="stat-value">6</span></div>
+          <div class="stat-item"><span class="stat-label">Systems built</span><span class="stat-value">8</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══ MYCROQUET ═══ -->
-  <section id="mycroquet" class="project fade-in">
-    <h2 class="project-header">01 — MyCroquet</h2>
-    <p class="project-summary">Passwordless membership portal. Replaces handwritten forms and direct database access with a clean interface that validates, logs, and audits every change.</p>
-    <div class="project-stat">41 clubs linked · all active members imported · 6 alpha sessions with CAQ Membership Officer</div>
-    <p style="color: var(--fg-dim);">Club secretaries enter data once. It flows through the system. Zero double-entry. Every change logged with full audit trail.</p>
-    <a href="mycroquet.html" class="read-more scramble">→ full system detail</a>
-  </section>
+  <div class="window fade-in" id="mycroquet">
+    <div class="window-titlebar">
+      <span class="window-titlebar-text">01 — MyCroquet</span>
+      <div class="window-buttons">
+        <span class="window-btn">─</span>
+        <span class="window-btn">□</span>
+        <span class="window-btn">×</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <h2>Membership Portal</h2>
+      <p class="project-meta">41 clubs · all active members · 6 alpha sessions</p>
+      <p>Passwordless membership portal. Replaces handwritten forms and direct database access with a clean interface that validates, logs, and audits every change.</p>
+      <p>Club secretaries enter data once. It flows through the system. Zero double-entry. Every change logged with full audit trail.</p>
+      <a href="mycroquet.html" class="btn">Read More</a>
+    </div>
+  </div>
 
   <!-- ═══ COME AND TRY ═══ -->
-  <section id="comeandtry" class="project fade-in">
-    <h2 class="project-header">02 — Come & Try</h2>
-    <p class="project-summary">Unified sign-up system for Come & Try sessions. One website for every club in Queensland — small regional clubs get parity with large city ones.</p>
-    <div class="project-stat">single shared pipeline · no dropped enquiries · committee-wide visibility</div>
-    <p style="color: var(--fg-dim);">When someone signs up, their details land where any committee member can see and follow up. No more warm leads going cold because the right person was on holiday.</p>
-    <a href="come-and-try.html" class="read-more scramble">→ full system detail</a>
-  </section>
+  <div class="window fade-in" id="comeandtry">
+    <div class="window-titlebar">
+      <span class="window-titlebar-text">02 — Come & Try</span>
+      <div class="window-buttons">
+        <span class="window-btn">─</span>
+        <span class="window-btn">□</span>
+        <span class="window-btn">×</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <h2>Unified Sign-Up System</h2>
+      <p class="project-meta">single shared pipeline · committee-wide visibility</p>
+      <p>One website for every club in Queensland. Small regional clubs get parity with large city ones. When someone signs up, their details land where any committee member can see and follow up.</p>
+      <p>No more warm leads going cold because the right person was on holiday.</p>
+      <a href="come-and-try.html" class="btn">Read More</a>
+    </div>
+  </div>
 
   <!-- ═══ IDEALS & AIMS ═══ -->
-  <section id="ideals" class="project fade-in">
-    <h2 class="project-header">03 — Ideals & Aims</h2>
-    <p class="project-summary">Strategic framework — 4 ideals that govern how CAQ operates, 6 aims that define what it builds toward. Developed from a Management Committee workshop.</p>
-    <div class="project-stat">4 ideals · 6 aims · quarterly priority system</div>
-    <p style="color: var(--fg-dim);">The aims form a cascade: strong admin enables external promotion, which brings people to the door, which feeds member growth, which strengthens clubs, which develops play, which opens room for innovation.</p>
-    <a href="ideals-and-aims.html" class="read-more scramble">→ full framework detail</a>
-  </section>
-
-  <!-- ═══ DIVIDER ═══ -->
-  <div class="divider" aria-hidden="true">────────────────────────────────────────────────────────────────</div>
+  <div class="window fade-in" id="ideals">
+    <div class="window-titlebar">
+      <span class="window-titlebar-text">03 — Ideals & Aims</span>
+      <div class="window-buttons">
+        <span class="window-btn">─</span>
+        <span class="window-btn">□</span>
+        <span class="window-btn">×</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <h2>Strategic Framework</h2>
+      <p class="project-meta">4 ideals · 6 aims · quarterly priority system</p>
+      <p>Four ideals govern how CAQ operates. Six aims define what it builds toward. Developed from a Management Committee workshop.</p>
+      <p>The aims form a cascade: strong admin enables external promotion, which brings people to the door, which feeds member growth, which strengthens clubs, which develops play, which opens room for innovation.</p>
+      <a href="ideals-and-aims.html" class="btn">Read More</a>
+    </div>
+  </div>
 
   <!-- ═══ ONE POSTCODE ═══ -->
-  <section id="postcode" class="project fade-in">
-    <h2 class="project-header">04 — One Postcode, Your Nearest Club</h2>
-    <p class="project-summary">Postcode-based club finder. Type a postcode, get your nearest club and Come & Try times. Removes the discovery barrier entirely.</p>
-    <div class="project-stat">deployed · integrates with Come & Try pipeline</div>
-  </section>
+  <div class="window fade-in" id="postcode">
+    <div class="window-titlebar">
+      <span class="window-titlebar-text">04 — One Postcode, Your Nearest Club</span>
+      <div class="window-buttons">
+        <span class="window-btn">─</span>
+        <span class="window-btn">□</span>
+        <span class="window-btn">×</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <h2>Club Finder</h2>
+      <p class="project-meta">deployed · integrates with Come & Try pipeline</p>
+      <p>Type a postcode, get your nearest club and Come & Try times. Removes the discovery barrier entirely — someone curious about croquet doesn't have to search 20 different club websites.</p>
+    </div>
+  </div>
 
   <!-- ═══ EMAIL SEQUENCE ═══ -->
-  <section id="emails" class="project fade-in">
-    <h2 class="project-header">05 — The Email Sequence</h2>
-    <p class="project-summary">Automated 28-day email series after Come & Try sign-up. Alternates game knowledge and club life stories. Ends with a direct join invitation.</p>
-    <div class="project-stat">28 days · fully automatic · zero volunteer effort</div>
-    <p style="color: var(--fg-dim);">Keeps croquet present in the gap between visits — the window where people drift away. The system handles the nurture; the club handles the personal touch.</p>
-  </section>
+  <div class="window fade-in" id="emails">
+    <div class="window-titlebar">
+      <span class="window-titlebar-text">05 — The Email Sequence</span>
+      <div class="window-buttons">
+        <span class="window-btn">─</span>
+        <span class="window-btn">□</span>
+        <span class="window-btn">×</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <h2>Automated Nurture</h2>
+      <p class="project-meta">28 days · fully automatic · zero volunteer effort</p>
+      <p>Automated 28-day email series after Come & Try sign-up. Alternates game knowledge and club life stories. Ends with a direct join invitation.</p>
+      <p>Keeps croquet present in the gap between visits — the window where people drift away. The system handles the nurture; the club handles the personal touch.</p>
+    </div>
+  </div>
 
   <!-- ═══ MESSAGING ═══ -->
-  <section id="messaging" class="project fade-in">
-    <h2 class="project-header">06 — Messaging</h2>
-    <p class="project-summary">Shared enquiry tracking. Club contact goes to one system, not one person's email. Any committee member can see who enquired and follow up.</p>
-    <div class="project-stat">3-week visibility window · accountability at committee meetings</div>
-  </section>
+  <div class="window fade-in" id="messaging">
+    <div class="window-titlebar">
+      <span class="window-titlebar-text">06 — Messaging</span>
+      <div class="window-buttons">
+        <span class="window-btn">─</span>
+        <span class="window-btn">□</span>
+        <span class="window-btn">×</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <h2>Shared Enquiry Tracking</h2>
+      <p class="project-meta">3-week visibility · committee accountability</p>
+      <p>Club contact goes to one system, not one person's email inbox. Any committee member can see who enquired and follow up. Solves the "person on holiday" problem.</p>
+    </div>
+  </div>
 
   <!-- ═══ NEWS SITE ═══ -->
-  <section id="news" class="project fade-in">
-    <h2 class="project-header">07 — The News Site</h2>
-    <p class="project-summary">Write once, publish everywhere. Authors write in plain text, articles appear on the news site, then get reused across emails, newsletters, and AI search results.</p>
-    <div class="project-stat">2,000+ members reached · content stays findable indefinitely</div>
-  </section>
+  <div class="window fade-in" id="news">
+    <div class="window-titlebar">
+      <span class="window-titlebar-text">07 — The News Site</span>
+      <div class="window-buttons">
+        <span class="window-btn">─</span>
+        <span class="window-btn">□</span>
+        <span class="window-btn">×</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <h2>Write Once, Publish Everywhere</h2>
+      <p class="project-meta">2,000+ members reached · content stays findable</p>
+      <p>Authors write in plain text, articles appear on the news site, then get reused across emails, newsletters, and AI search results. No code, no design tools — anyone who can write a Notion page can publish.</p>
+    </div>
+  </div>
 
   <!-- ═══ VISUAL IDENTITY ═══ -->
-  <section id="identity" class="project fade-in">
-    <h2 class="project-header">08 — Visual Identity</h2>
-    <p class="project-summary">Unified design system. One colour palette, one typeface, one illustration style across all internal and external materials.</p>
-    <div class="project-stat">QLD Maroon · lawn green · Inter typeface · hand-sketched illustrations</div>
-    <p style="color: var(--fg-dim);">A person who sees a Come & Try poster, an email, and a website recognises they're all part of the same organisation.</p>
-  </section>
-
-  <!-- ═══ DIVIDER ═══ -->
-  <div class="divider" aria-hidden="true">════════════════════════════════════════════════════════════════</div>
+  <div class="window fade-in" id="identity">
+    <div class="window-titlebar">
+      <span class="window-titlebar-text">08 — Visual Identity</span>
+      <div class="window-buttons">
+        <span class="window-btn">─</span>
+        <span class="window-btn">□</span>
+        <span class="window-btn">×</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <h2>Unified Design System</h2>
+      <p class="project-meta">QLD Maroon · lawn green · Inter · hand-sketched illustrations</p>
+      <p>One colour palette, one typeface, one illustration style across all internal and external materials. A person who sees a Come & Try poster, an email, and a website recognises they're all part of the same organisation.</p>
+    </div>
+  </div>
 
   <!-- ═══ CONTACT ═══ -->
-  <section id="contact" class="fade-in">
-    <h2>// CONTACT</h2>
-    <p>Wade Hart<br>
-    <a href="mailto:me@croquetwade.com" class="scramble">me@croquetwade.com</a></p>
-    <p style="color: var(--fg-muted); font-size: 0.85rem; margin-top: 2rem;">CAQ Growth Consultancy — Queensland, Australia</p>
-  </section>
+  <div class="window fade-in" id="contact">
+    <div class="window-titlebar">
+      <span class="window-titlebar-text">Contact</span>
+      <div class="window-buttons">
+        <span class="window-btn">─</span>
+        <span class="window-btn">□</span>
+        <span class="window-btn">×</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <h2>Get In Touch</h2>
+      <p><strong>Wade Hart</strong><br>
+      <a href="mailto:me@croquetwade.com">me@croquetwade.com</a></p>
+      <p style="color: var(--fg-dim); font-size: 0.85rem;">CAQ Growth Consultancy — Queensland, Australia</p>
+    </div>
+  </div>
 
-  <!-- ═══ NAV BOTTOM ═══ -->
-  <nav class="nav-bottom" aria-label="Section links">
-    <a href="#" class="scramble">↑ top</a>
-    <a href="#system" class="scramble">system</a>
-    <a href="#mycroquet" class="scramble">mycroquet</a>
-    <a href="#comeandtry" class="scramble">come&try</a>
-    <a href="#ideals" class="scramble">ideals</a>
-    <a href="#contact" class="scramble">contact</a>
-  </nav>
+  <!-- spacer for fixed taskbar -->
+  <div class="taskbar-spacer"></div>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer class="footer">
-    <pre class="ascii-art-small" style="color: var(--fg-muted); margin-bottom: 1rem;" role="img" aria-label="CW">
- ██████╗██╗    ██╗
-██╔════╝██║    ██║
-██║     ██║ █╗ ██║
-██║     ██║███╗██║
-╚██████╗╚███╔███╔╝
- ╚═════╝ ╚══╝╚══╝</pre>
-    <p>&copy; 2026 Wade Hart. All systems operational.</p>
-  </footer>
+</div>
 
+<!-- ═══ TASKBAR ═══ -->
+<div class="taskbar">
+  <a href="#" class="start-btn">⊞ Start</a>
+  <div class="taskbar-divider"></div>
+  <div class="taskbar-links">
+    <a href="#mycroquet" class="taskbar-link">MyCroquet</a>
+    <a href="#comeandtry" class="taskbar-link">Come&Try</a>
+    <a href="#ideals" class="taskbar-link">Ideals</a>
+    <a href="#contact" class="taskbar-link">Contact</a>
+  </div>
+  <span class="taskbar-clock"></span>
 </div>
 
 <script src="effects.js"></script>

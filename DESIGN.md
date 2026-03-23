@@ -1,75 +1,46 @@
-# croquetwade.com — Design Brief
+# croquetwade.com — Design Brief (v2: Win98 Retro)
 
 ## Concept: "The Future. But 1990."
 
-Retrofuturist terminal aesthetic. Pure black and white. ASCII art as visual medium.
-Not a gimmick — a real portfolio for real decision-makers, wrapped in an unforgettable aesthetic.
+Light, nostalgic Windows 98 aesthetic. Office vibes, not hacker vibes. The Win98 chrome frames real, professional content — it's charming and memorable without being a gimmick.
 
-## References
+**v1 (dark terminal/ASCII art) was rejected** — it looked like Claude's portfolio, not Wade's.
 
-- **thenicholasong.com** — CRT overlay, monospace everything, typewriter text, text scramble, smooth scroll, pixel-art letterforms. "Not a copy but that vibe."
-- **ASCII-Motion** (github.com/CameronFoxly/Ascii-Motion) — ASCII art rendering, retro fonts. Inspiration only.
-- **EGA/VGA 16-colour** — Optional limited-palette accents if pure B&W needs relief.
+## Primary Reference
+
+retro98.framer.website — Win98 chrome, light backgrounds, beveled borders, embossed panels, pixel accents.
 
 ## Palette
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--bg` | `#000000` | Background — pure black |
-| `--fg` | `#FFFFFF` | Primary text — pure white |
-| `--fg-dim` | `#AAAAAA` | Secondary text, metadata |
-| `--fg-muted` | `#555555` | Tertiary, decorative lines |
-| `--accent` | `#55FF55` | Optional EGA bright green — links, highlights (use sparingly) |
-
-Start pure B&W. Add accent only if hierarchy demands it.
+| `--bg` | `#008080` | Teal — classic Win98 desktop |
+| `--bg-panel` | `#c0c0c0` | Silver — panel/window frame |
+| `--bg-window` | `#ffffff` | White — content area |
+| `--bg-titlebar` | `#000080` | Navy — active window titlebar |
+| `--fg` | `#000000` | Black — primary text |
+| `--fg-dim` | `#444444` | Dark gray — secondary text |
+| `--fg-muted` | `#808080` | Gray — tertiary, meta text |
 
 ## Typography
 
-One font family. Monospace everywhere. The constraint IS the identity.
+| Font | Usage |
+|------|-------|
+| Handjet (bold) | Headlines, window titles |
+| Inter | Body text |
+| VT323 | Stat readouts, mono elements |
 
-| Token | Font | Weight | Usage |
-|-------|------|--------|-------|
-| `--font-body` | Sometype Mono | 400, 500 | Body text, paragraphs |
-| `--font-display` | VT323 | 400 | ASCII art headers, large display text |
+## Key Components
 
-Both from Google Fonts. No serif/sans mixing. No secondary family.
-
-## Atmosphere
-
-All CSS-only. Subtle enough to be felt, not seen.
-
-- **Scanlines** — `::before` pseudo on body, 4px repeating gradient, opacity 0.05–0.08
-- **Noise/grain** — `::after` pseudo, background-position keyframe at opacity 0.03–0.05
-- **No heavy flicker** — causes eye strain
-- **Phosphor glow** — layered text-shadow on key headings only
-- **Hidden scrollbars** — viewport = terminal screen
-
-## Interactions
-
-- **Typewriter reveal** — text types on scroll-into-view, 40-60ms/char, lifelike variation
-- **Text scramble on hover** — links/interactive elements scramble to special chars, restore on mouseout
-- **Smooth scroll** — weighted, cinematic, ~1s duration, exponential ease
-- **Section fade-in** — content fades + slight translateY on scroll entry
-
-## Visual Elements
-
-- **ASCII art hero** — site name as large figlet-style ASCII banner
-- **Section dividers** — box-drawing characters: `═══`, `───`, `░░░`
-- **Terminal-style links** — `[bracket notation]` or `> prefixed`
-- **Stat readouts** — terminal output format, not cards
-- **ASCII art illustrations** — croquet elements (mallet, hoop, ball) as character art
+- **Window panels** — 4-layer beveled box-shadow, navy titlebar with decorative buttons
+- **Recessed panels** — inverted bevel for stat readouts
+- **Win98 buttons** — raised bevel, sunken on :active
+- **Taskbar** — fixed footer with Start button, section links, live clock
+- **Custom scrollbar** — Win98-style silver with beveled thumb
 
 ## Layout
 
-- Single column, max-width ~720px, centred
-- Generous vertical spacing between sections
-- Mobile-first — nothing breaks at 375px
-- No persistent nav bar — content IS the interface
-- Small anchor links at top/bottom for section jumping
-
-## What This Is NOT
-
-- Not a terminal emulator (no typing commands)
-- Not a joke or novelty
-- Not a CSS framework wrapper
-- Not the CAQ community aesthetic (no maroon, no cream, no green backgrounds)
+- Single column, max-width 780px, centred on teal desktop
+- Each project in its own window panel
+- Hybrid structure: scroll home + 3 deep-dive pages
+- Minimal nav — taskbar at bottom, anchor links
