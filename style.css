@@ -729,7 +729,7 @@ a:active {
 }
 
 .float-window {
-  resize: both;
+  resize: vertical;
   overflow: hidden;
   min-width: 280px;
   min-height: 120px;
