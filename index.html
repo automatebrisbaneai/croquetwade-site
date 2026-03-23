@@ -12,240 +12,372 @@
 </head>
 <body>
 
-<div class="desktop">
+<div class="desktop-wrap">
 
-  <!-- ═══ HERO WINDOW ═══ -->
-  <div class="window">
-    <div class="window-titlebar">
-      <span class="window-titlebar-icon">🏏</span>
-      <span class="window-titlebar-text">CroquetWade — Growth Consultancy</span>
-      <div class="window-buttons">
-        <span class="window-btn window-btn-minimize">─</span>
-        <span class="window-btn window-btn-maximize">□</span>
-        <span class="window-btn window-btn-close">×</span>
+  <!-- ═══ DESKTOP ICONS ═══ -->
+  <nav class="desktop-icons" aria-label="Desktop shortcuts">
+    <a href="#" class="desktop-icon">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="4" y="6" width="24" height="18" rx="2" fill="#ece9d8" stroke="#000" stroke-width="1"/><rect x="6" y="8" width="20" height="12" fill="#3a6ea5"/><rect x="12" y="24" width="8" height="2" fill="#808080"/><rect x="10" y="26" width="12" height="1" fill="#aca899"/></svg>
+      <span class="desktop-icon-label">My Computer</span>
+    </a>
+    <a href="#mycroquet" class="desktop-icon">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><rect x="5" y="10" width="22" height="1" fill="#e8c838"/></svg>
+      <span class="desktop-icon-label">My Projects</span>
+    </a>
+    <a href="#contact" class="desktop-icon">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="8" width="28" height="18" rx="1" fill="#fff" stroke="#0066cc" stroke-width="1.5"/><path d="M3 9l13 10L29 9" stroke="#0066cc" stroke-width="1.5" fill="none"/></svg>
+      <span class="desktop-icon-label">Email Wade</span>
+    </a>
+    <a href="#identity" class="desktop-icon">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="1" fill="#fff" stroke="#808080" stroke-width="1"/><rect x="4" y="4" width="8" height="6" fill="#ff0000"/><rect x="13" y="4" width="8" height="6" fill="#00aa00"/><rect x="4" y="11" width="8" height="6" fill="#0000ff"/><rect x="13" y="11" width="8" height="6" fill="#ffff00"/><rect x="22" y="4" width="6" height="13" fill="#ff00ff"/><circle cx="14" cy="24" r="5" fill="#00aaaa"/></svg>
+      <span class="desktop-icon-label">Paint</span>
+    </a>
+    <a href="#news" class="desktop-icon">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" fill="#0078d7" stroke="#005a9e" stroke-width="1"/><text x="16" y="21" text-anchor="middle" fill="white" font-size="16" font-weight="bold" font-family="serif">e</text></svg>
+      <span class="desktop-icon-label">Internet Explorer</span>
+    </a>
+    <a class="desktop-icon" style="margin-top: auto;">
+      <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><path d="M6 6h20l-3 20H9L6 6z" fill="#ece9d8" stroke="#808080" stroke-width="1"/><rect x="10" y="2" width="12" height="5" fill="none" stroke="#808080" stroke-width="1" rx="1"/><line x1="12" y1="10" x2="12" y2="23" stroke="#aca899" stroke-width="1"/><line x1="16" y1="10" x2="16" y2="23" stroke="#aca899" stroke-width="1"/><line x1="20" y1="10" x2="20" y2="23" stroke="#aca899" stroke-width="1"/></svg>
+      <span class="desktop-icon-label">Recycle Bin</span>
+    </a>
+  </nav>
+
+  <!-- ═══ WINDOWS COLUMN ═══ -->
+  <div class="desktop-windows">
+
+    <!-- ═══ HERO — My Computer style ═══ -->
+    <div class="window">
+      <div class="window-titlebar">
+        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="2" y="3" width="12" height="9" rx="1" fill="#ece9d8" stroke="#000" stroke-width=".5"/><rect x="3" y="4" width="10" height="6" fill="#3a6ea5"/><rect x="6" y="12" width="4" height="1" fill="#808080"/></svg>
+        <span class="window-titlebar-text">CroquetWade — Growth Consultancy</span>
+        <div class="window-buttons">
+          <span class="window-btn window-btn-minimize">─</span>
+          <span class="window-btn window-btn-maximize">□</span>
+          <span class="window-btn window-btn-close">×</span>
+        </div>
       </div>
-    </div>
-    <div class="window-frame">
-      <div class="window-body hero-body">
-        <h1>CroquetWade</h1>
-        <p class="hero-subtitle">Croquet growth systems for Queensland. Strategy, technology, and membership — built from the ground up for the Croquet Association of Queensland.</p>
-        <p style="font-size: 0.85rem; color: var(--fg-dim);">Wade Hart — CAQ Growth Consultancy</p>
+      <div class="window-menubar">
+        <a>File</a><a>Edit</a><a>View</a><a>Favourites</a><a>Tools</a><a>Help</a>
+      </div>
+      <div class="window-addressbar">
+        <span class="addressbar-label">Address</span>
+        <span class="addressbar-input">C:\CroquetWade\Growth Consultancy</span>
+        <span class="addressbar-go">Go</span>
+      </div>
+      <div class="window-frame">
+        <div class="window-body hero-body">
+          <h1>CroquetWade</h1>
+          <p class="hero-subtitle">Croquet growth systems for Queensland. Strategy, technology, and membership — built from the ground up for the Croquet Association of Queensland.</p>
+          <p style="font-size: 0.85rem; color: var(--fg-dim);">Wade Hart — CAQ Growth Consultancy</p>
 
-        <div class="recessed" style="margin-top: 1.5rem;">
-          <div class="stat-grid">
-            <div class="stat-item"><span class="stat-label">Clubs connected</span><span class="stat-value">41</span></div>
-            <div class="stat-item"><span class="stat-label">Members indexed</span><span class="stat-value">1,777</span></div>
-            <div class="stat-item"><span class="stat-label">Pipeline stages</span><span class="stat-value">6</span></div>
-            <div class="stat-item"><span class="stat-label">Systems built</span><span class="stat-value">8</span></div>
+          <div class="recessed" style="margin-top: 1.5rem;">
+            <div class="stat-grid">
+              <div class="stat-item"><span class="stat-label">Clubs connected</span><span class="stat-value">41</span></div>
+              <div class="stat-item"><span class="stat-label">Members indexed</span><span class="stat-value">1,777</span></div>
+              <div class="stat-item"><span class="stat-label">Pipeline stages</span><span class="stat-value">6</span></div>
+              <div class="stat-item"><span class="stat-label">Systems built</span><span class="stat-value">8</span></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- ═══ MYCROQUET ═══ -->
-  <div class="window fade-in" id="mycroquet">
-    <div class="window-titlebar">
-      <span class="window-titlebar-icon">📋</span>
-      <span class="window-titlebar-text">01 — MyCroquet</span>
-      <div class="window-buttons">
-        <span class="window-btn window-btn-minimize">─</span>
-        <span class="window-btn window-btn-maximize">□</span>
-        <span class="window-btn window-btn-close">×</span>
+    <!-- ═══ MYCROQUET — Explorer window ═══ -->
+    <div class="window fade-in" id="mycroquet">
+      <div class="window-titlebar">
+        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="2" width="14" height="12" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width=".5"/><rect x="1" y="2" width="7" height="2" rx="1" fill="#e8c838"/></svg>
+        <span class="window-titlebar-text">My Projects\MyCroquet</span>
+        <div class="window-buttons">
+          <span class="window-btn window-btn-minimize">─</span>
+          <span class="window-btn window-btn-maximize">□</span>
+          <span class="window-btn window-btn-close">×</span>
+        </div>
+      </div>
+      <div class="window-menubar">
+        <a>File</a><a>Edit</a><a>View</a><a>Help</a>
+      </div>
+      <div class="window-frame">
+        <div class="window-body">
+          <h2>MyCroquet — Membership Portal</h2>
+          <p class="project-meta">41 clubs · all active members · 6 alpha sessions</p>
+          <p>Passwordless membership portal. Replaces handwritten forms and direct database access with a clean interface that validates, logs, and audits every change.</p>
+          <p>Club secretaries enter data once. It flows through the system. Zero double-entry. Every change logged with full audit trail.</p>
+          <a href="mycroquet.html" class="btn">Open</a>
+        </div>
       </div>
     </div>
-    <div class="window-frame">
-      <div class="window-body">
-        <h2>Membership Portal</h2>
-        <p class="project-meta">41 clubs · all active members · 6 alpha sessions</p>
-        <p>Passwordless membership portal. Replaces handwritten forms and direct database access with a clean interface that validates, logs, and audits every change.</p>
-        <p>Club secretaries enter data once. It flows through the system. Zero double-entry. Every change logged with full audit trail.</p>
-        <a href="mycroquet.html" class="btn">Read More</a>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══ COME AND TRY ═══ -->
-  <div class="window fade-in" id="comeandtry">
-    <div class="window-titlebar">
-      <span class="window-titlebar-icon">🎯</span>
-      <span class="window-titlebar-text">02 — Come & Try</span>
-      <div class="window-buttons">
-        <span class="window-btn window-btn-minimize">─</span>
-        <span class="window-btn window-btn-maximize">□</span>
-        <span class="window-btn window-btn-close">×</span>
+    <!-- ═══ COME AND TRY ═══ -->
+    <div class="window fade-in" id="comeandtry">
+      <div class="window-titlebar">
+        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="2" width="14" height="12" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width=".5"/><rect x="1" y="2" width="7" height="2" rx="1" fill="#e8c838"/></svg>
+        <span class="window-titlebar-text">My Projects\Come & Try</span>
+        <div class="window-buttons">
+          <span class="window-btn window-btn-minimize">─</span>
+          <span class="window-btn window-btn-maximize">□</span>
+          <span class="window-btn window-btn-close">×</span>
+        </div>
+      </div>
+      <div class="window-menubar">
+        <a>File</a><a>Edit</a><a>View</a><a>Help</a>
+      </div>
+      <div class="window-frame">
+        <div class="window-body">
+          <h2>Come & Try — Unified Sign-Up System</h2>
+          <p class="project-meta">single shared pipeline · committee-wide visibility</p>
+          <p>One website for every club in Queensland. Small regional clubs get parity with large city ones. When someone signs up, their details land where any committee member can see and follow up.</p>
+          <p>No more warm leads going cold because the right person was on holiday.</p>
+          <a href="come-and-try.html" class="btn">Open</a>
+        </div>
       </div>
     </div>
-    <div class="window-frame">
-      <div class="window-body">
-        <h2>Unified Sign-Up System</h2>
-        <p class="project-meta">single shared pipeline · committee-wide visibility</p>
-        <p>One website for every club in Queensland. Small regional clubs get parity with large city ones. When someone signs up, their details land where any committee member can see and follow up.</p>
-        <p>No more warm leads going cold because the right person was on holiday.</p>
-        <a href="come-and-try.html" class="btn">Read More</a>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══ IDEALS & AIMS ═══ -->
-  <div class="window fade-in" id="ideals">
-    <div class="window-titlebar">
-      <span class="window-titlebar-icon">⚙️</span>
-      <span class="window-titlebar-text">03 — Ideals & Aims</span>
-      <div class="window-buttons">
-        <span class="window-btn window-btn-minimize">─</span>
-        <span class="window-btn window-btn-maximize">□</span>
-        <span class="window-btn window-btn-close">×</span>
+    <!-- ═══ IDEALS & AIMS ═══ -->
+    <div class="window fade-in" id="ideals">
+      <div class="window-titlebar">
+        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="2" y="1" width="12" height="14" rx="1" fill="#fff" stroke="#808080" stroke-width=".5"/><line x1="4" y1="4" x2="12" y2="4" stroke="#0066cc" stroke-width="1"/><line x1="4" y1="7" x2="12" y2="7" stroke="#808080" stroke-width=".5"/><line x1="4" y1="9" x2="12" y2="9" stroke="#808080" stroke-width=".5"/><line x1="4" y1="11" x2="10" y2="11" stroke="#808080" stroke-width=".5"/></svg>
+        <span class="window-titlebar-text">Ideals & Aims — WordPad</span>
+        <div class="window-buttons">
+          <span class="window-btn window-btn-minimize">─</span>
+          <span class="window-btn window-btn-maximize">□</span>
+          <span class="window-btn window-btn-close">×</span>
+        </div>
+      </div>
+      <div class="window-menubar">
+        <a>File</a><a>Edit</a><a>View</a><a>Insert</a><a>Format</a><a>Help</a>
+      </div>
+      <div class="window-frame">
+        <div class="window-body">
+          <h2>Strategic Framework</h2>
+          <p class="project-meta">4 ideals · 6 aims · quarterly priority system</p>
+          <p>Four ideals govern how CAQ operates. Six aims define what it builds toward. Developed from a Management Committee workshop.</p>
+          <p>The aims form a cascade: strong admin enables external promotion, which brings people to the door, which feeds member growth, which strengthens clubs, which develops play, which opens room for innovation.</p>
+          <a href="ideals-and-aims.html" class="btn">Open</a>
+        </div>
       </div>
     </div>
-    <div class="window-frame">
-      <div class="window-body">
-        <h2>Strategic Framework</h2>
-        <p class="project-meta">4 ideals · 6 aims · quarterly priority system</p>
-        <p>Four ideals govern how CAQ operates. Six aims define what it builds toward. Developed from a Management Committee workshop.</p>
-        <p>The aims form a cascade: strong admin enables external promotion, which brings people to the door, which feeds member growth, which strengthens clubs, which develops play, which opens room for innovation.</p>
-        <a href="ideals-and-aims.html" class="btn">Read More</a>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══ ONE POSTCODE ═══ -->
-  <div class="window fade-in" id="postcode">
-    <div class="window-titlebar">
-      <span class="window-titlebar-icon">📍</span>
-      <span class="window-titlebar-text">04 — One Postcode, Your Nearest Club</span>
-      <div class="window-buttons">
-        <span class="window-btn window-btn-minimize">─</span>
-        <span class="window-btn window-btn-maximize">□</span>
-        <span class="window-btn window-btn-close">×</span>
+    <!-- ═══ ONE POSTCODE ═══ -->
+    <div class="window fade-in" id="postcode">
+      <div class="window-titlebar">
+        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><circle cx="8" cy="6" r="5" fill="#4a90d9" stroke="#2060a0" stroke-width=".5"/><path d="M8 11l-2 4h4l-2-4z" fill="#c00" stroke="#800" stroke-width=".5"/><circle cx="8" cy="6" r="2" fill="#fff"/></svg>
+        <span class="window-titlebar-text">One Postcode — Club Finder</span>
+        <div class="window-buttons">
+          <span class="window-btn window-btn-minimize">─</span>
+          <span class="window-btn window-btn-maximize">□</span>
+          <span class="window-btn window-btn-close">×</span>
+        </div>
+      </div>
+      <div class="window-frame">
+        <div class="window-body">
+          <h2>Club Finder</h2>
+          <p class="project-meta">deployed · integrates with Come & Try pipeline</p>
+          <p>Type a postcode, get your nearest club and Come & Try times. Removes the discovery barrier entirely — someone curious about croquet doesn't have to search 20 different club websites.</p>
+        </div>
       </div>
     </div>
-    <div class="window-frame">
-      <div class="window-body">
-        <h2>Club Finder</h2>
-        <p class="project-meta">deployed · integrates with Come & Try pipeline</p>
-        <p>Type a postcode, get your nearest club and Come & Try times. Removes the discovery barrier entirely — someone curious about croquet doesn't have to search 20 different club websites.</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══ EMAIL SEQUENCE ═══ -->
-  <div class="window fade-in" id="emails">
-    <div class="window-titlebar">
-      <span class="window-titlebar-icon">✉️</span>
-      <span class="window-titlebar-text">05 — The Email Sequence</span>
-      <div class="window-buttons">
-        <span class="window-btn window-btn-minimize">─</span>
-        <span class="window-btn window-btn-maximize">□</span>
-        <span class="window-btn window-btn-close">×</span>
+    <!-- ═══ EMAIL SEQUENCE — Outlook Express style ═══ -->
+    <div class="window fade-in" id="emails">
+      <div class="window-titlebar">
+        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="4" width="14" height="9" rx="1" fill="#f0ede1" stroke="#808080" stroke-width=".5"/><path d="M2 5l6 5 6-5" stroke="#0066cc" stroke-width="1" fill="none"/></svg>
+        <span class="window-titlebar-text">The Email Sequence — Outlook Express</span>
+        <div class="window-buttons">
+          <span class="window-btn window-btn-minimize">─</span>
+          <span class="window-btn window-btn-maximize">□</span>
+          <span class="window-btn window-btn-close">×</span>
+        </div>
+      </div>
+      <div class="window-menubar">
+        <a>File</a><a>Edit</a><a>View</a><a>Tools</a><a>Message</a><a>Help</a>
+      </div>
+      <div class="window-frame">
+        <div class="window-body">
+          <h2>Automated Nurture</h2>
+          <p class="project-meta">28 days · fully automatic · zero volunteer effort</p>
+          <p>Automated 28-day email series after Come & Try sign-up. Alternates game knowledge and club life stories. Ends with a direct join invitation.</p>
+          <p>Keeps croquet present in the gap between visits — the window where people drift away. The system handles the nurture; the club handles the personal touch.</p>
+        </div>
       </div>
     </div>
-    <div class="window-frame">
-      <div class="window-body">
-        <h2>Automated Nurture</h2>
-        <p class="project-meta">28 days · fully automatic · zero volunteer effort</p>
-        <p>Automated 28-day email series after Come & Try sign-up. Alternates game knowledge and club life stories. Ends with a direct join invitation.</p>
-        <p>Keeps croquet present in the gap between visits — the window where people drift away. The system handles the nurture; the club handles the personal touch.</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══ MESSAGING ═══ -->
-  <div class="window fade-in" id="messaging">
-    <div class="window-titlebar">
-      <span class="window-titlebar-icon">💬</span>
-      <span class="window-titlebar-text">06 — Messaging</span>
-      <div class="window-buttons">
-        <span class="window-btn window-btn-minimize">─</span>
-        <span class="window-btn window-btn-maximize">□</span>
-        <span class="window-btn window-btn-close">×</span>
+    <!-- ═══ MESSAGING — Windows Messenger style ═══ -->
+    <div class="window fade-in" id="messaging">
+      <div class="window-titlebar">
+        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><path d="M2 3h12v8H8l-3 3v-3H2V3z" fill="#a0d8a0" stroke="#408040" stroke-width=".5"/></svg>
+        <span class="window-titlebar-text">Messaging — Windows Messenger</span>
+        <div class="window-buttons">
+          <span class="window-btn window-btn-minimize">─</span>
+          <span class="window-btn window-btn-maximize">□</span>
+          <span class="window-btn window-btn-close">×</span>
+        </div>
+      </div>
+      <div class="window-frame">
+        <div class="window-body">
+          <h2>Shared Enquiry Tracking</h2>
+          <p class="project-meta">3-week visibility · committee accountability</p>
+          <p>Club contact goes to one system, not one person's email inbox. Any committee member can see who enquired and follow up. Solves the "person on holiday" problem.</p>
+        </div>
       </div>
     </div>
-    <div class="window-frame">
-      <div class="window-body">
-        <h2>Shared Enquiry Tracking</h2>
-        <p class="project-meta">3-week visibility · committee accountability</p>
-        <p>Club contact goes to one system, not one person's email inbox. Any committee member can see who enquired and follow up. Solves the "person on holiday" problem.</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══ NEWS SITE ═══ -->
-  <div class="window fade-in" id="news">
-    <div class="window-titlebar">
-      <span class="window-titlebar-icon">📰</span>
-      <span class="window-titlebar-text">07 — The News Site</span>
-      <div class="window-buttons">
-        <span class="window-btn window-btn-minimize">─</span>
-        <span class="window-btn window-btn-maximize">□</span>
-        <span class="window-btn window-btn-close">×</span>
+    <!-- ═══ NEWS SITE — Internet Explorer ═══ -->
+    <div class="window fade-in" id="news">
+      <div class="window-titlebar">
+        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><circle cx="8" cy="8" r="7" fill="#0078d7" stroke="#005a9e" stroke-width=".5"/><text x="8" y="12" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="serif">e</text></svg>
+        <span class="window-titlebar-text">The News Site — Internet Explorer</span>
+        <div class="window-buttons">
+          <span class="window-btn window-btn-minimize">─</span>
+          <span class="window-btn window-btn-maximize">□</span>
+          <span class="window-btn window-btn-close">×</span>
+        </div>
+      </div>
+      <div class="window-menubar">
+        <a>File</a><a>Edit</a><a>View</a><a>Favourites</a><a>Tools</a><a>Help</a>
+      </div>
+      <div class="window-addressbar">
+        <span class="addressbar-label">Address</span>
+        <span class="addressbar-input">https://news.croquetqld.org</span>
+        <span class="addressbar-go">Go</span>
+      </div>
+      <div class="window-frame">
+        <div class="window-body">
+          <h2>Write Once, Publish Everywhere</h2>
+          <p class="project-meta">2,000+ members reached · content stays findable</p>
+          <p>Authors write in plain text, articles appear on the news site, then get reused across emails, newsletters, and AI search results. No code, no design tools — anyone who can write a page can publish.</p>
+        </div>
       </div>
     </div>
-    <div class="window-frame">
-      <div class="window-body">
-        <h2>Write Once, Publish Everywhere</h2>
-        <p class="project-meta">2,000+ members reached · content stays findable</p>
-        <p>Authors write in plain text, articles appear on the news site, then get reused across emails, newsletters, and AI search results. No code, no design tools — anyone who can write a page can publish.</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══ VISUAL IDENTITY ═══ -->
-  <div class="window fade-in" id="identity">
-    <div class="window-titlebar">
-      <span class="window-titlebar-icon">🎨</span>
-      <span class="window-titlebar-text">08 — Visual Identity</span>
-      <div class="window-buttons">
-        <span class="window-btn window-btn-minimize">─</span>
-        <span class="window-btn window-btn-maximize">□</span>
-        <span class="window-btn window-btn-close">×</span>
+    <!-- ═══ VISUAL IDENTITY — Paint! ═══ -->
+    <div class="window fade-in" id="identity">
+      <div class="window-titlebar">
+        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="1" width="14" height="14" rx="1" fill="#fff" stroke="#808080" stroke-width=".5"/><rect x="3" y="3" width="4" height="3" fill="#f00"/><rect x="8" y="3" width="4" height="3" fill="#0a0"/><rect x="3" y="7" width="4" height="3" fill="#00f"/><rect x="8" y="7" width="4" height="3" fill="#ff0"/></svg>
+        <span class="window-titlebar-text">Visual Identity — Paint</span>
+        <div class="window-buttons">
+          <span class="window-btn window-btn-minimize">─</span>
+          <span class="window-btn window-btn-maximize">□</span>
+          <span class="window-btn window-btn-close">×</span>
+        </div>
+      </div>
+      <div class="window-menubar">
+        <a>File</a><a>Edit</a><a>View</a><a>Image</a><a>Colours</a><a>Help</a>
+      </div>
+      <div style="display:flex;">
+        <!-- Paint toolbar (left) -->
+        <div class="paint-toolbar" style="flex-direction:column; border-bottom:none; border-right: 1px solid #aca899;">
+          <span class="paint-tool">✏️</span>
+          <span class="paint-tool active">🖌️</span>
+          <span class="paint-tool">🪣</span>
+          <span class="paint-tool">✂️</span>
+          <span class="paint-tool">🔍</span>
+          <span class="paint-tool">📝</span>
+          <span class="paint-tool">⬜</span>
+          <span class="paint-tool">⭕</span>
+        </div>
+        <!-- Canvas area -->
+        <div style="flex:1; display:flex; flex-direction:column;">
+          <div class="paint-canvas">
+            <h2>Unified Design System</h2>
+            <p class="project-meta" style="margin-bottom:0.5rem;">QLD Maroon · lawn green · Inter · hand-sketched illustrations</p>
+            <p>One colour palette, one typeface, one illustration style across all internal and external materials. A person who sees a Come & Try poster, an email, and a website recognises they're all part of the same organisation.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Colour palette (bottom) -->
+      <div class="paint-palette">
+        <div class="paint-color-preview">
+          <div class="paint-color-fg"></div>
+          <div class="paint-color-bg"></div>
+        </div>
+        <div class="paint-colors">
+          <span class="paint-swatch" style="background:#000"></span>
+          <span class="paint-swatch" style="background:#808080"></span>
+          <span class="paint-swatch" style="background:#800000"></span>
+          <span class="paint-swatch" style="background:#808000"></span>
+          <span class="paint-swatch" style="background:#008000"></span>
+          <span class="paint-swatch" style="background:#008080"></span>
+          <span class="paint-swatch" style="background:#000080"></span>
+          <span class="paint-swatch" style="background:#800080"></span>
+          <span class="paint-swatch" style="background:#808040"></span>
+          <span class="paint-swatch" style="background:#004040"></span>
+          <span class="paint-swatch" style="background:#0000ff"></span>
+          <span class="paint-swatch" style="background:#004080"></span>
+          <span class="paint-swatch" style="background:#4000ff"></span>
+          <span class="paint-swatch" style="background:#804000"></span>
+          <span class="paint-swatch" style="background:#fff"></span>
+          <span class="paint-swatch" style="background:#c0c0c0"></span>
+          <span class="paint-swatch" style="background:#ff0000"></span>
+          <span class="paint-swatch" style="background:#ffff00"></span>
+          <span class="paint-swatch" style="background:#00ff00"></span>
+          <span class="paint-swatch" style="background:#00ffff"></span>
+          <span class="paint-swatch" style="background:#0000ff"></span>
+          <span class="paint-swatch" style="background:#ff00ff"></span>
+          <span class="paint-swatch" style="background:#ffff80"></span>
+          <span class="paint-swatch" style="background:#00ff80"></span>
+          <span class="paint-swatch" style="background:#80ffff"></span>
+          <span class="paint-swatch" style="background:#8080ff"></span>
+          <span class="paint-swatch" style="background:#ff0080"></span>
+          <span class="paint-swatch" style="background:#ff8040"></span>
+        </div>
+      </div>
+      <div class="paint-statusbar">
+        <span>For Help, click Help Topics on the Help Menu.</span>
+        <span style="margin-left:auto;">780 x 120 px</span>
       </div>
     </div>
-    <div class="window-frame">
-      <div class="window-body">
-        <h2>Unified Design System</h2>
-        <p class="project-meta">QLD Maroon · lawn green · Inter · hand-sketched illustrations</p>
-        <p>One colour palette, one typeface, one illustration style across all internal and external materials. A person who sees a Come & Try poster, an email, and a website recognises they're all part of the same organisation.</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══ CONTACT ═══ -->
-  <div class="window fade-in" id="contact">
-    <div class="window-titlebar">
-      <span class="window-titlebar-icon">📧</span>
-      <span class="window-titlebar-text">Contact</span>
-      <div class="window-buttons">
-        <span class="window-btn window-btn-minimize">─</span>
-        <span class="window-btn window-btn-maximize">□</span>
-        <span class="window-btn window-btn-close">×</span>
+    <!-- ═══ CONTACT — Email window ═══ -->
+    <div class="window fade-in" id="contact">
+      <div class="window-titlebar">
+        <svg width="16" height="16" viewBox="0 0 16 16" style="margin-right:4px"><rect x="1" y="4" width="14" height="9" rx="1" fill="#f0ede1" stroke="#808080" stroke-width=".5"/><path d="M2 5l6 5 6-5" stroke="#0066cc" stroke-width="1" fill="none"/></svg>
+        <span class="window-titlebar-text">New Message</span>
+        <div class="window-buttons">
+          <span class="window-btn window-btn-minimize">─</span>
+          <span class="window-btn window-btn-maximize">□</span>
+          <span class="window-btn window-btn-close">×</span>
+        </div>
+      </div>
+      <div class="window-menubar">
+        <a>File</a><a>Edit</a><a>View</a><a>Insert</a><a>Format</a><a>Tools</a><a>Help</a>
+      </div>
+      <div class="window-frame">
+        <div class="window-body">
+          <div style="border-bottom: 1px solid #aca899; padding-bottom: 0.5rem; margin-bottom: 1rem;">
+            <p style="margin-bottom:0.3rem;font-size:0.85rem;"><strong>To:</strong> <a href="mailto:me@croquetwade.com">me@croquetwade.com</a></p>
+            <p style="margin-bottom:0.3rem;font-size:0.85rem;"><strong>From:</strong> You</p>
+            <p style="margin-bottom:0;font-size:0.85rem;"><strong>Subject:</strong> Let's talk about croquet growth</p>
+          </div>
+          <p><strong>Wade Hart</strong><br>CAQ Growth Consultancy — Queensland, Australia</p>
+          <p style="color: var(--fg-dim); font-size: 0.85rem;">Hit reply. I'd love to hear from you.</p>
+          <a href="mailto:me@croquetwade.com" class="btn" style="margin-top: 0.5rem;">Send</a>
+        </div>
       </div>
     </div>
-    <div class="window-frame">
-      <div class="window-body">
-        <h2>Get In Touch</h2>
-        <p><strong>Wade Hart</strong><br>
-        <a href="mailto:me@croquetwade.com">me@croquetwade.com</a></p>
-        <p style="color: var(--fg-dim); font-size: 0.85rem;">CAQ Growth Consultancy — Queensland, Australia</p>
-      </div>
-    </div>
-  </div>
 
-  <div class="taskbar-spacer"></div>
+    <div class="taskbar-spacer"></div>
 
-</div>
+  </div><!-- /desktop-windows -->
+
+</div><!-- /desktop-wrap -->
 
 <!-- ═══ TASKBAR ═══ -->
 <div class="taskbar">
   <a href="#" class="start-btn"><span class="start-btn-logo">⊞</span> start</a>
   <div class="taskbar-divider"></div>
   <div class="taskbar-links">
-    <a href="#mycroquet" class="taskbar-link">MyCroquet</a>
-    <a href="#comeandtry" class="taskbar-link">Come&Try</a>
-    <a href="#ideals" class="taskbar-link">Ideals</a>
-    <a href="#contact" class="taskbar-link">Contact</a>
+    <a href="#mycroquet" class="taskbar-link">📋 MyCroquet</a>
+    <a href="#comeandtry" class="taskbar-link">🎯 Come&Try</a>
+    <a href="#ideals" class="taskbar-link">📄 Ideals</a>
+    <a href="#contact" class="taskbar-link">✉️ Contact</a>
   </div>
-  <span class="taskbar-clock"></span>
+  <div class="systray">
+    <span class="systray-icon" title="Volume">🔊</span>
+    <span class="systray-icon" title="Network">📶</span>
+    <span class="systray-icon" title="Security">🛡️</span>
+    <span class="systray-divider"></span>
+    <span class="taskbar-clock"></span>
+  </div>
 </div>
 
 <script src="effects.js"></script>

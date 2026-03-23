@@ -719,6 +719,11 @@ a:active {
 }
 
 /* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .desktop-icons { display: none; }
+  .desktop-wrap { max-width: var(--max-width); }
+}
+
 @media (max-width: 600px) {
   :root {
     --gutter: 0.5rem;
@@ -728,9 +733,14 @@ a:active {
 
   .hero-body { padding: 1.25rem; }
   .window-body { padding: 1rem 1.25rem; }
+  .paint-canvas { padding: 1rem; }
 
   .stat-grid { grid-template-columns: 1fr; }
   .taskbar-links { display: none; }
+  .window-menubar { display: none; }
+  .window-addressbar { display: none; }
+  .paint-toolbar { flex-wrap: wrap; }
+  .paint-palette { flex-wrap: wrap; }
 }
 
 @media (max-width: 375px) {
