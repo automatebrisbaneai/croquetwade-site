@@ -71,11 +71,24 @@
     setInterval(update, 30000);
   }
 
+  /* ── Visitor Counter (fake, increments on each visit) ── */
+
+  function initVisitorCounter() {
+    var el = document.getElementById('visitor-count');
+    if (!el) return;
+    var stored = localStorage.getItem('cw-visitors');
+    var count = stored ? parseInt(stored, 10) : 4271;
+    count += Math.floor(Math.random() * 3) + 1;
+    localStorage.setItem('cw-visitors', count);
+    el.textContent = String(count).replace(/\B(?=(\d{3})+(?!\d))/g, ',').padStart(7, '0');
+  }
+
   /* ── Init ────────────────────────────────────────────── */
 
   document.addEventListener('DOMContentLoaded', function () {
     initScrollReveal();
     initSmoothScroll();
     initClock();
+    initVisitorCounter();
   });
 })();
