@@ -84,7 +84,7 @@ function getLeaderboard(){
 }
 function saveScore(name,hoops){
   var lb=getLeaderboard();lb.push({name:name.toUpperCase().substring(0,6),hoops:hoops});
-  lb.sort(function(a,b){return b.hoops-a.hoops;});lb=lb.slice(0,8);
+  lb.sort(function(a,b){return b.hoops-a.hoops;});lb=lb.slice(0,5);
   localStorage.setItem('bamford-lb',JSON.stringify(lb));
 }
 
@@ -275,7 +275,7 @@ function drawWinScreen(){
     ctx.fillText('\u2714 SAVED: '+savedName,W/2,335);
     var lb=getLeaderboard();
     ctx.fillStyle='#555';ctx.font='11px monospace';ctx.fillText('\u2500\u2500 HALL OF CHAMPIONS \u2500\u2500',W/2,360);
-    lb.slice(0,6).forEach(function(e,i){
+    lb.slice(0,5).forEach(function(e,i){
       var medal=i===0?'\u{1F947}':i===1?'\u{1F948}':i===2?'\u{1F949}':'  ';
       ctx.fillStyle=(e.name===savedName)?'#ffcc00':'#aaa';ctx.font='11px monospace';
       ctx.fillText(medal+' '+e.name.padEnd(6)+' '+e.hoops+'/5 hoops',W/2,378+i*14);
@@ -301,7 +301,7 @@ function drawLoseScreen(){
     if(savedName)ctx.fillText('\u2714 SAVED: '+savedName,W/2,320);
     var lb=getLeaderboard();
     ctx.fillStyle='#555';ctx.font='11px monospace';ctx.fillText('\u2500\u2500 HALL OF CHAMPIONS \u2500\u2500',W/2,345);
-    lb.slice(0,6).forEach(function(e,i){
+    lb.slice(0,5).forEach(function(e,i){
       var medal=i===0?'\u{1F947}':i===1?'\u{1F948}':i===2?'\u{1F949}':'  ';
       ctx.fillStyle=(e.name===savedName)?'#ffcc00':'#aaa';ctx.font='11px monospace';
       ctx.fillText(medal+' '+e.name.padEnd(6)+' '+e.hoops+'/5 hoops',W/2,363+i*14);
