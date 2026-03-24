@@ -390,7 +390,7 @@ function update(){
 
     var hit=checkHoopCollision();
     if(hit==='score'&&!scored){
-      scored=true;ball.vx*=0.3;ball.vy*=0.3;
+      scored=true;
       bamfordScore++;playCheer();state='scored';resultTimer=0;
     } else if(hit==='bounce_left'&&!bounced){
       bounced=true;ball.vx=-Math.abs(ball.vx)*0.6-1;ball.vy*=0.5;playBounce();
