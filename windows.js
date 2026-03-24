@@ -119,9 +119,9 @@ var PAINT_WINDOW = {
 
 // Game iframes
 var GAME_WINDOWS = [
-  { id: 'minesweeper-win', title: 'Minesweeper', emoji: '\u{1F4A3}', src: 'games/minesweeper.html?embed=1', w: 440, h: 530, top: 40, left: 'calc(50% - 220px)' },
-  { id: 'snake-win', title: 'Snake', emoji: '\u{1F40D}', src: 'games/snake.html?embed=1', w: 470, h: 540, top: 30, left: 'calc(50% - 135px)' },
-  { id: 'solitaire-win', title: 'Solitaire', emoji: '\u2660', src: 'games/solitaire.html?embed=1', w: 780, h: 680, top: 20, left: 'calc(50% - 390px)' },
+  { id: 'minesweeper-win', title: 'Minesweeper', emoji: '\u{1F4A3}', src: 'games/minesweeper.html?embed=1', w: 440, h: 365, top: 40, left: 'calc(50% - 220px)' },
+  { id: 'snake-win', title: 'Snake', emoji: '\u{1F40D}', src: 'games/snake.html?embed=1', w: 470, h: 535, top: 30, left: 'calc(50% - 135px)' },
+  { id: 'solitaire-win', title: 'Solitaire', emoji: '\u2660', src: 'games/solitaire.html?embed=1', w: 780, h: 475, top: 20, left: 'calc(50% - 390px)' },
   { id: 'hearts-win', title: 'Hearts', emoji: '<span style="color:#c00">\u2665</span>', src: 'games/hearts.html?embed=1', w: 660, h: 540, top: 30, left: 'calc(50% - 230px)' },
   { id: 'blackjack-win', title: 'Blackjack', emoji: '\u{1F0CF}', src: 'games/blackjack.html?embed=1', w: 540, h: 480, top: 40, left: 'calc(50% - 170px)' }
 ];
