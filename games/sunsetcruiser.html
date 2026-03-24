@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunset Cruiser</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;font-family:'Segoe UI',Tahoma,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;}
+body.embed .game-window{border:none;box-shadow:none;}
+body.embed .titlebar{display:none;}
+body.embed{min-height:auto;}
+.game-window{background:#000;}
+.titlebar{background:linear-gradient(180deg,#0054e3,#0f6cfc);color:#fff;padding:4px 6px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;text-shadow:0 1px 1px rgba(0,0,0,.4);border-radius:6px 6px 0 0;}
+.titlebar-btns{display:flex;gap:2px;}
+.titlebar-btn{width:21px;height:21px;border-radius:3px;border:1px solid;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;cursor:default;}
+.btn-close{background:linear-gradient(180deg,#e47c6c,#c9473b);border-color:#c04535;color:#fff;}
+.btn-other{background:linear-gradient(180deg,#3c8bea,#2663c7);border-color:#3573d6;color:#fff;}
+canvas{display:block;}
+</style>
+</head>
+<body>
+<div class="game-window">
+  <div class="titlebar"><span>🏎️ Sunset Cruiser</span><div class="titlebar-btns"><span class="titlebar-btn btn-other">─</span><span class="titlebar-btn btn-other">□</span><span class="titlebar-btn btn-close" onclick="window.close()">×</span></div></div>
+  <canvas id="c" width="640" height="400"></canvas>
+</div>
+<script>
+var canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+var W=640,H=400;
+var ROAD_W=2000,SEG_L=200,DRAW_DIST=150;
+var keys={},speed=0,maxSpeed=200,accel=0,pos=0,playerX=0;
+var segments=[],cars=[],score=0,crashed=false,crashTimer=0;
+
+// Road generation
+function initRoad(){
+  segments=[];
+  for(var i=0;i<1600;i++){
+    var curve=0;
+    if(i>40&&i<70)curve=0.5;
+    if(i>100&&i<130)curve=-0.7;
+    if(i>200&&i<250)curve=0.8;
+    if(i>300&&i<360)curve=-0.6;
+    if(i>400&&i<480)curve=0.9;
+    if(i>500&&i<550)curve=-1.0;
+    if(i>600&&i<700)curve=0.4;
+    if(i>800&&i<900)curve=-0.5;
+    if(i>1000&&i<1100)curve=0.7;
+    if(i>1200&&i<1350)curve=-0.8;
+    segments.push({curve:curve,sprite:Math.random()<0.35?(Math.random()<0.5?'palm':'sign'):null,spriteX:Math.random()<0.5?-1:1});
+  }
+  // Scatter traffic
+  cars=[];
+  for(var i=0;i<20;i++){
+    cars.push({seg:200+Math.floor(Math.random()*1200),x:(Math.random()-0.5)*1.2,spd:80+Math.random()*60,color:['#f00','#00f','#ff0','#0f0','#fff','#f80'][Math.floor(Math.random()*6)]});
+  }
+}
+
+function project(z){
+  var scale=300/z;
+  return{scale:scale,x:W/2,y:H/2-scale*300};
+}
+
+function update(){
+  if(crashed){crashTimer--;if(crashTimer<=0){crashed=false;speed=0;}return;}
+
+  if(keys['ArrowUp']||keys['w'])speed=Math.min(maxSpeed,speed+1.5);
+  else if(keys['ArrowDown']||keys['s'])speed=Math.max(0,speed-2);
+  else speed=Math.max(0,speed-0.5);
+
+  if(keys['ArrowLeft']||keys['a'])playerX-=0.008*(speed/maxSpeed+0.3);
+  if(keys['ArrowRight']||keys['d'])playerX+=0.008*(speed/maxSpeed+0.3);
+
+  // Clamp player
+  if(playerX<-1.2){playerX=-1.2;speed*=0.95;}
+  if(playerX>1.2){playerX=1.2;speed*=0.95;}
+  // Off-road friction
+  if(Math.abs(playerX)>0.8)speed*=0.98;
+
+  pos+=speed;
+  score=Math.floor(pos/100);
+
+  // Road curve affects player
+  var seg=segments[Math.floor(pos/SEG_L)%segments.length];
+  playerX-=seg.curve*speed*0.0002;
+
+  // Car collision
+  var playerSeg=Math.floor(pos/SEG_L)%segments.length;
+  cars.forEach(function(c){
+    c.seg+=c.spd*0.003;
+    if(c.seg>segments.length)c.seg-=segments.length;
+    var diff=Math.abs(c.seg-playerSeg);
+    if(diff<3&&Math.abs(c.x-playerX)<0.3&&speed>20){
+      crashed=true;crashTimer=40;speed=0;
+    }
+  });
+}
+
+function draw(){
+  // Sky gradient (sunset)
+  var skyGrad=ctx.createLinearGradient(0,0,0,H/2);
+  skyGrad.addColorStop(0,'#1a0533');
+  skyGrad.addColorStop(0.3,'#6b1839');
+  skyGrad.addColorStop(0.6,'#d44a1a');
+  skyGrad.addColorStop(0.85,'#f4a020');
+  skyGrad.addColorStop(1,'#fde68a');
+  ctx.fillStyle=skyGrad;
+  ctx.fillRect(0,0,W,H/2);
+
+  // Sun
+  ctx.fillStyle='#ff6633';
+  ctx.beginPath();ctx.arc(W/2-playerX*200,H/2-20,35,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ff9944';
+  ctx.beginPath();ctx.arc(W/2-playerX*200,H/2-20,25,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ffcc66';
+  ctx.beginPath();ctx.arc(W/2-playerX*200,H/2-20,15,0,Math.PI*2);ctx.fill();
+
+  // Ground
+  ctx.fillStyle='#3a7d3a';ctx.fillRect(0,H/2,W,H/2);
+
+  var baseSeg=Math.floor(pos/SEG_L);
+  var baseOff=(pos%SEG_L)/SEG_L;
+  var cx=0,maxy=H;
+
+  // Draw road segments
+  for(var n=DRAW_DIST;n>1;n--){
+    var idx=(baseSeg+n)%segments.length;
+    var seg=segments[idx];
+    var z=n*SEG_L-baseOff*SEG_L;
+    if(z<=0)continue;
+    var p=project(z);
+    var roadW=ROAD_W*p.scale;
+    var y=H/2+(H/2)*((n-1)/(DRAW_DIST));
+
+    cx+=seg.curve*p.scale*50;
+    var screenX=W/2+cx-playerX*roadW;
+
+    if(y>=maxy)continue;
+
+    // Alternating road colours
+    var dark=(Math.floor(baseSeg+n)%2===0);
+    var grassColor=dark?'#3a7d3a':'#3d8b3d';
+    var roadColor=dark?'#555':'#666';
+    var rumbleColor=dark?'#c00':'#fff';
+    var lineColor=dark?'#fff':'#555';
+
+    var segH=Math.max(1,(maxy-y));
+
+    // Grass
+    ctx.fillStyle=grassColor;ctx.fillRect(0,y,W,segH+1);
+    // Rumble strips
+    ctx.fillStyle=rumbleColor;ctx.fillRect(screenX-roadW*0.65,y,roadW*1.3,segH+1);
+    // Road
+    ctx.fillStyle=roadColor;ctx.fillRect(screenX-roadW*0.5,y,roadW,segH+1);
+    // Center line
+    if(!dark){ctx.fillStyle=lineColor;ctx.fillRect(screenX-roadW*0.01,y,roadW*0.02,segH+1);}
+    // Lane lines
+    if(!dark){
+      ctx.fillStyle='rgba(255,255,255,0.4)';
+      ctx.fillRect(screenX-roadW*0.25,y,roadW*0.01,segH+1);
+      ctx.fillRect(screenX+roadW*0.24,y,roadW*0.01,segH+1);
+    }
+
+    // Roadside sprites
+    if(seg.sprite&&n<80){
+      var spriteScale=p.scale*8000;
+      var sx=screenX+seg.spriteX*roadW*0.8;
+      if(seg.sprite==='palm'){
+        // Palm tree
+        ctx.fillStyle='#5a3a1a';ctx.fillRect(sx-spriteScale*0.03,y-spriteScale*0.4,spriteScale*0.06,spriteScale*0.4);
+        ctx.fillStyle='#228b22';
+        ctx.beginPath();ctx.moveTo(sx,y-spriteScale*0.6);
+        ctx.quadraticCurveTo(sx-spriteScale*0.3,y-spriteScale*0.35,sx-spriteScale*0.4,y-spriteScale*0.3);
+        ctx.quadraticCurveTo(sx-spriteScale*0.1,y-spriteScale*0.4,sx,y-spriteScale*0.38);
+        ctx.quadraticCurveTo(sx+spriteScale*0.1,y-spriteScale*0.4,sx+spriteScale*0.4,y-spriteScale*0.3);
+        ctx.quadraticCurveTo(sx+spriteScale*0.3,y-spriteScale*0.35,sx,y-spriteScale*0.6);
+        ctx.fill();
+      } else {
+        // Sign
+        ctx.fillStyle='#888';ctx.fillRect(sx-spriteScale*0.01,y-spriteScale*0.25,spriteScale*0.02,spriteScale*0.25);
+        ctx.fillStyle='#00f';ctx.fillRect(sx-spriteScale*0.08,y-spriteScale*0.35,spriteScale*0.16,spriteScale*0.12);
+      }
+    }
+
+    // Traffic cars
+    cars.forEach(function(car){
+      var carSeg=Math.floor(car.seg);
+      if(carSeg===((baseSeg+n)%segments.length)&&n<80){
+        var carScale=spriteScale||p.scale*6000;
+        var carX=screenX+car.x*roadW*0.4;
+        ctx.fillStyle=car.color;
+        ctx.fillRect(carX-carScale*0.06,y-carScale*0.06,carScale*0.12,carScale*0.06);
+        ctx.fillStyle='#222';
+        ctx.fillRect(carX-carScale*0.04,y-carScale*0.1,carScale*0.08,carScale*0.05);
+        // Wheels
+        ctx.fillStyle='#000';
+        ctx.fillRect(carX-carScale*0.07,y-carScale*0.02,carScale*0.03,carScale*0.03);
+        ctx.fillRect(carX+carScale*0.04,y-carScale*0.02,carScale*0.03,carScale*0.03);
+      }
+    });
+
+    maxy=y;
+  }
+
+  // Player car
+  if(!crashed||Math.floor(crashTimer/4)%2===0){
+    var carW=50,carH=30;
+    var carX=W/2-carW/2;
+    var carY=H-60;
+    // Body
+    ctx.fillStyle='#cc0000';
+    ctx.fillRect(carX,carY,carW,carH);
+    // Windshield
+    ctx.fillStyle='#4488cc';
+    ctx.fillRect(carX+8,carY-10,carW-16,14);
+    // Roof
+    ctx.fillStyle='#aa0000';
+    ctx.fillRect(carX+6,carY-12,carW-12,4);
+    // Wheels
+    ctx.fillStyle='#222';
+    ctx.fillRect(carX-4,carY+carH-8,10,10);
+    ctx.fillRect(carX+carW-6,carY+carH-8,10,10);
+    // Headlights
+    ctx.fillStyle='#ff0';
+    ctx.fillRect(carX,carY+2,4,6);
+    ctx.fillRect(carX+carW-4,carY+2,4,6);
+    // Taillights
+    ctx.fillStyle='#f00';
+    ctx.fillRect(carX,carY+carH-4,6,4);
+    ctx.fillRect(carX+carW-6,carY+carH-4,6,4);
+  }
+
+  // HUD
+  ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(0,0,W,28);
+  ctx.fillStyle='#fff';ctx.font='bold 16px monospace';ctx.textAlign='left';
+  ctx.fillText('SPEED: '+Math.floor(speed)+' km/h',10,19);
+  ctx.textAlign='center';
+  ctx.fillText('SUNSET CRUISER',W/2,19);
+  ctx.textAlign='right';
+  ctx.fillText('DIST: '+score+'m',W-10,19);
+
+  if(crashed){
+    ctx.fillStyle='#f00';ctx.font='bold 28px sans-serif';ctx.textAlign='center';
+    ctx.fillText('CRASH!',W/2,H/2);
+  }
+
+  if(speed===0&&!crashed&&pos===0){
+    ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(W/4,H/3,W/2,H/3);
+    ctx.fillStyle='#ff9944';ctx.font='bold 26px sans-serif';ctx.textAlign='center';
+    ctx.fillText('SUNSET CRUISER',W/2,H/2-20);
+    ctx.fillStyle='#fff';ctx.font='16px sans-serif';
+    ctx.fillText('↑ Accelerate  ← → Steer  ↓ Brake',W/2,H/2+15);
+  }
+}
+
+function gameLoop(){
+  update();draw();
+  requestAnimationFrame(gameLoop);
+}
+
+document.addEventListener('keydown',function(e){keys[e.key]=true;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)!==-1)e.preventDefault();});
+document.addEventListener('keyup',function(e){keys[e.key]=false;});
+
+if(location.search.indexOf('embed')!==-1)document.body.classList.add('embed');
+initRoad();gameLoop();
+</script>
+</body>
+</html>
