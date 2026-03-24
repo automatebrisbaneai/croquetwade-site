@@ -123,7 +123,10 @@ var GAME_WINDOWS = [
   { id: 'snake-win', title: 'Snake', emoji: '\u{1F40D}', src: 'games/snake.html?embed=1', w: 700, h: 700, top: 30, left: 'calc(50% - 250px)' },
   { id: 'solitaire-win', title: 'Solitaire', emoji: '\u2660', src: 'games/solitaire.html?embed=1', w: 800, h: 700, top: 20, left: 'calc(50% - 300px)' },
   { id: 'hearts-win', title: 'Hearts', emoji: '<span style="color:#c00">\u2665</span>', src: 'games/hearts.html?embed=1', w: 750, h: 700, top: 25, left: 'calc(50% - 275px)' },
-  { id: 'blackjack-win', title: 'Blackjack', emoji: '\u{1F0CF}', src: 'games/blackjack.html?embed=1', w: 700, h: 700, top: 30, left: 'calc(50% - 250px)' }
+  { id: 'blackjack-win', title: 'Blackjack', emoji: '\u{1F0CF}', src: 'games/blackjack.html?embed=1', w: 700, h: 700, top: 30, left: 'calc(50% - 250px)' },
+  { id: 'tetris-win', title: 'Tetris', emoji: '\u{1F9F1}', src: 'games/tetris.html?embed=1', w: 500, h: 560, top: 25, left: 'calc(50% - 200px)' },
+  { id: 'gorillas-win', title: 'Gorillas', emoji: '\u{1F34C}', src: 'games/gorillas.html?embed=1', w: 680, h: 480, top: 35, left: 'calc(50% - 240px)' },
+  { id: 'skifree-win', title: 'SkiFree', emoji: '\u26F7\uFE0F', src: 'games/skifree.html?embed=1', w: 540, h: 540, top: 30, left: 'calc(50% - 220px)' }
 ];
 
 function buildWindowHTML(w) {
@@ -203,14 +206,17 @@ function buildGamesFolder() {
     { id: 'snake-win', label: 'Snake', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#1a1a1a" stroke="#808080"/><rect x="6" y="14" width="4" height="4" rx="1" fill="#4caf50"/><rect x="10" y="14" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="14" width="4" height="4" rx="1" fill="#66bb6a"/><rect x="14" y="10" width="4" height="4" rx="1" fill="#66bb6a"/><circle cx="24" cy="22" r="3" fill="#f44336"/></svg>' },
     { id: 'solitaire-win', label: 'Solitaire', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="4" y="2" width="20" height="28" rx="3" fill="#fff" stroke="#333"/><text x="9" y="14" fill="#c00" font-size="12" font-weight="bold">A</text><text x="14" y="26" fill="#c00" font-size="16">\u2665</text></svg>' },
     { id: 'hearts-win', label: 'Hearts', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#008000" stroke="#006000"/><text x="16" y="22" text-anchor="middle" fill="#c00" font-size="22">\u2665</text></svg>' },
-    { id: 'blackjack-win', label: 'Blackjack', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#006400" stroke="#004400"/><text x="16" y="14" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">21</text><text x="16" y="26" text-anchor="middle" fill="#ffd700" font-size="14">\u{1F0CF}</text></svg>' }
+    { id: 'blackjack-win', label: 'Blackjack', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#006400" stroke="#004400"/><text x="16" y="14" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">21</text><text x="16" y="26" text-anchor="middle" fill="#ffd700" font-size="14">\u{1F0CF}</text></svg>' },
+    { id: 'tetris-win', label: 'Tetris', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#111" stroke="#808080"/><rect x="6" y="18" width="6" height="6" fill="#00f0f0"/><rect x="12" y="18" width="6" height="6" fill="#00f0f0"/><rect x="12" y="12" width="6" height="6" fill="#00f0f0"/><rect x="18" y="12" width="6" height="6" fill="#00f0f0"/><rect x="6" y="6" width="6" height="6" fill="#f0a000"/><rect x="18" y="18" width="6" height="6" fill="#a000f0"/><rect x="18" y="24" width="6" height="6" fill="#a000f0"/></svg>' },
+    { id: 'gorillas-win', label: 'Gorillas', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#000033" stroke="#808080"/><rect x="4" y="16" width="8" height="12" fill="#808080"/><rect x="14" y="10" width="6" height="18" fill="#a0522d"/><rect x="22" y="14" width="8" height="14" fill="#4682b4"/><circle cx="8" cy="13" r="3" fill="#8b4513"/><circle cx="26" cy="11" r="3" fill="#8b4513"/><circle cx="16" cy="6" r="3" fill="#ff0"/></svg>' },
+    { id: 'skifree-win', label: 'SkiFree', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#f0f0f0" stroke="#808080"/><polygon points="16,6 10,18 22,18" fill="#228b22"/><rect x="15" y="18" width="2" height="4" fill="#8b4513"/><circle cx="10" cy="24" r="2" fill="#000"/><line x1="8" y1="26" x2="12" y2="26" stroke="#000" stroke-width="1.5"/><rect x="22" y="20" width="6" height="8" fill="#fff" stroke="#888"/></svg>' }
   ];
 
   gameIcons.forEach(function(g) {
     h += '<a onclick="closeApp(\'games-win\');openApp(\'' + g.id + '\')" class="desktop-icon" style="cursor:pointer">' + g.svg + '<span class="desktop-icon-label" style="color:#000">' + g.label + '</span></a>';
   });
 
-  h += '</div><div style="background:#ece9d8;padding:2px 8px;font-size:11px;color:#808080;border-top:1px solid #aca899;">5 objects</div></div>';
+  h += '</div><div style="background:#ece9d8;padding:2px 8px;font-size:11px;color:#808080;border-top:1px solid #aca899;">8 objects</div></div>';
   return h;
 }
 

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkiFree</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#fff;font-family:'Segoe UI',Tahoma,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;}
+body.embed .game-window{border:none;box-shadow:none;}
+body.embed .titlebar{display:none;}
+body.embed{min-height:auto;}
+.game-window{background:#fff;}
+.titlebar{background:linear-gradient(180deg,#0054e3,#0f6cfc);color:#fff;padding:4px 6px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;text-shadow:0 1px 1px rgba(0,0,0,.4);border-radius:6px 6px 0 0;}
+.titlebar-btns{display:flex;gap:2px;}
+.titlebar-btn{width:21px;height:21px;border-radius:3px;border:1px solid;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;cursor:default;}
+.btn-close{background:linear-gradient(180deg,#e47c6c,#c9473b);border-color:#c04535;color:#fff;}
+.btn-other{background:linear-gradient(180deg,#3c8bea,#2663c7);border-color:#3573d6;color:#fff;}
+canvas{display:block;}
+.hud{padding:4px 12px;font-size:13px;display:flex;justify-content:space-between;background:#e8e8e8;color:#333;}
+</style>
+</head>
+<body>
+<div class="game-window">
+  <div class="titlebar"><span>⛷️ SkiFree</span><div class="titlebar-btns"><span class="titlebar-btn btn-other">─</span><span class="titlebar-btn btn-other">□</span><span class="titlebar-btn btn-close" onclick="window.close()">×</span></div></div>
+  <canvas id="c" width="500" height="450"></canvas>
+  <div class="hud"><span id="dist">Distance: 0m</span><span id="status">← → to steer · ↓ speed up · F to go fast</span></div>
+</div>
+<script>
+var canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+var W=500,H=450;
+var skier,obstacles,distance,speed,maxSpeed,yeti,yetiActive,gameOver,fast;
+var keys={};
+
+function init(){
+  skier={x:W/2,y:150,dir:0}; // dir: -1 left, 0 down, 1 right
+  obstacles=[];distance=0;speed=2;maxSpeed=4;fast=false;
+  yeti={x:0,y:0,active:false,eating:false};yetiActive=false;gameOver=false;
+  // Pre-populate obstacles
+  for(var i=0;i<40;i++){
+    obstacles.push({
+      x:Math.random()*W,
+      y:200+Math.random()*800,
+      type:['tree','tree','tree','rock','rock','ramp','flag'][Math.floor(Math.random()*7)]
+    });
+  }
+  loop();
+}
+
+function loop(){
+  if(gameOver)return;
+  update();draw();
+  requestAnimationFrame(loop);
+}
+
+function update(){
+  if(yeti.eating){return;}
+  var spd=fast?maxSpeed*2:speed;
+  // Steer
+  if(keys['ArrowLeft']||keys['a']){skier.dir=-1;skier.x-=spd*1.5;}
+  else if(keys['ArrowRight']||keys['d']){skier.dir=1;skier.x+=spd*1.5;}
+  else{skier.dir=0;}
+  if(keys['ArrowDown']||keys['s'])spd=maxSpeed;
+  if(keys['f'])fast=true;else fast=false;
+
+  // Clamp
+  if(skier.x<10)skier.x=10;if(skier.x>W-10)skier.x=W-10;
+
+  // Move obstacles down (skier moves forward)
+  distance+=spd;
+  obstacles.forEach(function(o){o.y-=spd;});
+
+  // Remove passed, add new
+  obstacles=obstacles.filter(function(o){return o.y>-50;});
+  while(obstacles.length<30){
+    obstacles.push({
+      x:Math.random()*W,
+      y:H+Math.random()*300,
+      type:['tree','tree','tree','rock','rock','ramp','flag'][Math.floor(Math.random()*7)]
+    });
+  }
+
+  // Collision
+  obstacles.forEach(function(o){
+    if(Math.abs(o.x-skier.x)<12&&Math.abs(o.y-skier.y)<12){
+      if(o.type==='tree'||o.type==='rock'){speed=Math.max(1,speed*0.5);}
+      if(o.type==='ramp'){skier.y-=30;setTimeout(function(){skier.y=150;},300);}
+    }
+  });
+
+  speed=Math.min(maxSpeed,speed+0.002);
+
+  // Yeti appears after 2000m
+  if(distance>2000&&!yetiActive){yetiActive=true;yeti.x=W/2;yeti.y=H+100;yeti.active=true;}
+  if(yeti.active&&!yeti.eating){
+    yeti.y-=spd+1.5;
+    if(yeti.x<skier.x)yeti.x+=1.2;else yeti.x-=1.2;
+    if(Math.abs(yeti.x-skier.x)<15&&Math.abs(yeti.y-skier.y)<20){
+      yeti.eating=true;
+      document.getElementById('status').textContent='🐻 The Yeti got you! Distance: '+Math.floor(distance)+'m';
+      setTimeout(function(){gameOver=true;draw();},1500);
+    }
+  }
+
+  document.getElementById('dist').textContent='Distance: '+Math.floor(distance)+'m';
+}
+
+function draw(){
+  // Snow background
+  ctx.fillStyle='#f0f0f0';ctx.fillRect(0,0,W,H);
+
+  // Ski tracks (subtle)
+  ctx.strokeStyle='#ddd';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(skier.x-3,0);ctx.lineTo(skier.x-3,skier.y);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(skier.x+3,0);ctx.lineTo(skier.x+3,skier.y);ctx.stroke();
+
+  // Obstacles
+  obstacles.forEach(function(o){
+    if(o.type==='tree'){
+      ctx.fillStyle='#228b22';
+      ctx.beginPath();ctx.moveTo(o.x,o.y-16);ctx.lineTo(o.x-8,o.y+4);ctx.lineTo(o.x+8,o.y+4);ctx.fill();
+      ctx.beginPath();ctx.moveTo(o.x,o.y-10);ctx.lineTo(o.x-10,o.y+8);ctx.lineTo(o.x+10,o.y+8);ctx.fill();
+      ctx.fillStyle='#8b4513';ctx.fillRect(o.x-2,o.y+8,4,6);
+    } else if(o.type==='rock'){
+      ctx.fillStyle='#808080';
+      ctx.beginPath();ctx.arc(o.x,o.y,6,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#666';ctx.beginPath();ctx.arc(o.x-1,o.y-1,4,0,Math.PI*2);ctx.fill();
+    } else if(o.type==='ramp'){
+      ctx.fillStyle='#4169e1';
+      ctx.beginPath();ctx.moveTo(o.x-10,o.y+4);ctx.lineTo(o.x,o.y-6);ctx.lineTo(o.x+10,o.y+4);ctx.fill();
+    } else if(o.type==='flag'){
+      ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(o.x,o.y+10);ctx.lineTo(o.x,o.y-10);ctx.stroke();
+      ctx.fillStyle='#f00';ctx.fillRect(o.x,o.y-10,10,7);
+    }
+  });
+
+  // Skier
+  if(!yeti.eating){
+    ctx.fillStyle='#000';
+    // Body
+    ctx.fillRect(skier.x-3,skier.y-8,6,12);
+    // Head
+    ctx.beginPath();ctx.arc(skier.x,skier.y-11,4,0,Math.PI*2);ctx.fill();
+    // Skis
+    ctx.strokeStyle='#000';ctx.lineWidth=2;
+    if(skier.dir===-1){
+      ctx.beginPath();ctx.moveTo(skier.x-8,skier.y+6);ctx.lineTo(skier.x+4,skier.y+4);ctx.stroke();
+    } else if(skier.dir===1){
+      ctx.beginPath();ctx.moveTo(skier.x-4,skier.y+4);ctx.lineTo(skier.x+8,skier.y+6);ctx.stroke();
+    } else {
+      ctx.beginPath();ctx.moveTo(skier.x-4,skier.y+4);ctx.lineTo(skier.x-4,skier.y+10);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(skier.x+4,skier.y+4);ctx.lineTo(skier.x+4,skier.y+10);ctx.stroke();
+    }
+  }
+
+  // Yeti
+  if(yeti.active){
+    ctx.fillStyle='#fff';ctx.strokeStyle='#888';ctx.lineWidth=1;
+    // Body
+    ctx.fillRect(yeti.x-12,yeti.y-16,24,28);ctx.strokeRect(yeti.x-12,yeti.y-16,24,28);
+    // Head
+    ctx.beginPath();ctx.arc(yeti.x,yeti.y-22,10,0,Math.PI*2);ctx.fill();ctx.stroke();
+    // Eyes
+    ctx.fillStyle='#f00';ctx.fillRect(yeti.x-5,yeti.y-25,4,4);ctx.fillRect(yeti.x+2,yeti.y-25,4,4);
+    // Mouth
+    if(yeti.eating){ctx.fillStyle='#f00';ctx.fillRect(yeti.x-4,yeti.y-17,8,4);}
+    // Arms
+    ctx.strokeStyle='#888';ctx.lineWidth=3;
+    ctx.beginPath();ctx.moveTo(yeti.x-12,yeti.y-8);ctx.lineTo(yeti.x-22,yeti.y-16);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(yeti.x+12,yeti.y-8);ctx.lineTo(yeti.x+22,yeti.y-16);ctx.stroke();
+  }
+
+  if(gameOver){
+    ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='#fff';ctx.font='28px sans-serif';ctx.textAlign='center';
+    ctx.fillText('The Yeti Got You!',W/2,H/2-20);
+    ctx.font='16px sans-serif';
+    ctx.fillText('Distance: '+Math.floor(distance)+'m — Click to restart',W/2,H/2+20);
+  }
+}
+
+document.addEventListener('keydown',function(e){keys[e.key]=true;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight',' '].indexOf(e.key)!==-1)e.preventDefault();});
+document.addEventListener('keyup',function(e){keys[e.key]=false;});
+canvas.addEventListener('click',function(){if(gameOver)init();});
+
+if(location.search.indexOf('embed')!==-1)document.body.classList.add('embed');
+init();
+</script>
+</body>
+</html>
