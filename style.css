@@ -782,8 +782,7 @@ a:active {
   border: none;
   background: #008000;
   width: 100%;
-  flex: 1;
-  min-height: 0;
+  height: calc(100% - 30px);
   overflow: hidden;
   min-height: 200px;
 }
