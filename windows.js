@@ -180,7 +180,7 @@ function buildPaintWindow() {
 }
 
 function buildGameWindow(g) {
-  var h = '<div class="float-window" id="' + g.id + '" style="top:' + g.top + 'px;left:' + g.left + ';">';
+  var h = '<div class="float-window" id="' + g.id + '" style="top:' + g.top + 'px;left:' + g.left + ';width:' + g.w + 'px;">';
   h += '<div class="window-titlebar" data-drag="' + g.id + '">';
   h += '<span style="margin-right:4px">' + g.emoji + '</span>';
   h += '<span class="window-titlebar-text">' + g.title + '</span>';
