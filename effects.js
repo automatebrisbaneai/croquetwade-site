@@ -128,13 +128,13 @@ var floatZ = 50;
     // Only animate on mobile — replace static text with animated version
     if (window.innerWidth > 768) return;
 
-    post.innerHTML = '';
+    post.innerHTML = '<span class="bios-cursor">_</span>';
     content.classList.remove('visible');
 
     var lines = [
       { text: 'CroquetWade BIOS v1.0', cls: 'bios-brand', delay: 0 },
-      { text: 'Copyright (C) 2026 Wade Hart\n', cls: '', delay: 100 },
-      { text: 'Checking RAM... ', cls: '', delay: 400 },
+      { text: '\nCopyright (C) 2026 Wade Hart\n', cls: '', delay: 100 },
+      { text: '\nChecking RAM... ', cls: '', delay: 400 },
       { text: '640K OK', cls: 'bios-ok', delay: 800 },
       { text: '\nDetecting hard drives... ', cls: '', delay: 1000 },
       { text: 'C:\\CroquetWade found', cls: 'bios-ok', delay: 1400 },
@@ -144,32 +144,37 @@ var floatZ = 50;
       { text: '\nWindows requires minimum 1024x768', cls: 'bios-error', delay: 3000 },
       { text: '\n\nFalling back to text mode...', cls: '', delay: 3400 },
       { text: '\n', cls: '', delay: 3800 },
-      { text: 'Tap anywhere to continue_', cls: 'bios-prompt', delay: 4000 }
+      { text: '\nTap anywhere to continue', cls: 'bios-prompt', delay: 4000 }
     ];
 
-    var html = '';
+    var textSoFar = '';
+    var postDone = false;
+
     lines.forEach(function(line) {
       setTimeout(function() {
-        if (line.cls) html += '<span class="' + line.cls + '">' + line.text + '</span>';
-        else html += line.text;
-        post.innerHTML = html;
+        if (line.cls) textSoFar += '<span class="' + line.cls + '">' + line.text + '</span>';
+        else textSoFar += line.text;
+        // Always show blinking cursor at the end
+        post.innerHTML = textSoFar + '<span class="bios-cursor">_</span>';
+        if (line === lines[lines.length - 1]) postDone = true;
       }, line.delay);
     });
 
-    // Show content on tap or after 6 seconds
+    // Only reveal on tap/click AFTER the POST sequence finishes — no auto-reveal
     var revealed = false;
     function revealContent() {
-      if (revealed) return;
+      if (revealed || !postDone) return;
       revealed = true;
-      post.innerHTML += '\n\n<span class="bios-ok">System ready.</span>\n';
+      post.innerHTML = textSoFar + '\n\n<span class="bios-ok">System ready.</span>\n';
       content.classList.add('visible');
     }
 
     document.addEventListener('click', function() {
-      setTimeout(revealContent, 100);
-    }, { once: false });
-
-    setTimeout(revealContent, 6000);
+      revealContent();
+    });
+    document.addEventListener('touchstart', function() {
+      revealContent();
+    });
   }
 
   /* ── Init ────────────────────────────────────────────── */

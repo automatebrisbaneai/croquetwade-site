@@ -888,6 +888,16 @@ a:active {
     color: #ffff55;
   }
 
+  .bios-cursor {
+    animation: bios-blink 0.7s step-end infinite;
+    color: #aaa;
+  }
+
+  @keyframes bios-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
   .bios-content {
     display: none;
   }
