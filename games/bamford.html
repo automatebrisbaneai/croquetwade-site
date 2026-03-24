@@ -22,109 +22,129 @@ canvas{display:block;cursor:crosshair;}
 <body>
 <div class="game-window">
   <div class="titlebar"><span>🏆 Bamford's Comeback — Cairo 2013</span><div class="titlebar-btns"><span class="titlebar-btn btn-other">─</span><span class="titlebar-btn btn-other">□</span><span class="titlebar-btn btn-close" onclick="window.close()">×</span></div></div>
-  <canvas id="c" width="600" height="500"></canvas>
+  <canvas id="c" width="600" height="520"></canvas>
 </div>
 <script>
 var canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
-var W=600,H=500;
+var W=600,H=520;
 
-// Game state
-var state='title'; // title, commentary, aiming, power, rolling, scored, missed, won, lost
-var hoopIndex=0;
-var bamfordScore=2,nasrScore=6;
-var aimAngle=0,aimDir=1,aimSpeed=0.025;
-var power=0,powerDir=1,powerSpeed=0.02;
+// ── Audio (Web Audio API) ──────────────────────────────
+var audioCtx;
+function initAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();}
+
+function playCheer(){
+  initAudio();var t=audioCtx.currentTime;
+  // Rising triumphant notes
+  [523,659,784,1047].forEach(function(f,i){
+    var o=audioCtx.createOscillator(),g=audioCtx.createGain();
+    o.type='triangle';o.frequency.value=f;
+    g.gain.setValueAtTime(0.15,t+i*0.12);g.gain.exponentialRampToValueAtTime(0.01,t+i*0.12+0.4);
+    o.connect(g);g.connect(audioCtx.destination);o.start(t+i*0.12);o.stop(t+i*0.12+0.4);
+  });
+  // Crowd noise (white noise burst)
+  var buf=audioCtx.createBuffer(1,audioCtx.sampleRate*0.8,audioCtx.sampleRate);
+  var d=buf.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*0.15;
+  var n=audioCtx.createBufferSource(),ng=audioCtx.createGain();
+  n.buffer=buf;ng.gain.setValueAtTime(0.12,t);ng.gain.exponentialRampToValueAtTime(0.01,t+0.8);
+  n.connect(ng);ng.connect(audioCtx.destination);n.start(t+0.15);
+}
+
+function playBounce(){
+  initAudio();var t=audioCtx.currentTime;
+  var o=audioCtx.createOscillator(),g=audioCtx.createGain();
+  o.type='square';o.frequency.setValueAtTime(800,t);o.frequency.exponentialRampToValueAtTime(200,t+0.15);
+  g.gain.setValueAtTime(0.2,t);g.gain.exponentialRampToValueAtTime(0.01,t+0.2);
+  o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+0.2);
+}
+
+function playSad(){
+  initAudio();var t=audioCtx.currentTime;
+  // Descending woop woop woop
+  [400,300,200].forEach(function(f,i){
+    var o=audioCtx.createOscillator(),g=audioCtx.createGain();
+    o.type='sine';o.frequency.setValueAtTime(f+50,t+i*0.25);o.frequency.exponentialRampToValueAtTime(f-50,t+i*0.25+0.2);
+    g.gain.setValueAtTime(0.15,t+i*0.25);g.gain.exponentialRampToValueAtTime(0.01,t+i*0.25+0.25);
+    o.connect(g);g.connect(audioCtx.destination);o.start(t+i*0.25);o.stop(t+i*0.25+0.3);
+  });
+}
+
+function playHit(){
+  initAudio();var t=audioCtx.currentTime;
+  var o=audioCtx.createOscillator(),g=audioCtx.createGain();
+  o.type='sine';o.frequency.value=220;
+  g.gain.setValueAtTime(0.1,t);g.gain.exponentialRampToValueAtTime(0.01,t+0.15);
+  o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+0.15);
+}
+
+// ── Leaderboard ─────────────────────────────────────────
+function getLeaderboard(){
+  var lb=JSON.parse(localStorage.getItem('bamford-lb')||'null');
+  if(!lb)lb=[{name:'CLAUDE',hoops:5},{name:'REGGIE',hoops:4},{name:'WADEH!',hoops:3}];
+  return lb;
+}
+function saveScore(name,hoops){
+  var lb=getLeaderboard();lb.push({name:name.toUpperCase().substring(0,6),hoops:hoops});
+  lb.sort(function(a,b){return b.hoops-a.hoops;});lb=lb.slice(0,8);
+  localStorage.setItem('bamford-lb',JSON.stringify(lb));
+}
+
+// ── Game State ──────────────────────────────────────────
+var state='title';
+var hoopIndex=0,bamfordScore=2,nasrScore=6;
+var aimAngle=0,aimDir=1,baseAimSpeed=0.015;
+var power=0,powerDir=1,powerSpeed=0.012;
 var ball={x:0,y:0,vx:0,vy:0};
 var hoop={x:0,y:0};
-var commentaryTimer=0;
-var resultTimer=0;
-var evening=false;
-var confetti=[];
+var commentaryTimer=0,resultTimer=0,evening=false,confetti=[];
+var bounced=false,scored=false,nameInput='',enteringName=false,finalHoops=0;
 
-// Hoop configurations (progressively harder)
 var HOOPS=[
   {bx:300,by:380,hx:300,hy:180,label:'Hoop 9',dist:'3 yards',commentary:['The comeback begins.','The crowd stirs.','Bamford steps up to the ball.']},
-  {bx:250,by:390,hx:320,hy:170,label:'Hoop 10',dist:'4 yards',commentary:['6–4. Nasr\'s lead is shrinking.','Cairo holds its breath.','The Egyptian crowd falls quiet.']},
-  {bx:350,by:400,hx:280,hy:160,label:'Hoop 11',dist:'5 yards',commentary:['6–5. One more and it\'s level.','The floodlights flicker on.','The evening call to prayer echoes across the grounds.']},
-  {bx:200,by:410,hx:310,hy:150,label:'Hoop 12',dist:'5 yards',commentary:['6–6. Level.','A phone rings behind Nasr. He flinches.','This is Bamford\'s moment.']},
-  {bx:150,by:420,hx:300,hy:130,label:'Hoop 13',dist:'7 yards',commentary:['Six all. The final hoop.','Seven yards from the boundary.','One shot for the World Championship.','The crowd stands.']}
+  {bx:260,by:390,hx:310,hy:175,label:'Hoop 10',dist:'4 yards',commentary:['6–4. Nasr\'s lead is shrinking.','Cairo holds its breath.','The Egyptian crowd falls quiet.']},
+  {bx:340,by:395,hx:285,hy:165,label:'Hoop 11',dist:'5 yards',commentary:['6–5. One more and it\'s level.','The floodlights flicker on.','The evening call to prayer echoes\nacross the grounds.']},
+  {bx:220,by:400,hx:305,hy:155,label:'Hoop 12',dist:'5 yards',commentary:['6–6. Level.','A phone rings behind Nasr.\nHe flinches.','This is Bamford\'s moment.']},
+  {bx:180,by:410,hx:300,hy:140,label:'Hoop 13',dist:'7 yards',commentary:['Six all. The final hoop.','Seven yards from the boundary.','One shot for the World Championship.','The crowd stands.']}
 ];
 
+// ── Drawing ─────────────────────────────────────────────
 function drawLawn(){
-  // Sky/background
-  if(evening){
-    var grad=ctx.createLinearGradient(0,0,0,80);
-    grad.addColorStop(0,'#1a0a30');grad.addColorStop(0.5,'#2a1545');grad.addColorStop(1,'#1a3a1a');
-    ctx.fillStyle=grad;
-  } else {
-    ctx.fillStyle='#87ceeb';
-  }
+  if(evening){var g=ctx.createLinearGradient(0,0,0,80);g.addColorStop(0,'#1a0a30');g.addColorStop(0.5,'#2a1545');g.addColorStop(1,'#1a3a1a');ctx.fillStyle=g;}
+  else ctx.fillStyle='#87ceeb';
   ctx.fillRect(0,0,W,80);
-
-  // Cairo skyline silhouette
   ctx.fillStyle=evening?'#0a0a20':'#556b55';
-  // Mosque dome
   ctx.beginPath();ctx.arc(480,75,20,Math.PI,0);ctx.fill();
   ctx.fillRect(498,55,4,25);ctx.beginPath();ctx.arc(500,52,4,0,Math.PI*2);ctx.fill();
-  // Buildings
   ctx.fillRect(100,60,30,20);ctx.fillRect(140,55,20,25);ctx.fillRect(200,50,40,30);
   ctx.fillRect(350,58,25,22);ctx.fillRect(420,52,35,28);ctx.fillRect(520,60,40,20);
-  // Minaret
   ctx.fillRect(248,35,6,45);ctx.beginPath();ctx.arc(251,32,5,0,Math.PI*2);ctx.fill();
-
-  // Lawn
   ctx.fillStyle='#2d8a2d';ctx.fillRect(0,80,W,H-80);
-  // Lawn stripes
-  for(var i=80;i<H;i+=20){
-    ctx.fillStyle=i%40===0?'#2d8a2d':'#329632';
-    ctx.fillRect(0,i,W,20);
-  }
-
-  // Floodlights
+  for(var i=80;i<H;i+=20){ctx.fillStyle=i%40===0?'#2d8a2d':'#329632';ctx.fillRect(0,i,W,20);}
   if(evening){
     ctx.fillStyle='rgba(255,255,200,0.03)';
     ctx.beginPath();ctx.moveTo(50,80);ctx.lineTo(-50,H);ctx.lineTo(150,H);ctx.fill();
     ctx.beginPath();ctx.moveTo(550,80);ctx.lineTo(450,H);ctx.lineTo(650,H);ctx.fill();
-    // Light poles
     ctx.fillStyle='#888';ctx.fillRect(45,40,4,44);ctx.fillRect(548,40,4,44);
     ctx.fillStyle='#ffff99';ctx.fillRect(42,36,10,6);ctx.fillRect(545,36,10,6);
   }
-
-  // Court boundary lines
-  ctx.strokeStyle='rgba(255,255,255,0.3)';ctx.lineWidth=1;
-  ctx.strokeRect(60,90,W-120,H-120);
+  ctx.strokeStyle='rgba(255,255,255,0.3)';ctx.lineWidth=1;ctx.strokeRect(60,90,W-120,H-140);
 }
 
 function drawHoop(x,y){
-  // Hoop - white uprights with crossbar
+  // Wider hoop for easier scoring
   ctx.fillStyle='#fff';
-  ctx.fillRect(x-12,y-4,3,16); // left upright
-  ctx.fillRect(x+9,y-4,3,16);  // right upright
-  ctx.fillRect(x-12,y-4,24,3); // crossbar
-  // Shadow
-  ctx.fillStyle='rgba(0,0,0,0.15)';
-  ctx.fillRect(x-10,y+14,20,3);
-  // Hoop zone (where ball needs to pass)
-  ctx.strokeStyle='rgba(255,255,255,0.15)';ctx.lineWidth=1;
-  ctx.beginPath();ctx.arc(x,y+6,14,0,Math.PI*2);ctx.stroke();
+  ctx.fillRect(x-16,y-4,3,18);ctx.fillRect(x+13,y-4,3,18);ctx.fillRect(x-16,y-4,32,3);
+  ctx.fillStyle='rgba(0,0,0,0.15)';ctx.fillRect(x-14,y+16,28,3);
 }
 
 function drawBall(x,y,color){
-  ctx.fillStyle=color;
-  ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.fill();
-  // Highlight
-  ctx.fillStyle='rgba(255,255,255,0.3)';
-  ctx.beginPath();ctx.arc(x-2,y-2,3,0,Math.PI*2);ctx.fill();
-  // Shadow
-  ctx.fillStyle='rgba(0,0,0,0.2)';
-  ctx.beginPath();ctx.ellipse(x+2,y+10,7,3,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,0.3)';ctx.beginPath();ctx.arc(x-2,y-2,3,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(0,0,0,0.2)';ctx.beginPath();ctx.ellipse(x+2,y+10,7,3,0,0,Math.PI*2);ctx.fill();
 }
 
 function drawScoreboard(){
-  // Board background
   ctx.fillStyle='#1a1a1a';ctx.fillRect(W/2-140,4,280,38);
   ctx.strokeStyle='#444';ctx.lineWidth=2;ctx.strokeRect(W/2-140,4,280,38);
-  // LED style scores
   ctx.font='bold 11px monospace';ctx.textAlign='center';
   ctx.fillStyle='#ff4444';ctx.fillText('NASR (EGY)',W/2-70,18);
   ctx.fillStyle='#4488ff';ctx.fillText('BAMFORD (RSA)',W/2+70,18);
@@ -132,78 +152,79 @@ function drawScoreboard(){
   ctx.fillStyle='#ff6666';ctx.fillText(nasrScore,W/2-70,38);
   ctx.fillStyle='#66aaff';ctx.fillText(bamfordScore,W/2+70,38);
   ctx.fillStyle='#aaa';ctx.fillText('–',W/2,38);
-  // Title
   ctx.font='9px monospace';ctx.fillStyle='#666';
-  ctx.fillText('GC WORLD CHAMPIONSHIP FINAL • CAIRO 2013',W/2,52);
+  ctx.fillText('GC WORLD CHAMPIONSHIP FINAL \u2022 CAIRO 2013',W/2,52);
 }
 
 function drawPowerBar(){
   var bx=W-50,by=100,bw=20,bh=250;
   ctx.fillStyle='#222';ctx.fillRect(bx-2,by-2,bw+4,bh+4);
   ctx.fillStyle='#333';ctx.fillRect(bx,by,bw,bh);
-  // Fill
   var fillH=bh*power;
-  var grad=ctx.createLinearGradient(bx,by+bh-fillH,bx,by+bh);
-  grad.addColorStop(0,'#ff4444');grad.addColorStop(0.5,'#ffaa00');grad.addColorStop(1,'#44ff44');
-  ctx.fillStyle=grad;ctx.fillRect(bx,by+bh-fillH,bw,fillH);
-  // Label
+  var g=ctx.createLinearGradient(bx,by+bh-fillH,bx,by+bh);
+  g.addColorStop(0,'#ff4444');g.addColorStop(0.5,'#ffaa00');g.addColorStop(1,'#44ff44');
+  ctx.fillStyle=g;ctx.fillRect(bx,by+bh-fillH,bw,fillH);
+  // Sweet spot marker
+  var sweet=getSweetPower();
+  var sy=by+bh-bh*sweet;
+  ctx.fillStyle='rgba(255,255,255,0.4)';ctx.fillRect(bx-4,sy-2,bw+8,4);
   ctx.fillStyle='#fff';ctx.font='10px sans-serif';ctx.textAlign='center';
   ctx.fillText('POWER',bx+bw/2,by+bh+16);
 }
 
 function drawAimArrow(){
   var len=60;
-  var ex=ball.x+Math.cos(aimAngle)*len;
-  var ey=ball.y+Math.sin(aimAngle)*len;
-  // Dotted line
+  var ex=ball.x+Math.cos(aimAngle)*len,ey=ball.y+Math.sin(aimAngle)*len;
   ctx.strokeStyle='rgba(255,255,255,0.6)';ctx.lineWidth=2;ctx.setLineDash([4,4]);
-  ctx.beginPath();ctx.moveTo(ball.x,ball.y);ctx.lineTo(ex,ey);ctx.stroke();
-  ctx.setLineDash([]);
-  // Arrowhead
-  ctx.fillStyle='#fff';
-  ctx.beginPath();
-  ctx.moveTo(ex,ey);
+  ctx.beginPath();ctx.moveTo(ball.x,ball.y);ctx.lineTo(ex,ey);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.moveTo(ex,ey);
   ctx.lineTo(ex-Math.cos(aimAngle-0.3)*10,ey-Math.sin(aimAngle-0.3)*10);
-  ctx.lineTo(ex-Math.cos(aimAngle+0.3)*10,ey-Math.sin(aimAngle+0.3)*10);
-  ctx.fill();
+  ctx.lineTo(ex-Math.cos(aimAngle+0.3)*10,ey-Math.sin(aimAngle+0.3)*10);ctx.fill();
 }
 
-function drawPixelReg(){
-  var rx=30,ry=H-90;
-  // Body (stocky)
-  ctx.fillStyle='#fff';ctx.fillRect(rx-8,ry,16,20); // white polo
-  ctx.fillStyle='#2a2a6a';ctx.fillRect(rx-8,ry+20,16,14); // dark trousers
-  // Head
-  ctx.fillStyle='#d4a574';ctx.fillRect(rx-5,ry-10,10,12);
-  // Hair
-  ctx.fillStyle='#4a3520';ctx.fillRect(rx-5,ry-12,10,4);
-  // Eyes
-  ctx.fillStyle='#000';ctx.fillRect(rx-3,ry-6,2,2);ctx.fillRect(rx+1,ry-6,2,2);
-  // Mallet
-  ctx.fillStyle='#8b4513';ctx.fillRect(rx+10,ry+4,3,30);
-  ctx.fillStyle='#654321';ctx.fillRect(rx+6,ry+32,10,6);
-  // Label
-  ctx.fillStyle='#fff';ctx.font='bold 9px sans-serif';ctx.textAlign='center';
-  ctx.fillText('REG',rx,ry+52);
-  ctx.fillText('BAMFORD',rx,ry+62);
+// Reg at the ball, crouching to play
+function drawReg(bx,by){
+  var rx=bx-20,ry=by-10;
+  ctx.fillStyle='#fff';ctx.fillRect(rx-6,ry,12,14);// white polo
+  ctx.fillStyle='#2a2a6a';ctx.fillRect(rx-6,ry+14,12,10);// trousers
+  ctx.fillStyle='#d4a574';ctx.fillRect(rx-4,ry-8,8,10);// head
+  ctx.fillStyle='#4a3520';ctx.fillRect(rx-4,ry-10,8,4);// hair
+  ctx.fillStyle='#000';ctx.fillRect(rx-2,ry-5,2,2);ctx.fillRect(rx+1,ry-5,2,2);// eyes
+  // Mallet reaching toward ball
+  ctx.fillStyle='#8b4513';ctx.fillRect(rx+6,ry+6,20,2);// shaft
+  ctx.fillStyle='#654321';ctx.fillRect(rx+24,ry+2,8,5);// head
+}
+
+// Nasr standing to the side watching
+function drawNasr(){
+  var nx=W-60,ny=H-100;
+  ctx.fillStyle='#fff';ctx.fillRect(nx-6,ny,12,16);// white polo
+  ctx.fillStyle='#333';ctx.fillRect(nx-6,ny+16,12,12);// trousers
+  ctx.fillStyle='#c4915a';ctx.fillRect(nx-4,ny-8,8,10);// head
+  ctx.fillStyle='#1a1a1a';ctx.fillRect(nx-4,ny-10,8,3);// hair
+  ctx.fillStyle='#000';ctx.fillRect(nx-2,ny-5,2,2);ctx.fillRect(nx+1,ny-5,2,2);// eyes
+  // Arms crossed
+  ctx.fillStyle='#fff';ctx.fillRect(nx-10,ny+4,8,3);ctx.fillRect(nx+2,ny+4,8,3);
+  // Mallet resting
+  ctx.fillStyle='#8b4513';ctx.fillRect(nx+10,ny-5,2,30);
+  ctx.fillStyle='#654321';ctx.fillRect(nx+7,ny+23,8,4);
+  ctx.fillStyle='#cc3333';ctx.font='bold 9px sans-serif';ctx.textAlign='center';
+  ctx.fillText('NASR',nx,ny+44);
 }
 
 function drawCommentary(){
   var hp=HOOPS[hoopIndex];
-  var lineIdx=Math.min(Math.floor(commentaryTimer/80),hp.commentary.length-1);
-
+  var lineIdx=Math.min(Math.floor(commentaryTimer/90),hp.commentary.length-1);
   ctx.fillStyle='rgba(0,0,0,0.85)';ctx.fillRect(80,H/2-80,W-160,160);
   ctx.strokeStyle='#c8a415';ctx.lineWidth=2;ctx.strokeRect(82,H/2-78,W-164,156);
-
   ctx.fillStyle='#c8a415';ctx.font='bold 20px serif';ctx.textAlign='center';
-  ctx.fillText(hp.label+' • '+hp.dist,W/2,H/2-48);
-
+  ctx.fillText(hp.label+' \u2022 '+hp.dist,W/2,H/2-48);
   ctx.fillStyle='#fff';ctx.font='16px serif';
   for(var i=0;i<=lineIdx;i++){
-    ctx.fillText(hp.commentary[i],W/2,H/2-15+i*26);
+    var lines=hp.commentary[i].split('\n');
+    lines.forEach(function(line,li){ctx.fillText(line,W/2,H/2-15+i*26+li*18);});
   }
-
-  if(commentaryTimer>hp.commentary.length*80+40){
+  if(commentaryTimer>hp.commentary.length*90+50){
     ctx.fillStyle='#ffcc00';ctx.font='bold 14px sans-serif';
     ctx.fillText('Click to take your shot',W/2,H/2+70);
   }
@@ -211,205 +232,226 @@ function drawCommentary(){
 
 function drawTitleScreen(){
   ctx.fillStyle='#0a1a0a';ctx.fillRect(0,0,W,H);
-
-  // Cairo silhouette
   ctx.fillStyle='#1a2a1a';
-  ctx.beginPath();ctx.arc(300,200,80,Math.PI,0);ctx.fill();
-  ctx.fillRect(318,120,5,80);ctx.beginPath();ctx.arc(320,116,6,0,Math.PI*2);ctx.fill();
-  ctx.fillRect(100,180,50,40);ctx.fillRect(180,170,60,50);ctx.fillRect(400,175,45,45);ctx.fillRect(470,165,50,55);
-
-  // Title
-  ctx.fillStyle='#c8a415';ctx.font='bold 36px serif';ctx.textAlign='center';
-  ctx.fillText("BAMFORD'S COMEBACK",W/2,280);
-
+  ctx.beginPath();ctx.arc(300,180,80,Math.PI,0);ctx.fill();
+  ctx.fillRect(318,100,5,80);ctx.beginPath();ctx.arc(320,96,6,0,Math.PI*2);ctx.fill();
+  ctx.fillRect(100,160,50,40);ctx.fillRect(180,150,60,50);ctx.fillRect(400,155,45,45);ctx.fillRect(470,145,50,55);
+  ctx.fillStyle='#c8a415';ctx.font='bold 34px serif';ctx.textAlign='center';
+  ctx.fillText("BAMFORD'S COMEBACK",W/2,260);
   ctx.fillStyle='#fff';ctx.font='18px serif';
-  ctx.fillText('GC World Championship Final',W/2,310);
-  ctx.fillText('Cairo, Egypt — 2013',W/2,335);
-
-  ctx.fillStyle='#ff6666';ctx.font='bold 24px monospace';
-  ctx.fillText('NASR 6 – 2 BAMFORD',W/2,375);
-
-  ctx.fillStyle='#ffcc00';ctx.font='14px sans-serif';
-  ctx.fillText('Five hoops to be World Champion.',W/2,410);
-
+  ctx.fillText('GC World Championship Final',W/2,288);ctx.fillText('Cairo, Egypt \u2014 2013',W/2,312);
+  ctx.fillStyle='#ff6666';ctx.font='bold 24px monospace';ctx.fillText('NASR 6 \u2013 2 BAMFORD',W/2,352);
+  ctx.fillStyle='#ffcc00';ctx.font='14px sans-serif';ctx.fillText('Five hoops to be World Champion.',W/2,385);
   ctx.fillStyle=(Date.now()%1000<500)?'#fff':'#aaa';ctx.font='bold 16px sans-serif';
-  ctx.fillText('CLICK TO START',W/2,460);
+  ctx.fillText('CLICK TO START',W/2,420);
+  // Leaderboard
+  var lb=getLeaderboard();
+  ctx.fillStyle='#555';ctx.font='11px monospace';ctx.fillText('\u2500\u2500 HALL OF CHAMPIONS \u2500\u2500',W/2,448);
+  ctx.fillStyle='#aaa';ctx.font='11px monospace';
+  lb.slice(0,5).forEach(function(e,i){
+    var medal=i===0?'\u{1F947}':i===1?'\u{1F948}':i===2?'\u{1F949}':'  ';
+    ctx.fillText(medal+' '+e.name.padEnd(6)+' '+e.hoops+'/5 hoops',W/2,462+i*14);
+  });
 }
 
 function drawWinScreen(){
   ctx.fillStyle='#0a0a30';ctx.fillRect(0,0,W,H);
-
-  // Confetti
-  confetti.forEach(function(c){
-    ctx.fillStyle=c.color;ctx.fillRect(c.x,c.y,c.w,c.h);
-    c.y+=c.vy;c.x+=c.vx;c.vy+=0.05;
-    if(c.y>H){c.y=-10;c.vy=1+Math.random()*2;}
-  });
-
-  ctx.fillStyle='#ffd700';ctx.font='bold 40px serif';ctx.textAlign='center';
-  ctx.fillText('🏆 WORLD CHAMPION 🏆',W/2,160);
-
-  ctx.fillStyle='#fff';ctx.font='bold 28px serif';
-  ctx.fillText('BAMFORD 7 – 6 NASR',W/2,220);
-
-  ctx.fillStyle='#c8a415';ctx.font='18px serif';
-  ctx.fillText('The greatest comeback in Golf Croquet history.',W/2,265);
-  ctx.fillText('From 6–2 down under the Cairo floodlights.',W/2,290);
-  ctx.fillText('A standing ovation. A legend is made.',W/2,315);
-
-  ctx.fillStyle='#4488ff';ctx.font='bold 14px sans-serif';
-  ctx.fillText('REG BAMFORD — SOUTH AFRICA',W/2,360);
-
-  ctx.fillStyle=(Date.now()%1000<500)?'#fff':'#aaa';ctx.font='14px sans-serif';
-  ctx.fillText('Click to play again',W/2,420);
+  confetti.forEach(function(c){ctx.fillStyle=c.color;ctx.fillRect(c.x,c.y,c.w,c.h);c.y+=c.vy;c.x+=c.vx;c.vy+=0.05;if(c.y>H){c.y=-10;c.vy=1+Math.random()*2;}});
+  ctx.fillStyle='#ffd700';ctx.font='bold 36px serif';ctx.textAlign='center';
+  ctx.fillText('\u{1F3C6} WORLD CHAMPION \u{1F3C6}',W/2,120);
+  ctx.fillStyle='#fff';ctx.font='bold 26px serif';ctx.fillText('BAMFORD 7 \u2013 6 NASR',W/2,170);
+  ctx.fillStyle='#c8a415';ctx.font='16px serif';
+  ctx.fillText('The greatest comeback in Golf Croquet history.',W/2,210);
+  ctx.fillText('From 6\u20132 down under the Cairo floodlights.',W/2,234);
+  ctx.fillText('A standing ovation. A legend is made.',W/2,258);
+  ctx.fillStyle='#4488ff';ctx.font='bold 14px sans-serif';ctx.fillText('REG BAMFORD \u2014 SOUTH AFRICA',W/2,295);
+  if(enteringName){
+    ctx.fillStyle='#fff';ctx.font='16px monospace';ctx.fillText('Enter your name (6 chars):',W/2,340);
+    ctx.fillStyle='#ffcc00';ctx.font='bold 24px monospace';
+    ctx.fillText(nameInput+'_',W/2,370);
+    ctx.fillStyle='#aaa';ctx.font='12px sans-serif';ctx.fillText('Press Enter to save',W/2,395);
+  } else {
+    var lb=getLeaderboard();
+    ctx.fillStyle='#555';ctx.font='11px monospace';ctx.fillText('\u2500\u2500 HALL OF CHAMPIONS \u2500\u2500',W/2,340);
+    ctx.fillStyle='#aaa';
+    lb.slice(0,5).forEach(function(e,i){
+      var medal=i===0?'\u{1F947}':i===1?'\u{1F948}':i===2?'\u{1F949}':'  ';
+      ctx.fillText(medal+' '+e.name.padEnd(6)+' '+e.hoops+'/5 hoops',W/2,358+i*14);
+    });
+    ctx.fillStyle=(Date.now()%1000<500)?'#fff':'#aaa';ctx.font='14px sans-serif';
+    ctx.fillText('Click to play again',W/2,440);
+  }
 }
 
 function drawLoseScreen(){
   ctx.fillStyle='#1a0a0a';ctx.fillRect(0,0,W,H);
-
-  ctx.fillStyle='#ff4444';ctx.font='bold 32px serif';ctx.textAlign='center';
-  ctx.fillText('NASR TAKES THE TITLE',W/2,180);
-
-  ctx.fillStyle='#fff';ctx.font='24px serif';
-  ctx.fillText('NASR '+(nasrScore)+' – '+bamfordScore+' BAMFORD',W/2,230);
-
+  ctx.fillStyle='#ff4444';ctx.font='bold 30px serif';ctx.textAlign='center';
+  ctx.fillText('NASR TAKES THE TITLE',W/2,160);
+  ctx.fillStyle='#fff';ctx.font='22px serif';ctx.fillText('NASR '+nasrScore+' \u2013 '+bamfordScore+' BAMFORD',W/2,200);
   ctx.fillStyle='#aaa';ctx.font='16px serif';
-  ctx.fillText('So close. The comeback falls short.',W/2,280);
-  ctx.fillText('Ahmed Nasr wins on home soil.',W/2,310);
-
-  ctx.fillStyle=(Date.now()%1000<500)?'#fff':'#aaa';ctx.font='14px sans-serif';
-  ctx.fillText('Click to try again',W/2,380);
+  ctx.fillText('So close. The comeback falls short.',W/2,250);ctx.fillText('Ahmed Nasr wins on home soil.',W/2,275);
+  if(enteringName){
+    ctx.fillStyle='#fff';ctx.font='16px monospace';ctx.fillText('Enter your name (6 chars):',W/2,320);
+    ctx.fillStyle='#ffcc00';ctx.font='bold 24px monospace';ctx.fillText(nameInput+'_',W/2,350);
+    ctx.fillStyle='#aaa';ctx.font='12px sans-serif';ctx.fillText('Press Enter to save',W/2,375);
+  } else {
+    ctx.fillStyle=(Date.now()%1000<500)?'#fff':'#aaa';ctx.font='14px sans-serif';
+    ctx.fillText('Click to try again',W/2,340);
+  }
 }
 
+// ── Aim assist: arrow slows when near the sweet angle ───
+function getTargetAngle(){return Math.atan2(hoop.y-ball.y,hoop.x-ball.x);}
+function getSweetPower(){
+  var dx=hoop.x-ball.x,dy=hoop.y-ball.y;
+  return Math.min(1,Math.max(0.2,Math.sqrt(dx*dx+dy*dy)/220));
+}
+
+function getAimSpeed(){
+  var target=getTargetAngle();
+  var diff=Math.abs(aimAngle-target);
+  // Slow down to 30% speed when within 0.15 radians of target (~8 degrees)
+  if(diff<0.15)return baseAimSpeed*0.3;
+  if(diff<0.3)return baseAimSpeed*0.55;
+  return baseAimSpeed;
+}
+
+// ── Hoop collision (score, bounce, miss) ────────────────
+var HOOP_W=26; // gap between uprights
+function checkHoopCollision(){
+  var dx=ball.x-hoop.x,dy=ball.y-(hoop.y+6);
+  var dist=Math.sqrt(dx*dx+dy*dy);
+
+  // Through the hoop! (generous zone)
+  if(Math.abs(dx)<HOOP_W/2&&Math.abs(dy)<12&&Math.abs(ball.vy)<0&&ball.vy<-0.5){
+    return'score';
+  }
+  // More generous: ball passes through hoop area moving upward
+  if(Math.abs(ball.x-hoop.x)<HOOP_W/2-2&&ball.y<hoop.y+10&&ball.y>hoop.y-8&&(ball.vy<0||Math.abs(ball.vy)<1)){
+    return'score';
+  }
+
+  // Hit left upright
+  if(Math.abs(ball.x-(hoop.x-14))<10&&Math.abs(ball.y-(hoop.y+4))<12){return'bounce_left';}
+  // Hit right upright
+  if(Math.abs(ball.x-(hoop.x+14))<10&&Math.abs(ball.y-(hoop.y+4))<12){return'bounce_right';}
+  return null;
+}
+
+// ── Setup ───────────────────────────────────────────────
 function setupHoop(){
   var hp=HOOPS[hoopIndex];
   ball.x=hp.bx;ball.y=hp.by;ball.vx=0;ball.vy=0;
   hoop.x=hp.hx;hoop.y=hp.hy;
-  aimAngle=Math.atan2(hoop.y-ball.y,hoop.x-ball.x);
-  evening=(hoopIndex>=2);
+  aimAngle=getTargetAngle()+0.3;aimDir=-1;
+  evening=(hoopIndex>=2);bounced=false;
 }
 
-function checkScore(){
-  var dx=ball.x-hoop.x,dy=ball.y-(hoop.y+6);
-  if(Math.abs(dx)<10&&Math.abs(dy)<10&&Math.abs(ball.vx)+Math.abs(ball.vy)>0.3){
-    return true;
-  }
-  return false;
-}
-
+// ── Update ──────────────────────────────────────────────
 function update(){
-  if(state==='commentary'){
-    commentaryTimer++;
-  }
+  if(state==='commentary')commentaryTimer++;
   if(state==='aiming'){
-    aimAngle+=aimSpeed*aimDir;
-    var targetAngle=Math.atan2(hoop.y-ball.y,hoop.x-ball.x);
-    if(aimAngle>targetAngle+0.6)aimDir=-1;
-    if(aimAngle<targetAngle-0.6)aimDir=1;
+    aimAngle+=getAimSpeed()*aimDir;
+    var ta=getTargetAngle();
+    if(aimAngle>ta+0.5)aimDir=-1;if(aimAngle<ta-0.5)aimDir=1;
   }
   if(state==='power'){
     power+=powerSpeed*powerDir;
-    if(power>1){power=1;powerDir=-1;}
-    if(power<0){power=0;powerDir=1;}
+    if(power>1){power=1;powerDir=-1;}if(power<0){power=0;powerDir=1;}
   }
   if(state==='rolling'){
     ball.x+=ball.vx;ball.y+=ball.vy;
-    ball.vx*=0.985;ball.vy*=0.985;
+    ball.vx*=0.988;ball.vy*=0.988;
 
     // Boundary bounce
-    if(ball.x<70||ball.x>W-70)ball.vx*=-0.5;
-    if(ball.y<90||ball.y>H-40)ball.vy*=-0.5;
+    if(ball.x<70||ball.x>W-70){ball.vx*=-0.5;playHit();}
+    if(ball.y<90||ball.y>H-50){ball.vy*=-0.5;playHit();}
 
-    if(checkScore()){
-      ball.vx=0;ball.vy=0;
-      bamfordScore++;
-      state='scored';resultTimer=0;
+    var hit=checkHoopCollision();
+    if(hit==='score'&&!scored){
+      scored=true;ball.vx*=0.3;ball.vy*=0.3;
+      bamfordScore++;playCheer();state='scored';resultTimer=0;
+    } else if(hit==='bounce_left'&&!bounced){
+      bounced=true;ball.vx=-Math.abs(ball.vx)*0.6-1;ball.vy*=0.5;playBounce();
+    } else if(hit==='bounce_right'&&!bounced){
+      bounced=true;ball.vx=Math.abs(ball.vx)*0.6+1;ball.vy*=0.5;playBounce();
     }
 
-    if(Math.abs(ball.vx)<0.1&&Math.abs(ball.vy)<0.1&&!checkScore()){
-      ball.vx=0;ball.vy=0;
-      state='missed';resultTimer=0;
+    if(!scored&&Math.abs(ball.vx)<0.08&&Math.abs(ball.vy)<0.08){
+      ball.vx=0;ball.vy=0;playSad();state='missed';resultTimer=0;
     }
   }
   if(state==='scored'){
     resultTimer++;
-    if(resultTimer>100){
+    if(resultTimer>120){
       if(bamfordScore>=7){
-        state='won';
-        confetti=[];
-        for(var i=0;i<80;i++)confetti.push({x:Math.random()*W,y:Math.random()*-200,w:4+Math.random()*4,h:4+Math.random()*8,vx:(Math.random()-0.5)*2,vy:1+Math.random()*3,color:['#ffd700','#4488ff','#ff4444','#44ff44','#fff','#c8a415'][Math.floor(Math.random()*6)]});
-      } else {
-        hoopIndex++;
-        setupHoop();
-        commentaryTimer=0;
-        state='commentary';
-      }
+        state='won';enteringName=true;nameInput='';finalHoops=5;
+        confetti=[];for(var i=0;i<80;i++)confetti.push({x:Math.random()*W,y:Math.random()*-200,w:4+Math.random()*4,h:4+Math.random()*8,vx:(Math.random()-0.5)*2,vy:1+Math.random()*3,color:['#ffd700','#4488ff','#ff4444','#44ff44','#fff','#c8a415'][Math.floor(Math.random()*6)]});
+        playCheer();
+      } else {hoopIndex++;setupHoop();commentaryTimer=0;state='commentary';}
     }
   }
   if(state==='missed'){
     resultTimer++;
-    if(resultTimer>80){
-      nasrScore++;
-      if(nasrScore>=7)state='lost';
-      else{state='lost';} // Nasr only needs 1 to win from 6
-    }
+    if(resultTimer>100){finalHoops=hoopIndex;enteringName=true;nameInput='';state='lost';}
   }
 }
 
+// ── Draw ────────────────────────────────────────────────
 function draw(){
   if(state==='title'){drawTitleScreen();return;}
   if(state==='won'){drawWinScreen();return;}
   if(state==='lost'){drawLoseScreen();return;}
 
-  drawLawn();
-  drawScoreboard();
-  drawHoop(hoop.x,hoop.y);
+  drawLawn();drawScoreboard();drawHoop(hoop.x,hoop.y);
   drawBall(ball.x,ball.y,'#3366cc');
-  drawPixelReg();
-
-  // Nasr's red ball (just for decoration, near hoop)
-  drawBall(hoop.x+30,hoop.y+20,'#cc3333');
+  // Nasr's red ball near hoop (decorative)
+  drawBall(hoop.x+35,hoop.y+25,'#cc3333');
+  // Reg at the ball
+  if(state!=='rolling')drawReg(ball.x,ball.y);
+  drawNasr();
 
   if(state==='commentary')drawCommentary();
-  if(state==='aiming'){drawAimArrow();ctx.fillStyle='#ffcc00';ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillText('Click to set direction',W/2,H-15);}
-  if(state==='power'){drawAimArrow();drawPowerBar();ctx.fillStyle='#ffcc00';ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillText('Click to set power',W/2,H-15);}
+  if(state==='aiming'){drawAimArrow();ctx.fillStyle='#ffcc00';ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillText('Click to set direction',W/2,H-10);}
+  if(state==='power'){drawAimArrow();drawPowerBar();ctx.fillStyle='#ffcc00';ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillText('Click to set power',W/2,H-10);}
 
   if(state==='scored'){
-    ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(W/2-120,H/2-30,240,60);
-    ctx.fillStyle='#44ff44';ctx.font='bold 24px serif';ctx.textAlign='center';
-    ctx.fillText('HOOP! '+bamfordScore+'–'+nasrScore,W/2,H/2+8);
+    ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(W/2-130,H/2-30,260,60);
+    ctx.fillStyle='#44ff44';ctx.font='bold 26px serif';ctx.textAlign='center';
+    ctx.fillText('\u2714 HOOP! '+bamfordScore+'\u2013'+nasrScore,W/2,H/2+8);
   }
   if(state==='missed'){
-    ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(W/2-100,H/2-20,200,40);
-    ctx.fillStyle='#ff4444';ctx.font='bold 20px serif';ctx.textAlign='center';
-    ctx.fillText('MISSED...',W/2,H/2+6);
+    ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(W/2-130,H/2-25,260,50);
+    ctx.fillStyle='#ff4444';ctx.font='bold 22px serif';ctx.textAlign='center';
+    ctx.fillText(bounced?'BOUNCED OFF...':'MISSED...',W/2,H/2+6);
   }
 }
 
+// ── Input ───────────────────────────────────────────────
 function onClick(){
-  if(state==='title'){
-    bamfordScore=2;nasrScore=6;hoopIndex=0;
-    setupHoop();commentaryTimer=0;state='commentary';
-  }
-  else if(state==='commentary'&&commentaryTimer>HOOPS[hoopIndex].commentary.length*80+40){
-    state='aiming';
-  }
-  else if(state==='aiming'){
-    state='power';power=0;powerDir=1;
-  }
+  initAudio();
+  if(state==='title'){bamfordScore=2;nasrScore=6;hoopIndex=0;scored=false;setupHoop();commentaryTimer=0;state='commentary';}
+  else if(state==='commentary'&&commentaryTimer>HOOPS[hoopIndex].commentary.length*90+50){state='aiming';}
+  else if(state==='aiming'){state='power';power=0;powerDir=1;}
   else if(state==='power'){
-    var spd=power*12+2;
-    ball.vx=Math.cos(aimAngle)*spd;
-    ball.vy=Math.sin(aimAngle)*spd;
-    state='rolling';
+    var spd=power*10+2;ball.vx=Math.cos(aimAngle)*spd;ball.vy=Math.sin(aimAngle)*spd;
+    scored=false;bounced=false;state='rolling';playHit();
   }
-  else if(state==='won'||state==='lost'){
-    state='title';
-  }
+  else if((state==='won'||state==='lost')&&!enteringName){state='title';}
 }
+
+document.addEventListener('keydown',function(e){
+  if(!enteringName)return;
+  if(e.key==='Enter'&&nameInput.length>0){
+    saveScore(nameInput,finalHoops);enteringName=false;
+  } else if(e.key==='Backspace'){
+    nameInput=nameInput.slice(0,-1);
+  } else if(e.key.length===1&&nameInput.length<6&&/[a-zA-Z0-9!? ]/.test(e.key)){
+    nameInput+=e.key.toUpperCase();
+  }
+});
 
 canvas.addEventListener('click',onClick);
-
 function gameLoop(){update();draw();requestAnimationFrame(gameLoop);}
 if(location.search.indexOf('embed')!==-1)document.body.classList.add('embed');
 gameLoop();
