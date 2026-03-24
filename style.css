@@ -780,9 +780,11 @@ a:active {
 .float-window iframe {
   display: block;
   border: none;
-  background: #c0c0c0;
+  background: #008000;
   width: 100%;
   flex: 1;
+  min-height: 0;
+  overflow: hidden;
   min-height: 200px;
 }
 

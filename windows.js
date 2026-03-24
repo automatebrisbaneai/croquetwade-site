@@ -180,12 +180,12 @@ function buildPaintWindow() {
 }
 
 function buildGameWindow(g) {
-  var h = '<div class="float-window" id="' + g.id + '" style="top:' + g.top + 'px;left:' + g.left + ';width:' + g.w + 'px;">';
+  var h = '<div class="float-window" id="' + g.id + '" style="top:' + g.top + 'px;left:' + g.left + ';width:' + g.w + 'px;height:' + g.h + 'px;">';
   h += '<div class="window-titlebar" data-drag="' + g.id + '">';
   h += '<span style="margin-right:4px">' + g.emoji + '</span>';
   h += '<span class="window-titlebar-text">' + g.title + '</span>';
   h += '<div class="window-buttons"><span class="window-btn window-btn-minimize">\u2500</span><span class="window-btn window-btn-maximize">\u25a1</span><span class="window-btn window-btn-close" onclick="closeApp(\'' + g.id + '\')">\u00d7</span></div></div>';
-  h += '<iframe src="' + g.src + '" width="' + g.w + '" height="' + g.h + '"></iframe></div>';
+  h += '<iframe src="' + g.src + '" scrolling="no"></iframe></div>';
   return h;
 }
 
