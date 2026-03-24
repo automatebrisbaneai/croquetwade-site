@@ -79,7 +79,7 @@ function playHit(){
 // ── Leaderboard ─────────────────────────────────────────
 function getLeaderboard(){
   var lb=JSON.parse(localStorage.getItem('bamford-lb')||'null');
-  if(!lb)lb=[{name:'CLAUDE',hoops:5},{name:'REGGIE',hoops:4},{name:'WADEH!',hoops:3}];
+  if(!lb)lb=[{name:'REGBAM',hoops:5},{name:'CLAUDE',hoops:4},{name:'WADEH!',hoops:3}];
   return lb;
 }
 function saveScore(name,hoops){
@@ -297,8 +297,17 @@ function drawLoseScreen(){
     ctx.fillStyle='#ffcc00';ctx.font='bold 24px monospace';ctx.fillText(nameInput+'_',W/2,350);
     ctx.fillStyle='#aaa';ctx.font='12px sans-serif';ctx.fillText('Press Enter to save',W/2,375);
   } else {
+    ctx.fillStyle='#44ff44';ctx.font='bold 14px monospace';
+    if(savedName)ctx.fillText('\u2714 SAVED: '+savedName,W/2,320);
+    var lb=getLeaderboard();
+    ctx.fillStyle='#555';ctx.font='11px monospace';ctx.fillText('\u2500\u2500 HALL OF CHAMPIONS \u2500\u2500',W/2,345);
+    lb.slice(0,6).forEach(function(e,i){
+      var medal=i===0?'\u{1F947}':i===1?'\u{1F948}':i===2?'\u{1F949}':'  ';
+      ctx.fillStyle=(e.name===savedName)?'#ffcc00':'#aaa';ctx.font='11px monospace';
+      ctx.fillText(medal+' '+e.name.padEnd(6)+' '+e.hoops+'/5 hoops',W/2,363+i*14);
+    });
     ctx.fillStyle=(Date.now()%1000<500)?'#fff':'#aaa';ctx.font='14px sans-serif';
-    ctx.fillText('Click to try again',W/2,340);
+    ctx.fillText('Click to try again',W/2,470);
   }
 }
 
@@ -467,6 +476,9 @@ document.addEventListener('keydown',function(e){
 canvas.addEventListener('click',onClick);
 function gameLoop(){update();draw();requestAnimationFrame(gameLoop);}
 if(location.search.indexOf('embed')!==-1)document.body.classList.add('embed');
+// Reset leaderboard if old format (CLAUDE at #1 instead of REGBAM)
+var _lb=JSON.parse(localStorage.getItem('bamford-lb')||'null');
+if(_lb&&_lb[0]&&_lb[0].name==='CLAUDE'&&_lb[0].hoops===5)localStorage.removeItem('bamford-lb');
 gameLoop();
 </script>
 </body>
