@@ -108,6 +108,15 @@ var WINDOWS = [
       + '<p><strong>Wade Hart</strong><br>CAQ Growth Consultancy — Queensland, Australia</p>'
       + '<p style="color:var(--fg-dim);font-size:0.85rem;">Hit reply. I\'d love to hear from you.</p>'
       + '<a href="mailto:me@croquetwade.com" class="btn" style="margin-top:0.5rem;">Send</a>'
+  },
+  {
+    id: 'clubsites-win', title: 'Club Website Project — Netscape', icon: 'netscape',
+    open: true, top: 60, left: 280, width: 480, height: 340,
+    address: 'https://websites.croquetwade.com',
+    body: '<h1 style="font-size:1.4rem;margin-bottom:0.75rem;">Club Website Project</h1>'
+      + '<p>Every club in Queensland deserves a well-designed website on their own domain.</p>'
+      + '<p>Thanks to the Qld Government marketing grant to get more people playing croquet, we\'re building one for every club.</p>'
+      + '<p style="margin-top:1rem;"><a href="https://websites.croquetwade.com" target="_blank" class="btn">Find out more</a></p>'
   }
 ];
 
@@ -242,6 +251,14 @@ function buildBiosContent() {
     html += body;
     html += '</div>';
   });
+  // Games section
+  html += '<div class="bios-section">';
+  html += '<h2>Games</h2>';
+  html += '<div class="bios-games">';
+  GAME_WINDOWS.forEach(function(g) {
+    html += '<a class="bios-game-link" onclick="openMobileGame(\'' + g.src.replace('?embed=1','') + '\')">' + g.emoji + ' ' + g.title + '</a>';
+  });
+  html += '</div></div>';
   html += '<div class="bios-footer">';
   html += '<p>Wade Hart — CAQ Growth Consultancy</p>';
   html += '<p><a href="mailto:me@croquetwade.com">me@croquetwade.com</a></p>';

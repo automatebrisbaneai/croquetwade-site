@@ -965,6 +965,68 @@ a:active {
     cursor: pointer;
     font-size: 14px;
   }
+
+  .bios-games {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .bios-game-link {
+    display: block;
+    padding: 10px 14px;
+    background: rgba(85, 255, 85, 0.08);
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #55ff55 !important;
+    text-decoration: none !important;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'VT323', monospace;
+  }
+
+  .bios-game-link:active {
+    background: rgba(85, 255, 85, 0.2);
+  }
+
+  .mobile-game-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000;
+  }
+
+  .mobile-game-overlay.open {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-game-close {
+    flex-shrink: 0;
+    padding: 10px 16px;
+    background: #cc0000;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'VT323', monospace;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  .mobile-game-close:active {
+    background: #990000;
+  }
+
+  .mobile-game-overlay iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: #000;
+  }
 }
 
 @media (max-width: 600px) {

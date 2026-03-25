@@ -203,3 +203,21 @@ function closeApp(id) {
   if (!win) return;
   win.classList.remove('open');
 }
+
+/* ── Mobile game fullscreen ────────────────────────────── */
+
+function openMobileGame(src) {
+  var overlay = document.getElementById('mobile-game-overlay');
+  var iframe = document.getElementById('mobile-game-iframe');
+  if (!overlay || !iframe) return;
+  iframe.src = src;
+  overlay.classList.add('open');
+}
+
+function closeMobileGame() {
+  var overlay = document.getElementById('mobile-game-overlay');
+  var iframe = document.getElementById('mobile-game-iframe');
+  if (!overlay || !iframe) return;
+  overlay.classList.remove('open');
+  iframe.src = 'about:blank';
+}
