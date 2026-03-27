@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyCroquet — Membership Portal · CroquetWade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;700&family=Inter:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .detail-page {
+      max-width: 680px;
+      margin: 2rem auto;
+      background: white;
+      border: 1px solid #0054e3;
+      border-radius: var(--window-radius);
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+    .detail-titlebar {
+      background: linear-gradient(180deg, var(--titlebar-top), var(--titlebar-bottom));
+      color: white;
+      padding: 5px 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .detail-nav {
+      background: var(--window-frame);
+      border-bottom: 1px solid #aca899;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+    }
+    .detail-nav a { color: var(--fg); text-decoration: none; }
+    .detail-nav a:hover { text-decoration: underline; }
+    .detail-body { padding: 2rem 2.25rem; }
+    .detail-body h2 { margin-bottom: 0.35rem; }
+    .detail-body p { margin-top: 0.75rem; color: var(--fg-dim); }
+    .detail-body p strong { color: var(--fg); }
+    .detail-section { margin-top: 1.5rem; }
+    .feature-list { margin-top: 0.75rem; list-style: none; padding: 0; }
+    .feature-list li { padding: 0.4rem 0; border-bottom: 1px solid #ece9d8; font-size: 0.9rem; color: var(--fg-dim); }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list li::before { content: "▸ "; color: #0054e3; }
+    .cta-row { margin-top: 1.75rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="detail-page">
+    <div class="detail-titlebar">
+      <svg width="16" height="16" viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="2" fill="#006644" stroke="#004422" stroke-width=".5"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold" font-family="serif">N</text></svg>
+      MyCroquet — Membership Portal — Netscape
+    </div>
+    <div class="detail-nav">
+      ← <a href="javascript:history.back()">Back</a> &nbsp;|&nbsp; <a href="/">CroquetWade</a>
+    </div>
+    <div class="detail-body">
+      <h2>MyCroquet</h2>
+      <p class="project-meta">41 clubs · all active members · live now</p>
+
+      <p>MyCroquet is Queensland's membership portal. It replaces handwritten forms and spreadsheet wrangling with a clean system that validates, logs, and audits every change — so club secretaries enter data once and it flows through.</p>
+
+      <div class="detail-section recessed" style="padding:1.25rem;">
+        <div class="stat-grid">
+          <div class="stat-item"><span class="stat-label">Clubs connected</span><span class="stat-value">41</span></div>
+          <div class="stat-item"><span class="stat-label">Members indexed</span><span class="stat-value">1,777</span></div>
+          <div class="stat-item"><span class="stat-label">Modules live</span><span class="stat-value">3</span></div>
+          <div class="stat-item"><span class="stat-label">Audit trail</span><span class="stat-value">full</span></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <p><strong>What it does</strong></p>
+        <ul class="feature-list">
+          <li>Passwordless login — no account setup required for members</li>
+          <li>Handicap module — GC and AC ratings, fully indexed</li>
+          <li>Come &amp; Try pipeline — tracks every prospect from sign-up to membership</li>
+          <li>Club admin — secretaries manage their own records without IT support</li>
+          <li>Role-based access — committee members see what they need, nothing more</li>
+        </ul>
+      </div>
+
+      <div class="cta-row">
+        <a href="https://my.croquetwade.com" target="_blank" class="btn">Open MyCroquet ↗</a>
+        <span style="font-size:0.8rem;color:var(--fg-muted);">Live site — croquetwade.com</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

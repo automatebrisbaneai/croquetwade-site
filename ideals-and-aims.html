@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ideals &amp; Aims — Strategic Framework · CroquetWade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;700&family=Inter:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .detail-page {
+      max-width: 680px;
+      margin: 2rem auto;
+      background: white;
+      border: 1px solid #0054e3;
+      border-radius: var(--window-radius);
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+    .detail-titlebar {
+      background: linear-gradient(180deg, var(--titlebar-top), var(--titlebar-bottom));
+      color: white;
+      padding: 5px 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .detail-nav {
+      background: var(--window-frame);
+      border-bottom: 1px solid #aca899;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+    }
+    .detail-nav a { color: var(--fg); text-decoration: none; }
+    .detail-nav a:hover { text-decoration: underline; }
+    .detail-body { padding: 2rem 2.25rem; }
+    .detail-body h2 { margin-bottom: 0.35rem; }
+    .detail-body p { margin-top: 0.75rem; color: var(--fg-dim); }
+    .detail-body p strong { color: var(--fg); }
+    .detail-section { margin-top: 1.5rem; }
+    .ideal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; }
+    .ideal-card { background: #f9f8f4; border: 1px solid #ece9d8; border-radius: 4px; padding: 0.75rem 1rem; }
+    .ideal-card .ideal-num { font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted); }
+    .ideal-card .ideal-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-top: 0.2rem; color: var(--fg); }
+    .aims-list { margin-top: 0.75rem; list-style: none; padding: 0; }
+    .aims-list li { padding: 0.4rem 0; border-bottom: 1px solid #ece9d8; font-size: 0.875rem; color: var(--fg-dim); display: flex; gap: 0.75rem; }
+    .aims-list li:last-child { border-bottom: none; }
+    .aims-list .aim-tag { font-family: var(--font-mono); font-size: 0.7rem; background: #ece9d8; color: #555; padding: 1px 6px; border-radius: 2px; white-space: nowrap; align-self: center; }
+    .cta-row { margin-top: 1.75rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    @media (max-width: 480px) { .ideal-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="detail-page">
+    <div class="detail-titlebar">
+      <svg width="16" height="16" viewBox="0 0 16 16"><rect x="2" y="1" width="12" height="14" rx="1" fill="#fff" stroke="#808080" stroke-width=".5"/><line x1="4" y1="4" x2="12" y2="4" stroke="#0066cc" stroke-width="1"/><line x1="4" y1="7" x2="12" y2="7" stroke="#808080" stroke-width=".5"/><line x1="4" y1="9" x2="12" y2="9" stroke="#808080" stroke-width=".5"/></svg>
+      Ideals &amp; Aims — Strategic Framework — WordPad
+    </div>
+    <div class="detail-nav">
+      ← <a href="javascript:history.back()">Back</a> &nbsp;|&nbsp; <a href="/">CroquetWade</a>
+    </div>
+    <div class="detail-body">
+      <h2>Ideals &amp; Aims</h2>
+      <p class="project-meta">4 ideals · 6 aims · developed from Management Committee workshop</p>
+
+      <p>The strategic framework that governs how CAQ operates and what it builds toward. The ideals are the decision filters — every action must pass them. The aims are the six outcomes the organisation works toward.</p>
+
+      <div class="detail-section">
+        <p><strong>The 4 Ideals</strong></p>
+        <div class="ideal-grid">
+          <div class="ideal-card">
+            <div class="ideal-num">IDEAL 1</div>
+            <div class="ideal-title">Enjoy Croquet</div>
+          </div>
+          <div class="ideal-card">
+            <div class="ideal-num">IDEAL 2</div>
+            <div class="ideal-title">Keep It Simple</div>
+          </div>
+          <div class="ideal-card">
+            <div class="ideal-num">IDEAL 3</div>
+            <div class="ideal-title">Hit Our Aims</div>
+          </div>
+          <div class="ideal-card">
+            <div class="ideal-num">IDEAL 4</div>
+            <div class="ideal-title">Co-operate for Croquet</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <p><strong>The 6 Aims</strong></p>
+        <ul class="aims-list">
+          <li><span class="aim-tag">1</span> Strengthen Admin &amp; Internal Operations</li>
+          <li><span class="aim-tag">2</span> Promote Croquet Externally</li>
+          <li><span class="aim-tag">3</span> Grow &amp; Engage Members</li>
+          <li><span class="aim-tag">4</span> Support Clubs</li>
+          <li><span class="aim-tag">5</span> Develop Skilled Play</li>
+          <li><span class="aim-tag">6</span> Encourage Innovative Ideas</li>
+        </ul>
+        <p style="font-size:0.8rem;">The aims form a cascade — strong admin enables external promotion, which brings people to the door, which feeds member growth, which strengthens clubs, which develops play, which opens room for innovation.</p>
+      </div>
+
+      <div class="cta-row">
+        <a href="caq-ideals.zip" download class="btn">Download Posters ↓</a>
+        <span style="font-size:0.8rem;color:var(--fg-muted);">4 ideal posters · PNG · 2.8 MB</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
