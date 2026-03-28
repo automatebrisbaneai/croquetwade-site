@@ -138,7 +138,8 @@ var GAME_WINDOWS = [
   { id: 'skifree-win', title: 'SkiFree', emoji: '\u26F7\uFE0F', src: 'games/skifree.html?embed=1', w: 540, h: 540, top: 30, left: 'calc(50% - 220px)' },
   { id: 'sunsetcruiser-win', title: 'Sunset Cruiser', emoji: '\u{1F3CE}\uFE0F', src: 'games/sunsetcruiser.html?embed=1', w: 680, h: 460, top: 25, left: 'calc(50% - 240px)' },
   { id: 'pacman-win', title: 'Dot Muncher', emoji: '\u{1F7E1}', src: 'games/pacman.html?embed=1', w: 580, h: 560, top: 30, left: 'calc(50% - 240px)' },
-  { id: 'bamford-win', title: "Bamford's Comeback", emoji: '\u{1F3C6}', src: 'games/bamford.html?embed=1', w: 640, h: 560, top: 20, left: 'calc(50% - 270px)' }
+  { id: 'bamford-win', title: "Bamford's Comeback", emoji: '\u{1F3C6}', src: 'games/bamford.html?embed=1', w: 640, h: 560, top: 20, left: 'calc(50% - 270px)' },
+  { id: 'bamford2-win', title: "Bamford's Comeback 2.0", emoji: '\u{1F3B1}', src: 'games/bamford2/', w: 720, h: 580, top: 20, left: 'calc(50% - 310px)' }
 ];
 
 function buildWindowHTML(w) {
