@@ -139,7 +139,8 @@ var GAME_WINDOWS = [
   { id: 'sunsetcruiser-win', title: 'Sunset Cruiser', emoji: '\u{1F3CE}\uFE0F', src: 'games/sunsetcruiser.html?embed=1', w: 680, h: 460, top: 25, left: 'calc(50% - 240px)' },
   { id: 'pacman-win', title: 'Dot Muncher', emoji: '\u{1F7E1}', src: 'games/pacman.html?embed=1', w: 580, h: 560, top: 30, left: 'calc(50% - 240px)' },
   { id: 'bamford-win', title: "Bamford's Comeback", emoji: '\u{1F3C6}', src: 'games/bamford.html?embed=1', w: 640, h: 560, top: 20, left: 'calc(50% - 270px)' },
-  { id: 'bamford2-win', title: "Bamford's Comeback 2.0", emoji: '\u{1F3B1}', src: 'games/bamford2/', w: 720, h: 580, top: 20, left: 'calc(50% - 310px)' }
+  { id: 'bamford2-win', title: "Bamford's Comeback 2.0", emoji: '\u{1F3B1}', src: 'games/bamford2/', w: 720, h: 580, top: 20, left: 'calc(50% - 310px)' },
+  { id: 'bamford3-win', title: 'Golf Croquet', emoji: '\u{1F7E1}', src: 'games/bamford3/', w: 900, h: 680, top: 15, left: 'calc(50% - 450px)' }
 ];
 
 function buildWindowHTML(w) {
@@ -226,14 +227,15 @@ function buildGamesFolder() {
     { id: 'sunsetcruiser-win', label: 'Sunset Cruiser', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#d44a1a" stroke="#808080"/><circle cx="16" cy="10" r="6" fill="#f4a020"/><rect x="4" y="18" width="24" height="4" fill="#555"/><rect x="6" y="16" width="6" height="4" fill="#cc0000" rx="1"/><rect x="10" y="22" width="4" height="3" rx="1" fill="#222"/><rect x="18" y="22" width="4" height="3" rx="1" fill="#222"/></svg>' },
     { id: 'pacman-win', label: 'Dot Muncher', svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#000" stroke="#808080"/><path d="M16 6a10 10 0 1 1 0 20 10 10 0 0 1 0-20z" fill="#ffff00"/><path d="M16 16l8-6v12z" fill="#000"/><circle cx="18" cy="12" r="1.5" fill="#000"/><circle cx="6" cy="10" r="2" fill="#ff0000"/><circle cx="8" cy="24" r="2" fill="#00ffff"/></svg>' },
     { id: 'bamford-win', label: "Bamford's Comeback", svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#2d8a2d" stroke="#808080"/><rect x="12" y="10" width="3" height="10" fill="#fff"/><rect x="17" y="10" width="3" height="10" fill="#fff"/><rect x="12" y="8" width="8" height="3" fill="#fff"/><circle cx="16" cy="24" r="4" fill="#3366cc"/><text x="16" y="7" text-anchor="middle" fill="#ffd700" font-size="6" font-weight="bold">\u{1F3C6}</text></svg>' },
-    { id: 'bamford2-win', label: "Bamford 2.0", svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#1a1a2e" stroke="#808080"/><circle cx="16" cy="16" r="8" fill="#2d8a2d" stroke="#fff" stroke-width="1"/><circle cx="16" cy="16" r="3" fill="#3366cc" stroke="#fff" stroke-width="0.5"/><circle cx="22" cy="10" r="3" fill="#cc3333" stroke="#fff" stroke-width="0.5"/><text x="16" y="30" text-anchor="middle" fill="#ffd700" font-size="5" font-weight="bold">2.0</text></svg>' }
+    { id: 'bamford2-win', label: "Bamford 2.0", svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#1a1a2e" stroke="#808080"/><circle cx="16" cy="16" r="8" fill="#2d8a2d" stroke="#fff" stroke-width="1"/><circle cx="16" cy="16" r="3" fill="#3366cc" stroke="#fff" stroke-width="0.5"/><circle cx="22" cy="10" r="3" fill="#cc3333" stroke="#fff" stroke-width="0.5"/><text x="16" y="30" text-anchor="middle" fill="#ffd700" font-size="5" font-weight="bold">2.0</text></svg>' },
+    { id: 'bamford3-win', label: "Golf Croquet", svg: '<svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" fill="#1a3a1a" stroke="#808080"/><circle cx="10" cy="22" r="3" fill="#2266cc" stroke="#fff" stroke-width="0.5"/><circle cx="22" cy="22" r="3" fill="#cc2222" stroke="#fff" stroke-width="0.5"/><circle cx="10" cy="14" r="3" fill="#333" stroke="#fff" stroke-width="0.5"/><circle cx="22" cy="14" r="3" fill="#cccc22" stroke="#fff" stroke-width="0.5"/><rect x="14" y="8" width="2" height="12" fill="#fff" stroke="#888" stroke-width="0.3"/><rect x="12" y="8" width="6" height="2" fill="#fff"/><text x="16" y="7" text-anchor="middle" fill="#88ff44" font-size="5" font-weight="bold">GC</text></svg>' }
   ];
 
   gameIcons.forEach(function(g) {
     h += '<a onclick="closeApp(\'games-win\');openApp(\'' + g.id + '\')" class="desktop-icon" style="cursor:pointer">' + g.svg + '<span class="desktop-icon-label" style="color:#000">' + g.label + '</span></a>';
   });
 
-  h += '</div><div style="background:#ece9d8;padding:2px 8px;font-size:11px;color:#808080;border-top:1px solid #aca899;">12 objects</div></div>';
+  h += '</div><div style="background:#ece9d8;padding:2px 8px;font-size:11px;color:#808080;border-top:1px solid #aca899;">13 objects</div></div>';
   return h;
 }
 
