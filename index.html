@@ -1,124 +1,805 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CroquetWade — Growth Consultancy for Queensland Croquet</title>
-  <meta name="description" content="Wade Hart. Croquet growth systems for the Croquet Association of Queensland. Strategy, technology, membership.">
+  <title>CroquetWade</title>
+  <meta name="description" content="Wade Hart builds the digital infrastructure for Queensland croquet. One connected ecosystem for clubs, members and the association.">
+  <meta property="og:title" content="CroquetWade">
+  <meta property="og:description" content="Wade Hart builds the digital infrastructure for Queensland croquet. Writing on growing the game.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://croquetwade.com/wade-waving-cut.webp">
+  <link rel="canonical" href="https://croquetwade.com/">
+
+  <!-- Typography: JetBrains Mono (CLI body) + Bricolage Grotesque (brand wordmarks) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;700&family=Inter:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/globals.css">
+
+  <style>
+    /* ──────────────────────────────────────────────────────
+       PAGE LAYOUT
+    ────────────────────────────────────────────────────── */
+    body {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .page-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 3rem);
+    }
+
+    /* ──────────────────────────────────────────────────────
+       MASTHEAD
+    ────────────────────────────────────────────────────── */
+    .masthead {
+      padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(1rem, 2vw, 1.5rem);
+    }
+
+    .masthead-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .masthead-wordmark {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: clamp(0.88rem, 2.5vw, 1.05rem);
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .masthead-wordmark:hover {
+      color: var(--terracotta);
+    }
+
+    .masthead-date {
+      font-family: var(--font-mono);
+      font-weight: 400;
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+    }
+
+    .masthead-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .masthead-portrait {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      object-position: center;
+      flex-shrink: 0;
+    }
+
+    /* ──────────────────────────────────────────────────────
+       HERO — full-bleed dark dithered ember-terrain band.
+       Dark entrance; the page resolves into the cream CLI below.
+    ────────────────────────────────────────────────────── */
+    .cc-hero {
+      position: relative;
+      width: 100%;
+      min-height: clamp(440px, 80vh, 780px);
+      background: #0e0b08;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .cc-hero canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 0;
+    }
+
+    /* melt the dark band into the cream page below */
+    .cc-hero::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 140px;
+      background: linear-gradient(180deg, rgba(244,238,219,0) 0%, var(--paper) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .cc-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+      min-height: clamp(440px, 80vh, 780px);
+      padding: clamp(2.5rem, 8vh, 6rem) clamp(1.5rem, 5vw, 3rem) clamp(4rem, 10vh, 7rem);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(1rem, 4vw, 3rem);
+    }
+
+    .cc-hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.15rem;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .cc-hero-friend {
+      flex: 0 0 auto;
+      width: clamp(130px, 19vw, 240px);
+      height: auto;
+      filter: drop-shadow(0 10px 26px rgba(0,0,0,0.55));
+      transform-origin: 58% 82%;
+      animation: cc-sway 4.6s ease-in-out infinite;
+      pointer-events: none;
+      user-select: none;
+    }
+    @keyframes cc-sway {
+      0%,100% { transform: rotate(-2deg) translateY(0); }
+      50%     { transform: rotate(2deg)  translateY(-6px); }
+    }
+
+    @media (max-width: 640px) {
+      .cc-hero-inner {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        justify-content: center;
+      }
+      .cc-hero-friend {
+        width: clamp(96px, 32vw, 150px);
+        align-self: flex-end;
+        margin-bottom: -0.25rem;
+      }
+    }
+
+    .cc-hero-prompt {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.03em;
+      color: var(--amber, #a6c46b);
+    }
+    .cc-hero-prompt .user { color: #c9d96b; }
+    .cc-hero-prompt .path { color: #b8ad96; }
+    .cc-hero-caret {
+      display: inline-block;
+      width: 0.6ch;
+      background: #a6c46b;
+      color: transparent;
+      animation: cc-blink 1.05s steps(1) infinite;
+    }
+    @keyframes cc-blink { 50% { opacity: 0; } }
+
+    .cc-hero h1 {
+      font-family: 'Bricolage Grotesque', Georgia, serif;
+      font-variation-settings: 'opsz' 96;
+      font-weight: 700;
+      font-style: italic;
+      font-synthesis: style;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      font-size: clamp(2.3rem, 6.6vw, 4.4rem);
+      color: var(--paper);
+      margin: 0;
+      text-shadow: 0 2px 30px rgba(14,11,8,0.85);
+    }
+
+    .cc-hero-dek {
+      max-width: 46ch;
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.4vw, 0.95rem);
+      line-height: 1.6;
+      color: #c9bfa6;
+      text-shadow: 0 1px 14px rgba(14,11,8,0.9);
+    }
+
+    .cc-hero-cta {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6em;
+      margin-top: 0.5rem;
+      padding: 0.7rem 1.05rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--paper);
+      background: rgba(14,11,8,0.55);
+      border: 1.5px solid var(--amber, #a6c46b);
+      border-radius: 2px;
+      box-shadow: 4px 4px 0 var(--lawn);
+      text-decoration: none;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+    .cc-hero-cta:hover {
+      color: var(--paper);
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--amber, #a6c46b);
+    }
+    .cc-hero-cta:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--amber, #a6c46b);
+    }
+    .cc-hero-cta .ret { color: var(--amber, #a6c46b); }
+
+    .cc-hero-scroll {
+      position: absolute;
+      left: 50%;
+      bottom: clamp(1rem, 3vh, 1.8rem);
+      transform: translateX(-50%);
+      z-index: 2;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #8c8270;
+      animation: cc-bob 1.8s ease-in-out infinite;
+    }
+    @keyframes cc-bob { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(4px);} }
+
+    /* tighten the cream masthead now that the hero precedes it */
+    .cc-hero + .page-wrap .masthead {
+      padding-top: clamp(1rem, 2vw, 1.5rem);
+    }
+
+    @media (max-width: 520px) {
+      .cc-hero-scroll { display: none; }
+    }
+
+    /* ──────────────────────────────────────────────────────
+       TERMINAL BLOCKS
+    ────────────────────────────────────────────────────── */
+    .terminal-blocks {
+      padding: clamp(2rem, 4vw, 3rem) 0 clamp(3rem, 6vw, 5rem);
+    }
+
+    .terminal-block {
+      margin-bottom: clamp(2rem, 4vw, 3rem);
+    }
+
+    .terminal-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .prompt-line {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6em;
+      margin-bottom: 0.5rem;
+    }
+
+    .prompt-dollar {
+      color: var(--terracotta);
+      font-weight: 600;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .prompt-cmd {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    .prompt-output {
+      padding-left: 1.55rem;
+      color: var(--ink-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .prompt-output a {
+      color: var(--ink-muted);
+      text-decoration: underline;
+      text-decoration-color: var(--terracotta);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color 120ms ease;
+    }
+
+    .prompt-output a:hover {
+      color: var(--terracotta);
+    }
+
+    /* ──────────────────────────────────────────────────────
+       QUADRANT CTA — ink-bordered hard-shadow link, kept inside
+       the terminal block so the CLI conceit is preserved while
+       the link reads as predominant call-to-action.
+    ────────────────────────────────────────────────────── */
+    .quadrant-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 0.95rem 1.1rem 1rem;
+      background: var(--paper);
+      color: var(--ink) !important;
+      border: 1.5px solid var(--ink);
+      border-radius: 2px;
+      box-shadow: 4px 4px 0 var(--ink);
+      text-decoration: none !important;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+
+    .quadrant-cta:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--terracotta);
+      color: var(--ink) !important;
+    }
+
+    .quadrant-cta:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--terracotta);
+    }
+
+    .quadrant-cta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 0;
+    }
+
+    .quadrant-cta-title {
+      font-family: 'Bricolage Grotesque', Georgia, serif;
+      font-variation-settings: 'opsz' 96;
+      font-weight: 700;
+      font-style: italic;
+      font-synthesis: style;
+      letter-spacing: -0.025em;
+      font-size: 1.85rem;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .quadrant-cta-desc {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+
+    .quadrant-cta-arrow {
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      color: var(--terracotta);
+      line-height: 1;
+    }
+
+    /* Writing list */
+    .writing-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .writing-list li {
+      padding: 0.45rem 0;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .writing-list li + li {
+      border-top: 1px solid var(--rule);
+    }
+
+    .writing-date {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .writing-title {
+      font-size: 0.92rem;
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: var(--terracotta);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color 120ms ease;
+    }
+
+    .writing-title:hover {
+      color: var(--terracotta);
+    }
+
+    .writing-dek {
+      flex-basis: 100%;
+      padding-left: 4.5rem;
+      margin-top: 0.15rem;
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 480px) {
+      .writing-dek {
+        padding-left: 0;
+      }
+    }
+
+    /* ──────────────────────────────────────────────────────
+       COLOPHON
+    ────────────────────────────────────────────────────── */
+    .colophon {
+      padding: clamp(1.5rem, 3vw, 2rem) 0 clamp(2rem, 4vw, 3rem);
+      border-top: 1px solid var(--rule);
+    }
+
+    .colophon p {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+
+    .colophon a {
+      color: var(--ink-muted);
+      text-decoration: underline;
+      text-decoration-color: var(--rule);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+      transition: color 120ms ease;
+    }
+
+    .colophon a:hover {
+      color: var(--terracotta);
+    }
+
+    .colophon-nav {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.25rem;
+    }
+
+    .colophon-nav a {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 120ms ease;
+    }
+
+    .colophon-nav a:hover {
+      color: var(--terracotta);
+    }
+
+    /* ──────────────────────────────────────────────────────
+       FOCUS
+    ────────────────────────────────────────────────────── */
+    *:focus-visible {
+      outline: 2px solid var(--terracotta);
+      outline-offset: 3px;
+    }
+
+    /* ──────────────────────────────────────────────────────
+       TYPING ANIMATION (load-time)
+       Reserves layout via visibility:hidden so nothing shifts.
+       Skipped entirely under prefers-reduced-motion.
+    ────────────────────────────────────────────────────── */
+    body.cli-typing .terminal-block .prompt-line,
+    body.cli-typing .terminal-block .prompt-output {
+      visibility: hidden;
+    }
+    body.cli-typing .terminal-block.tb-cmd-on .prompt-line {
+      visibility: visible;
+    }
+    body.cli-typing .terminal-block.tb-out-on .prompt-output {
+      visibility: visible;
+    }
+
+    /* Blinking caret on the command currently being typed */
+    body.cli-typing .terminal-block.tb-cmd-on .prompt-cmd::after {
+      content: "▋";
+      display: inline-block;
+      margin-left: 1px;
+      color: var(--terracotta);
+      animation: caret-blink 850ms step-end infinite;
+    }
+    body.cli-typing .terminal-block.tb-cmd-done .prompt-cmd::after {
+      content: none;
+    }
+
+    /* Final empty prompt — caret keeps blinking after all typing is done */
+    body.cli-typing .terminal-block-final .prompt-line {
+      visibility: visible;
+    }
+    body.cli-typing .terminal-block-final .prompt-cmd::after {
+      content: "▋";
+      display: inline-block;
+      margin-left: 1px;
+      color: var(--terracotta);
+      animation: caret-blink 850ms step-end infinite;
+    }
+
+    @keyframes caret-blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body.cli-typing .terminal-block .prompt-line,
+      body.cli-typing .terminal-block .prompt-output {
+        visibility: visible;
+      }
+      body.cli-typing .terminal-block .prompt-cmd::after {
+        content: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ═══ DESKTOP ICONS ═══ -->
-<nav class="desktop-icons" aria-label="Desktop shortcuts">
-  <a onclick="openApp('hero-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="4" y="6" width="24" height="18" rx="2" fill="#ece9d8" stroke="#000" stroke-width="1"/><rect x="6" y="8" width="20" height="12" fill="#3a6ea5"/><rect x="12" y="24" width="8" height="2" fill="#808080"/><rect x="10" y="26" width="12" height="1" fill="#aca899"/></svg>
-    <span class="desktop-icon-label">My Computer</span>
-  </a>
-  <a onclick="openApp('mycroquet-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><rect x="5" y="10" width="22" height="1" fill="#e8c838"/></svg>
-    <span class="desktop-icon-label">MyCroquet</span>
-  </a>
-  <a onclick="openApp('comeandtry-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><rect x="5" y="10" width="22" height="1" fill="#e8c838"/></svg>
-    <span class="desktop-icon-label">Come & Try</span>
-  </a>
-  <a onclick="openApp('ideals-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="5" y="2" width="22" height="28" rx="1" fill="#fff" stroke="#808080" stroke-width="1"/><line x1="8" y1="7" x2="24" y2="7" stroke="#0066cc" stroke-width="1.5"/><line x1="8" y1="11" x2="22" y2="11" stroke="#ccc" stroke-width="1"/><line x1="8" y1="15" x2="24" y2="15" stroke="#ccc" stroke-width="1"/><line x1="8" y1="19" x2="20" y2="19" stroke="#ccc" stroke-width="1"/></svg>
-    <span class="desktop-icon-label">Ideals & Aims</span>
-  </a>
-  <a onclick="openApp('postcode-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="9" fill="#4a90d9" stroke="#2060a0" stroke-width="1"/><path d="M16 21l-4 8h8l-4-8z" fill="#c00"/><circle cx="16" cy="12" r="4" fill="#fff"/></svg>
-    <span class="desktop-icon-label">Club Finder</span>
-  </a>
-  <a onclick="openApp('emails-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" fill="#f0ede1" stroke="#808080" stroke-width="1"/><path d="M3 7l13 10L29 7" stroke="#0066cc" stroke-width="1.5" fill="none"/></svg>
-    <span class="desktop-icon-label">Email Sequence</span>
-  </a>
-  <a onclick="openApp('messaging-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><path d="M4 5h24v16H14l-5 5v-5H4V5z" fill="#a0d8a0" stroke="#408040" stroke-width="1"/></svg>
-    <span class="desktop-icon-label">Messaging</span>
-  </a>
-  <a onclick="openApp('news-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="4" width="28" height="24" rx="2" fill="#006644" stroke="#004422" stroke-width="1"/><text x="16" y="22" text-anchor="middle" fill="#fff" font-size="20" font-weight="bold" font-family="serif">N</text></svg>
-    <span class="desktop-icon-label">Netscape</span>
-  </a>
-  <a onclick="openApp('identity-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="1" fill="#fff" stroke="#808080" stroke-width="1"/><rect x="4" y="4" width="8" height="6" fill="#f00"/><rect x="13" y="4" width="8" height="6" fill="#0a0"/><rect x="4" y="11" width="8" height="6" fill="#00f"/><rect x="13" y="11" width="8" height="6" fill="#ff0"/></svg>
-    <span class="desktop-icon-label">Paint</span>
-  </a>
-  <a onclick="openApp('contact-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="2" y="8" width="28" height="18" rx="1" fill="#fff" stroke="#0066cc" stroke-width="1.5"/><path d="M3 9l13 10L29 9" stroke="#0066cc" stroke-width="1.5" fill="none"/></svg>
-    <span class="desktop-icon-label">Email Wade</span>
-  </a>
-  <a onclick="openApp('games-win')" class="desktop-icon">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><rect x="3" y="4" width="26" height="24" rx="1" fill="#f5d76e" stroke="#c8a415" stroke-width="1"/><rect x="3" y="4" width="12" height="3" rx="1" fill="#e8c838"/><text x="16" y="24" text-anchor="middle" fill="#806000" font-size="10" font-weight="bold">🎮</text></svg>
-    <span class="desktop-icon-label">Games</span>
-  </a>
-  <a class="desktop-icon" style="margin-top:auto;">
-    <svg class="desktop-icon-img" viewBox="0 0 32 32" fill="none"><path d="M6 6h20l-3 20H9L6 6z" fill="#ece9d8" stroke="#808080" stroke-width="1"/><rect x="10" y="2" width="12" height="5" fill="none" stroke="#808080" stroke-width="1" rx="1"/><line x1="12" y1="10" x2="12" y2="23" stroke="#aca899"/><line x1="16" y1="10" x2="16" y2="23" stroke="#aca899"/><line x1="20" y1="10" x2="20" y2="23" stroke="#aca899"/></svg>
-    <span class="desktop-icon-label">Recycle Bin</span>
-  </a>
-</nav>
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- HERO — dithered ember-terrain title card             -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="cc-hero" aria-label="CroquetWade">
+    <canvas id="cc-hero-canvas" aria-hidden="true"></canvas>
+    <div class="cc-hero-inner">
+      <div class="cc-hero-text">
+        <p class="cc-hero-prompt">
+          <span class="user">croquetwade</span><span class="path">:~$</span>
+          <span data-edit-id="cw/index/hero-cmd">whoami</span><span class="cc-hero-caret">_</span>
+        </p>
+        <h1 data-edit-id="cw/index/hero-h1">CroquetWade</h1>
+        <p class="cc-hero-dek" data-edit-id="cw/index/hero-dek">Wade Hart. I build the digital infrastructure for Queensland croquet: one connected ecosystem where every piece feeds the next, from a Facebook ad to a world ranking.</p>
+        <a class="cc-hero-cta" href="mailto:hello@croquetwade.com" data-edit-id="cw/index/hero-cta">
+          talk to hello@croquetwade.com <span class="ret">&#9166;</span>
+        </a>
+      </div>
+      <img class="cc-hero-friend" src="wade-waving-cut.webp" alt="Wade Hart, waving" loading="eager" decoding="async">
+    </div>
+    <div class="cc-hero-scroll" aria-hidden="true">scroll ↓</div>
+  </section>
 
-<!-- ═══ BIOS SCREEN (mobile only, hidden on desktop) ═══ -->
-<div class="bios-screen" id="bios-screen">
-  <div class="bios-post" id="bios-post"><span class="bios-brand">CroquetWade BIOS v1.0</span>
-Copyright (C) 2026 Wade Hart
+  <div class="page-wrap">
 
-Checking RAM... <span class="bios-ok">640K OK</span>
-Detecting hard drives... <span class="bios-ok">C:\CroquetWade found</span>
-Loading Windows XP...
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- MASTHEAD                                            -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <header class="masthead" role="banner">
+      <div class="masthead-top">
+        <a href="/" class="masthead-wordmark" data-edit-id="cw/index/masthead-wordmark">croquetwade:~$</a>
+        <div class="masthead-right">
+          <img src="wade-waving-cut.webp" alt="CroquetWade" class="masthead-portrait">
+          <span class="masthead-date">2026-05-29</span>
+        </div>
+      </div>
+    </header>
 
-<span class="bios-error">ERROR: Display resolution too low</span>
-<span class="bios-error">Windows requires minimum 1024x768</span>
+    <main>
 
-Falling back to text mode...
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- TERMINAL BLOCKS                                     -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="terminal-blocks">
 
-<span class="bios-ok">System ready.</span>
+        <div class="terminal-block">
+          <div class="prompt-line">
+            <span class="prompt-dollar">$</span>
+            <span class="prompt-cmd">open quadrant</span>
+          </div>
+          <div class="prompt-output">
+            <a href="https://croquetclaude.com/quadrant/" class="quadrant-cta" data-edit-id="cw/index/quadrant-cta">
+              <span class="quadrant-cta-text">
+                <span class="quadrant-cta-title">Quadrant</span>
+                <span class="quadrant-cta-desc" data-edit-id="cw/index/quadrant-desc">A live, shared importance/urgency board for meeting brainstorms. Drop ideas in, drag them onto the grid.</span>
+              </span>
+              <span class="quadrant-cta-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
 
-<span class="bios-prompt" style="cursor:pointer;" onclick="document.getElementById('bios-content').classList.add('visible');this.style.display='none';">▶ Tap here to load system</span>
-</div>
-  <div class="bios-content visible" id="bios-content"></div>
-</div>
+        <div class="terminal-block">
+          <div class="prompt-line">
+            <span class="prompt-dollar">$</span>
+            <span class="prompt-cmd">whoami</span>
+          </div>
+          <div class="prompt-output" data-edit-id="cw/index/whoami">
+            CroquetWade. Wade Hart, building the digital infrastructure for Queensland croquet so clubs and the association spend their time on the game, not the admin.
+          </div>
+        </div>
 
-<!-- ═══ MOBILE GAME FULLSCREEN OVERLAY ═══ -->
-<div class="mobile-game-overlay" id="mobile-game-overlay">
-  <button class="mobile-game-close" onclick="closeMobileGame()">✕ Close</button>
-  <iframe id="mobile-game-iframe" src="about:blank"></iframe>
-</div>
+        <div class="terminal-block">
+          <div class="prompt-line">
+            <span class="prompt-dollar">$</span>
+            <span class="prompt-cmd">purpose</span>
+          </div>
+          <div class="prompt-output" data-edit-id="cw/index/purpose">
+            One connected ecosystem, not nine standalone systems. A Facebook ad becomes a member. A voice note becomes a news article. A gala day becomes an email campaign. Every piece feeds the next.
+          </div>
+        </div>
 
-<!-- ═══ ALL WINDOWS RENDER HERE ═══ -->
-<div id="window-container"></div>
+        <div class="terminal-block">
+          <div class="prompt-line">
+            <span class="prompt-dollar">$</span>
+            <span class="prompt-cmd">ls writing/</span>
+          </div>
+          <div class="prompt-output">
+            <ul class="writing-list" role="list">
+              <li><span class="writing-date">2026-03</span><a href="/blog/leisure-in-the-age-of-technology/" class="writing-title">Leisure in the Age of Technology</a></li>
+              <li><span class="writing-date">2026-03</span><a href="/blog/the-problem-not-for-profits-have-is-in-the-name/" class="writing-title">The problem Not-For-Profits have is in the name</a></li>
+              <li><span class="writing-date">2026-03</span><a href="/blog/be-the-croquet-club-you-promised-to-be/" class="writing-title">Be the croquet club you promised to be</a></li>
+              <li><span class="writing-date">2026-02</span><a href="/blog/the-value-in-a-new-member/" class="writing-title">The Value In A New Member</a></li>
+              <li><span class="writing-date">2026-02</span><a href="/blog/the-impossible-volunteer/" class="writing-title">The Impossible Volunteer</a></li>
+              <li><span class="writing-date">2026-02</span><a href="/blog/any-rook-is-fine/" class="writing-title">Any Rook is Fine.</a></li>
+              <li><span class="writing-date">2026-02</span><a href="/blog/the-spaces-we-lost/" class="writing-title">The spaces we lost</a></li>
+              <li><span class="writing-date">2026-02</span><a href="/blog/nice-guys-finish-first/" class="writing-title">Nice Guys Finish First</a></li>
+              <li><span class="writing-date">2026-02</span><a href="/blog/a-scoundrel-within-the-bounds-of-the-law/" class="writing-title">A Scoundrel Within the Bounds of the Law</a></li>
+              <li><span class="writing-date">2026-02</span><a href="/blog/youre-sold-complexity-as-a-solution/" class="writing-title">You're Sold Complexity as a Solution</a></li>
+              <li><span class="writing-date">2026-02</span><a href="/blog/additive-vs-subtractive-thinking/" class="writing-title">Additive vs Subtractive Thinking</a></li>
+              <li><span class="writing-date">2026-02</span><a href="/blog/nobody-wants-to-be-treasurer/" class="writing-title">Nobody Wants to Be Treasurer</a></li>
+              <li><span class="writing-date">2026-02</span><a href="/blog/have-your-club-agree-what-it-wants-to-be/" class="writing-title">Have your club agree what it wants to be.</a></li>
+              <li><span class="writing-date">2026-01</span><a href="/blog/usefulness-is-a-specific-equation/" class="writing-title">Usefulness is a specific equation</a></li>
+              <li><span class="writing-date">2026-01</span><a href="/blog/permission-based-come-and-try/" class="writing-title">Permission-Based Come and Try</a></li>
+              <li><span class="writing-date">2026-01</span><a href="/blog/why-releasing-clubhub-is-better-than-launching-it/" class="writing-title">Why 'releasing' ClubHub is better than 'launching' it</a></li>
+            </ul>
+            <p style="margin-top:1rem; font-size:0.82rem; color:var(--ink-muted);"><a href="/blog/" class="writing-title">all writing →</a> &nbsp;&middot;&nbsp; <a href="https://croquetwade.substack.com" class="writing-title">Substack</a></p>
+          </div>
+        </div>
 
-<!-- ═══ VISITOR COUNTER ═══ -->
-<div style="position:fixed;bottom:42px;right:8px;font-family:'VT323',monospace;font-size:0.75rem;color:rgba(255,255,255,0.5);text-align:right;">
-  <span style="background:rgba(0,0,0,.5);padding:1px 6px;border-radius:2px;">Visitor #<span id="visitor-count">004,271</span></span>
-</div>
+        <div class="terminal-block">
+          <div class="prompt-line">
+            <span class="prompt-dollar">$</span>
+            <span class="prompt-cmd">contact</span>
+          </div>
+          <div class="prompt-output" data-edit-id="cw/index/contact">
+            <a href="mailto:hello@croquetwade.com">hello@croquetwade.com</a>
+          </div>
+        </div>
 
-<!-- ═══ TASKBAR ═══ -->
-<div class="taskbar">
-  <a class="start-btn" onclick="openApp('hero-win')"><span class="start-btn-logo">⊞</span> start</a>
-  <div class="taskbar-divider"></div>
-  <div class="taskbar-links">
-    <a onclick="openApp('hero-win')" class="taskbar-link" style="cursor:pointer">🖥️ CroquetWade</a>
-    <a onclick="openApp('games-win')" class="taskbar-link" style="cursor:pointer">🎮 Games</a>
-    <a onclick="openApp('contact-win')" class="taskbar-link" style="cursor:pointer">✉️ Contact</a>
+      </div>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- COLOPHON / FOOTER                                   -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <footer class="colophon" role="contentinfo">
+      <p data-edit-id="cw/index/colophon">CroquetWade &middot; Wade Hart &middot; Brisbane, Queensland</p>
+      <nav class="colophon-nav" aria-label="Site navigation">
+        <a href="/">Home</a>
+        <a href="/blog/">Writing</a>
+        <a href="https://croquetwade.substack.com">Substack</a>
+        <a href="https://croquetclaude.com">CroquetClaude</a>
+      </nav>
+    </footer>
+
   </div>
-  <div class="systray">
-    <span class="systray-icon">🔊</span>
-    <span class="systray-icon">📶</span>
-    <span class="systray-icon">🛡️</span>
-    <span class="systray-divider"></span>
-    <span class="taskbar-clock"></span>
-  </div>
-</div>
 
-<script src="windows.js"></script>
-<script>renderAllWindows();</script>
-<script src="effects.js"></script>
+  <script>
+    (function () {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const blocks = Array.from(document.querySelectorAll('.terminal-block'));
+      if (!blocks.length) return;
+
+      const originals = blocks.map(b => {
+        const cmd = b.querySelector('.prompt-cmd');
+        const text = cmd ? cmd.textContent : '';
+        if (cmd) cmd.textContent = '';
+        return text;
+      });
+
+      document.body.classList.add('cli-typing');
+
+      const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+      // QWERTY adjacent-key map for plausible typos
+      const adj = {
+        a:'sqwz', b:'vngh', c:'xvdf', d:'serfcx', e:'wrsd',
+        f:'dgervc', g:'fhtybv', h:'gjyunb', i:'uokj', j:'hkuinm',
+        k:'jliom', l:'kop', m:'njk', n:'bmhj', o:'iplk',
+        p:'ol', q:'wa', r:'etdf', s:'adwexz', t:'ryfg',
+        u:'yihj', v:'cbfg', w:'qeas', x:'zcsd', y:'tugh', z:'axs'
+      };
+      function wrongKey(c) {
+        const lower = c.toLowerCase();
+        const opts = adj[lower];
+        if (!opts) return null;
+        const w = opts[Math.floor(Math.random() * opts.length)];
+        return c === c.toUpperCase() && c !== c.toLowerCase() ? w.toUpperCase() : w;
+      }
+
+      function pickMistakePositions(text) {
+        // 0-2 mistakes per command, weighted toward 0-1 on short commands
+        if (text.length < 4) return [];
+        const letterPositions = [];
+        for (let i = 1; i < text.length - 1; i++) {
+          if (/[a-z]/i.test(text[i])) letterPositions.push(i);
+        }
+        if (!letterPositions.length) return [];
+
+        const r = Math.random();
+        let count;
+        if (r < 0.35) count = 0;          // 35% clean
+        else if (r < 0.85) count = 1;     // 50% one mistake
+        else count = Math.min(2, letterPositions.length); // 15% two
+
+        const picks = new Set();
+        while (picks.size < count) {
+          picks.add(letterPositions[Math.floor(Math.random() * letterPositions.length)]);
+        }
+        return [...picks].sort((a,b)=>a-b);
+      }
+
+      async function typeChar(cmd, baseLen, ch) {
+        cmd.textContent = (cmd.textContent || '').slice(0, baseLen) + ch;
+        await sleep(40 + Math.random() * 40);
+      }
+
+      async function typeCommand(cmd, target) {
+        const mistakes = pickMistakePositions(target);
+        let i = 0;
+        while (i < target.length) {
+          if (mistakes.includes(i)) {
+            // Type wrong char
+            const wrong = wrongKey(target[i]);
+            if (wrong) {
+              await typeChar(cmd, i, wrong);
+              await sleep(170 + Math.random() * 160);  // notice the mistake
+              // Backspace
+              cmd.textContent = target.slice(0, i);
+              await sleep(70 + Math.random() * 60);
+            }
+          }
+          // Type correct char
+          await typeChar(cmd, i, target[i]);
+          i++;
+        }
+      }
+
+      async function play() {
+        await sleep(220);
+        for (let i = 0; i < blocks.length; i++) {
+          const block = blocks[i];
+          const cmd = block.querySelector('.prompt-cmd');
+          block.classList.add('tb-cmd-on');
+          await typeCommand(cmd, originals[i]);
+          block.classList.add('tb-cmd-done');
+          await sleep(160);
+          block.classList.add('tb-out-on');
+          await sleep(280);
+        }
+        // Final empty prompt with persistent blinking caret
+        await sleep(320);
+        const lastBlock = blocks[blocks.length - 1];
+        const finalBlock = document.createElement('div');
+        finalBlock.className = 'terminal-block terminal-block-final';
+        finalBlock.innerHTML = '<div class="prompt-line"><span class="prompt-dollar">$</span><span class="prompt-cmd"></span></div>';
+        lastBlock.parentNode.appendChild(finalBlock);
+      }
+
+      play();
+    })();
+  </script>
+
+  <!-- Hero dithered ember-terrain shader -->
+  <script src="js/hero-terrain.js" defer></script>
+
+  <!-- Site editor — only activates on ?edit&t=<token>; zero impact otherwise -->
+  <script src="https://edit.croquetwade.com/edit.js"
+          data-stack="git"
+          data-site="cw"
+          defer></script>
+
 </body>
 </html>
