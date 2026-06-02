@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CAQ Club Court Counts — Worksheet</title>
+<style>
+  :root{
+    --ink:#1c2419; --paper:#f6f4ec; --card:#fff; --line:#d9d6c8;
+    --green:#2f6b3f; --green-d:#234f2f; --amber:#b5791f; --muted:#6c7065;
+    --hot:#b23b2e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.45 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--paper)}
+  header.page{padding:22px 20px 14px;max-width:980px;margin:0 auto}
+  h1{font-size:1.5rem;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:.92rem;margin:0}
+  .note{max-width:980px;margin:8px auto 0;padding:10px 14px;background:#fff8e6;
+        border:1px solid #ecd9a3;border-radius:8px;font-size:.86rem;color:#6b561c}
+  /* sticky summary */
+  .summary{position:sticky;top:0;z-index:5;background:var(--green-d);color:#fff;
+           padding:12px 16px;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .summary .wrap{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:18px;align-items:baseline}
+  .stat{display:flex;flex-direction:column;line-height:1.1}
+  .stat b{font-size:1.35rem}
+  .stat span{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;opacity:.8}
+  .stat.hl b{color:#ffe08a}
+  main{max-width:980px;margin:0 auto;padding:16px 14px 60px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+  button.act{border:1px solid var(--green);background:#fff;color:var(--green-d);
+             padding:8px 14px;border-radius:8px;font-size:.9rem;cursor:pointer}
+  button.act:hover{background:var(--green);color:#fff}
+  .region{margin-top:22px}
+  .region h2{font-size:1.05rem;color:var(--green-d);border-bottom:2px solid var(--line);
+             padding-bottom:4px;margin:0 0 2px;display:flex;justify-content:space-between;align-items:baseline}
+  .region h2 small{font-weight:400;color:var(--muted);font-size:.78rem}
+  table{width:100%;border-collapse:collapse}
+  td,th{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+  th{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);text-align:left;font-weight:600}
+  td.club{font-weight:600;min-width:130px}
+  td.mem{color:var(--muted);white-space:nowrap;text-align:right;width:64px}
+  .pick{display:flex;gap:3px;align-items:center;flex-wrap:wrap}
+  .pick button{width:30px;height:30px;border:1px solid var(--line);background:#fff;border-radius:6px;
+               cursor:pointer;font-size:.9rem;color:var(--ink)}
+  .pick button.q{width:34px;color:var(--muted)}
+  .pick button.on{background:var(--green);border-color:var(--green);color:#fff;font-weight:700}
+  .pick input.num{width:44px;height:30px;border:1px solid var(--line);border-radius:6px;text-align:center;font-size:.9rem;margin-left:4px}
+  td.calc{white-space:nowrap;font-size:.85rem;text-align:right;width:130px}
+  .mpc{font-weight:600}
+  .spare-pos{color:var(--green)}
+  .spare-neg{color:var(--amber)}
+  .src{font-size:.74rem;color:var(--muted)}
+  .seeded td.club::after{content:" ✓";color:var(--green)}
+  .pct{font-size:.72rem;opacity:.8}
+  @media(max-width:620px){
+    td.mem{display:none} th.mem{display:none}
+    .stat b{font-size:1.1rem}
+  }
+</style>
+</head>
+<body>
+<div class="summary">
+  <div class="wrap">
+    <div class="stat"><b id="s-counted">0 / 0</b><span>clubs counted</span></div>
+    <div class="stat"><b id="s-lawns">0</b><span>lawns entered</span></div>
+    <div class="stat"><b id="s-cap">0</b><span>capacity @ 20/lawn</span></div>
+    <div class="stat"><b id="s-mem">0</b><span>members (counted clubs)</span></div>
+    <div class="stat hl"><b id="s-spare">0</b><span>spare capacity</span></div>
+  </div>
+</div>
+
+<header class="page">
+  <h1>CAQ Club Court Counts</h1>
+  <p class="sub">Private working sheet. Pick the number of lawns/courts at each club (1–6, or type a number). Four are pre-filled from our records (✓). Members shown are current active members; spare capacity assumes 20 members per lawn.</p>
+</header>
+<div class="note" id="save-note">
+  Saved in this browser as you go. Nothing is shared yet — when you've filled what you can, hit <b>Copy results</b> and send them to me and I'll store them permanently (and build the map).
+</div>
+
+<main>
+  <div class="actions">
+    <button class="act" onclick="copyResults()">Copy results</button>
+    <button class="act" onclick="downloadCSV()">Download CSV</button>
+    <button class="act" onclick="resetAll()">Reset my entries</button>
+  </div>
+  <div id="regions"></div>
+</main>
+
+<script src="js/club-courts-data.js"></script>
+<script>
+const LS_KEY = "caq-club-courts-v1";
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(LS_KEY) || "{}"); } catch(e){ saved = {}; }
+
+// merge: data seed (pre-filled) overlaid by saved entries
+const state = {};
+CLUB_COURT_DATA.forEach(c=>{
+  const s = saved[c.id] || {};
+  state[c.id] = {
+    courts: (s.courts!==undefined ? s.courts : c.courts),  // null = unknown
+    seeded: (c.courts!==null && c.courts!==undefined),
+    source: c.source || ""
+  };
+});
+
+function persist(){
+  const out={};
+  Object.keys(state).forEach(id=>{ out[id]={courts: state[id].courts}; });
+  localStorage.setItem(LS_KEY, JSON.stringify(out));
+}
+
+function setCourts(id, val){
+  state[id].courts = (val===null || val==="" || isNaN(val)) ? null : Math.max(0, parseInt(val,10));
+  persist(); render();
+}
+
+function render(){
+  const byRegion = {};
+  CLUB_COURT_DATA.forEach(c=>{ (byRegion[c.region] = byRegion[c.region]||[]).push(c); });
+  const order = Object.keys(byRegion).sort();
+  const root = document.getElementById("regions");
+  root.innerHTML = "";
+
+  let tLawns=0, tCap=0, tMemCounted=0, tCounted=0, tClubs=CLUB_COURT_DATA.length;
+
+  order.forEach(region=>{
+    const clubs = byRegion[region];
+    let rLawns=0, rCounted=0;
+    const sec = document.createElement("section");
+    sec.className="region";
+    const tbl = document.createElement("table");
+    tbl.innerHTML = `<thead><tr>
+      <th class="club">Club</th><th class="mem">Members</th>
+      <th>Lawns / courts</th><th class="calc">Spare @ 20</th></tr></thead>`;
+    const tb = document.createElement("tbody");
+
+    clubs.forEach(c=>{
+      const st = state[c.id];
+      const has = st.courts!==null && st.courts!==undefined;
+      if(has){ rLawns+=st.courts; rCounted++; tLawns+=st.courts; tCap+=st.courts*20; tMemCounted+=c.members; tCounted++; }
+      const tr = document.createElement("tr");
+      if(st.seeded) tr.className="seeded";
+
+      let calc="";
+      if(has && st.courts>0){
+        const mpc = (c.members/st.courts);
+        const spare = st.courts*20 - c.members;
+        const cls = spare>=0 ? "spare-pos":"spare-neg";
+        calc = `<span class="mpc">${mpc.toFixed(0)}/court</span> · <span class="${cls}">${spare>=0?"+":""}${spare}</span>`;
+      } else if (has && st.courts===0){
+        calc = `<span class="src">no lawns</span>`;
+      }
+
+      let picks="";
+      for(let n=1;n<=6;n++){
+        picks += `<button class="${st.courts===n?"on":""}" onclick="setCourts('${c.id}',${n})">${n}</button>`;
+      }
+      picks += `<button class="q ${(!has)?"on":""}" title="unknown / clear" onclick="setCourts('${c.id}',null)">?</button>`;
+      picks += `<input class="num" type="number" min="0" placeholder="" value="${has?st.courts:""}" onchange="setCourts('${c.id}', this.value)">`;
+
+      tr.innerHTML = `<td class="club">${c.name}${st.source?` <span class="src" title="${st.source}">(src)</span>`:""}</td>
+        <td class="mem">${c.members}</td>
+        <td><div class="pick">${picks}</div></td>
+        <td class="calc">${calc}</td>`;
+      tb.appendChild(tr);
+    });
+    tbl.appendChild(tb);
+    const head = document.createElement("h2");
+    head.innerHTML = `${region} <small>${rCounted}/${clubs.length} counted · ${rLawns} lawns</small>`;
+    sec.appendChild(head); sec.appendChild(tbl);
+    root.appendChild(sec);
+  });
+
+  document.getElementById("s-counted").textContent = `${tCounted} / ${tClubs}`;
+  document.getElementById("s-lawns").textContent = tLawns;
+  document.getElementById("s-cap").textContent = tCap;
+  document.getElementById("s-mem").textContent = tMemCounted;
+  const spare = tCap - tMemCounted;
+  document.getElementById("s-spare").textContent = (spare>=0?"+":"") + spare;
+}
+
+function rows(){
+  const out=[];
+  CLUB_COURT_DATA.forEach(c=>{
+    const st=state[c.id];
+    const courts = (st.courts!==null && st.courts!==undefined) ? st.courts : "";
+    const mpc = (courts!=="" && courts>0) ? (c.members/courts).toFixed(1) : "";
+    const spare = (courts!=="" ) ? (courts*20 - c.members) : "";
+    out.push({region:c.region, club:c.name, members:c.members, courts, mpc, spare, source:st.source});
+  });
+  return out;
+}
+
+function copyResults(){
+  const hdr="Region\tClub\tActiveMembers\tCourts\tMembersPerCourt\tSpare@20\tSource";
+  const lines=rows().map(r=>[r.region,r.club,r.members,r.courts,r.mpc,r.spare,r.source].join("\t"));
+  const text=[hdr,...lines].join("\n");
+  navigator.clipboard.writeText(text).then(()=>{
+    const n=document.getElementById("save-note");
+    n.innerHTML="Copied to clipboard — paste it back to me and I'll store the counts permanently.";
+    setTimeout(()=>location.reload(),1600);
+  },()=>{ window.prompt("Copy the results below:", text); });
+}
+
+function downloadCSV(){
+  const hdr="Region,Club,ActiveMembers,Courts,MembersPerCourt,Spare@20,Source";
+  const esc=v=>`"${String(v).replace(/"/g,'""')}"`;
+  const lines=rows().map(r=>[r.region,r.club,r.members,r.courts,r.mpc,r.spare,r.source].map(esc).join(","));
+  const blob=new Blob([[hdr,...lines].join("\n")],{type:"text/csv"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download="caq-club-courts.csv"; a.click();
+}
+
+function resetAll(){
+  if(!confirm("Clear your entries on this device? Pre-filled clubs (✓) return to their original values.")) return;
+  localStorage.removeItem(LS_KEY);
+  CLUB_COURT_DATA.forEach(c=>{ state[c.id].courts = c.courts; });
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
