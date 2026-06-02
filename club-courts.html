@@ -88,7 +88,7 @@
 
 <script src="js/club-courts-data.js"></script>
 <script>
-const PB = "https://pb.croquetwade.com";
+const PB = "https://util.croquetwade.com";  // Util PB — throwaway/utility store (not Core)
 const COL = "club_court_counts";
 
 // state[club_id] = {courts, recordId, source}
@@ -108,7 +108,8 @@ async function loadFromServer(){
     data.items.forEach(row=>{
       const id=row.club_id;
       if(state[id]){
-        state[id].courts = (row.courts===null||row.courts===undefined||row.courts==="") ? null : row.courts;
+        // PB number fields store unset as 0; treat 0 (and null/blank) as "not counted yet"
+        state[id].courts = (row.courts===null||row.courts===undefined||row.courts===""||row.courts===0) ? null : row.courts;
         state[id].recordId = row.id;
         state[id].source = row.source||"";
       }
