@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>CAQ Club Court Counts — Worksheet</title>
+<title>CAQ Club Court Counts — Shared Sheet</title>
 <style>
   :root{
     --ink:#1c2419; --paper:#f6f4ec; --card:#fff; --line:#d9d6c8;
@@ -17,9 +17,8 @@
   header.page{padding:22px 20px 14px;max-width:980px;margin:0 auto}
   h1{font-size:1.5rem;margin:0 0 4px}
   .sub{color:var(--muted);font-size:.92rem;margin:0}
-  .note{max-width:980px;margin:8px auto 0;padding:10px 14px;background:#fff8e6;
-        border:1px solid #ecd9a3;border-radius:8px;font-size:.86rem;color:#6b561c}
-  /* sticky summary */
+  .note{max-width:980px;margin:8px auto 0;padding:10px 14px;background:#eaf3ec;
+        border:1px solid #bcd9c2;border-radius:8px;font-size:.86rem;color:#274d31}
   .summary{position:sticky;top:0;z-index:5;background:var(--green-d);color:#fff;
            padding:12px 16px;box-shadow:0 2px 6px rgba(0,0,0,.18)}
   .summary .wrap{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:18px;align-items:baseline}
@@ -28,7 +27,7 @@
   .stat span{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;opacity:.8}
   .stat.hl b{color:#ffe08a}
   main{max-width:980px;margin:0 auto;padding:16px 14px 60px}
-  .actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px;align-items:center}
   button.act{border:1px solid var(--green);background:#fff;color:var(--green-d);
              padding:8px 14px;border-radius:8px;font-size:.9rem;cursor:pointer}
   button.act:hover{background:var(--green);color:#fff}
@@ -53,7 +52,6 @@
   .spare-neg{color:var(--amber)}
   .src{font-size:.74rem;color:var(--muted)}
   .seeded td.club::after{content:" ✓";color:var(--green)}
-  .pct{font-size:.72rem;opacity:.8}
   @media(max-width:620px){
     td.mem{display:none} th.mem{display:none}
     .stat b{font-size:1.1rem}
@@ -73,48 +71,79 @@
 
 <header class="page">
   <h1>CAQ Club Court Counts</h1>
-  <p class="sub">Private working sheet. Pick the number of lawns/courts at each club (1–6, or type a number). Four are pre-filled from our records (✓). Members shown are current active members; spare capacity assumes 20 members per lawn.</p>
+  <p class="sub">Pick the number of lawns/courts at each club (1–6, or type a number). Members shown are current active members; spare capacity assumes 20 members per lawn. A ✓ means a count has been recorded.</p>
 </header>
 <div class="note" id="save-note">
-  Saved in this browser as you go. Nothing is shared yet — when you've filled what you can, hit <b>Copy results</b> and send them to me and I'll store them permanently (and build the map).
+  <b>Shared sheet.</b> Every change saves to the database for everyone, live — safe to send this link around. <span id="net-status"></span>
 </div>
 
 <main>
   <div class="actions">
-    <button class="act" onclick="copyResults()">Copy results</button>
+    <button class="act" onclick="refreshFromServer()">Refresh</button>
     <button class="act" onclick="downloadCSV()">Download CSV</button>
-    <button class="act" onclick="resetAll()">Reset my entries</button>
+    <span id="save-status" class="src"></span>
   </div>
   <div id="regions"></div>
 </main>
 
 <script src="js/club-courts-data.js"></script>
 <script>
-const LS_KEY = "caq-club-courts-v1";
-let saved = {};
-try { saved = JSON.parse(localStorage.getItem(LS_KEY) || "{}"); } catch(e){ saved = {}; }
+const PB = "https://pb.croquetwade.com";
+const COL = "club_court_counts";
 
-// merge: data seed (pre-filled) overlaid by saved entries
+// state[club_id] = {courts, recordId, source}
 const state = {};
-CLUB_COURT_DATA.forEach(c=>{
-  const s = saved[c.id] || {};
-  state[c.id] = {
-    courts: (s.courts!==undefined ? s.courts : c.courts),  // null = unknown
-    seeded: (c.courts!==null && c.courts!==undefined),
-    source: c.source || ""
-  };
-});
+CLUB_COURT_DATA.forEach(c=>{ state[c.id] = {courts:null, recordId:null, source:c.source||""}; });
 
-function persist(){
-  const out={};
-  Object.keys(state).forEach(id=>{ out[id]={courts: state[id].courts}; });
-  localStorage.setItem(LS_KEY, JSON.stringify(out));
+function setStatus(msg, ok){
+  const el=document.getElementById("save-status");
+  if(el){ el.textContent=msg; el.style.color = (ok===false) ? "var(--hot)" : "var(--muted)"; }
 }
 
-function setCourts(id, val){
-  state[id].courts = (val===null || val==="" || isNaN(val)) ? null : Math.max(0, parseInt(val,10));
-  persist(); render();
+async function loadFromServer(){
+  try{
+    const res = await fetch(`${PB}/api/collections/${COL}/records?perPage=200`, {cache:"no-store"});
+    if(!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    data.items.forEach(row=>{
+      const id=row.club_id;
+      if(state[id]){
+        state[id].courts = (row.courts===null||row.courts===undefined||row.courts==="") ? null : row.courts;
+        state[id].recordId = row.id;
+        state[id].source = row.source||"";
+      }
+    });
+    document.getElementById("net-status").textContent = "";
+    render();
+    return true;
+  }catch(e){
+    document.getElementById("net-status").innerHTML =
+      "<b style='color:#b23b2e'>Can't reach the database — changes won't save until it's back. Hit Refresh.</b>";
+    return false;
+  }
 }
+
+async function setCourts(id, val){
+  const v = (val===null || val==="" || isNaN(val)) ? null : Math.max(0, parseInt(val,10));
+  const st = state[id];
+  if(!st.recordId){ setStatus("no record for this club — hit Refresh", false); return; }
+  const prev = st.courts;
+  st.courts = v; render(); setStatus("saving…");
+  try{
+    const res = await fetch(`${PB}/api/collections/${COL}/records/${st.recordId}`, {
+      method:"PATCH",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({courts: v})
+    });
+    if(!res.ok) throw new Error(res.status);
+    setStatus("saved ✓");
+  }catch(e){
+    st.courts = prev; render();
+    setStatus("save failed — check connection", false);
+  }
+}
+
+function refreshFromServer(){ setStatus("refreshing…"); loadFromServer().then(ok=>setStatus(ok?"up to date":"offline", ok)); }
 
 function render(){
   const byRegion = {};
@@ -141,7 +170,7 @@ function render(){
       const has = st.courts!==null && st.courts!==undefined;
       if(has){ rLawns+=st.courts; rCounted++; tLawns+=st.courts; tCap+=st.courts*20; tMemCounted+=c.members; tCounted++; }
       const tr = document.createElement("tr");
-      if(st.seeded) tr.className="seeded";
+      if(has) tr.className="seeded";
 
       let calc="";
       if(has && st.courts>0){
@@ -158,7 +187,7 @@ function render(){
         picks += `<button class="${st.courts===n?"on":""}" onclick="setCourts('${c.id}',${n})">${n}</button>`;
       }
       picks += `<button class="q ${(!has)?"on":""}" title="unknown / clear" onclick="setCourts('${c.id}',null)">?</button>`;
-      picks += `<input class="num" type="number" min="0" placeholder="" value="${has?st.courts:""}" onchange="setCourts('${c.id}', this.value)">`;
+      picks += `<input class="num" type="number" min="0" value="${has?st.courts:""}" onchange="setCourts('${c.id}', this.value)">`;
 
       tr.innerHTML = `<td class="club">${c.name}${st.source?` <span class="src" title="${st.source}">(src)</span>`:""}</td>
         <td class="mem">${c.members}</td>
@@ -193,17 +222,6 @@ function rows(){
   return out;
 }
 
-function copyResults(){
-  const hdr="Region\tClub\tActiveMembers\tCourts\tMembersPerCourt\tSpare@20\tSource";
-  const lines=rows().map(r=>[r.region,r.club,r.members,r.courts,r.mpc,r.spare,r.source].join("\t"));
-  const text=[hdr,...lines].join("\n");
-  navigator.clipboard.writeText(text).then(()=>{
-    const n=document.getElementById("save-note");
-    n.innerHTML="Copied to clipboard — paste it back to me and I'll store the counts permanently.";
-    setTimeout(()=>location.reload(),1600);
-  },()=>{ window.prompt("Copy the results below:", text); });
-}
-
 function downloadCSV(){
   const hdr="Region,Club,ActiveMembers,Courts,MembersPerCourt,Spare@20,Source";
   const esc=v=>`"${String(v).replace(/"/g,'""')}"`;
@@ -213,14 +231,16 @@ function downloadCSV(){
   a.href=URL.createObjectURL(blob); a.download="caq-club-courts.csv"; a.click();
 }
 
-function resetAll(){
-  if(!confirm("Clear your entries on this device? Pre-filled clubs (✓) return to their original values.")) return;
-  localStorage.removeItem(LS_KEY);
-  CLUB_COURT_DATA.forEach(c=>{ state[c.id].courts = c.courts; });
-  render();
-}
-
+// initial render (empty), then load shared data
 render();
+loadFromServer();
+
+// pull others' changes: on tab focus, and every 30s unless a number field is being edited
+window.addEventListener("focus", ()=>loadFromServer());
+setInterval(()=>{
+  const a=document.activeElement;
+  if(!(a && a.classList && a.classList.contains("num"))) loadFromServer();
+}, 30000);
 </script>
 </body>
 </html>
