@@ -382,6 +382,75 @@
       line-height: 1;
     }
 
+    /* Built / services list (registry-generated + hand-written, shared styling) */
+    .built-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .built-list li.built-item {
+      padding: 0.55rem 0;
+    }
+
+    .built-list li.built-item + li.built-item {
+      border-top: 1px solid var(--rule);
+    }
+
+    .built-group {
+      margin-top: 1.4rem;
+      padding-bottom: 0.35rem;
+      font-size: 0.8rem;
+      color: var(--terracotta);
+      letter-spacing: 0.03em;
+    }
+
+    .built-list li.built-group:first-child {
+      margin-top: 0;
+    }
+
+    .built-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    a.built-name {
+      text-decoration: underline;
+      text-decoration-color: var(--terracotta);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color 120ms ease;
+    }
+
+    a.built-name:hover {
+      color: var(--terracotta);
+    }
+
+    .built-status {
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 0.05rem 0.35rem;
+      margin-left: 0.35rem;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .built-desc {
+      display: block;
+      margin-top: 0.15rem;
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      line-height: 1.55;
+    }
+
+    .built-foot {
+      margin-top: 1.1rem;
+      font-size: 0.85rem;
+    }
+
     /* Writing list */
     .writing-list {
       list-style: none;
@@ -595,26 +664,141 @@
         <div class="terminal-block">
           <div class="prompt-line">
             <span class="prompt-dollar">$</span>
-            <span class="prompt-cmd">open quadrant</span>
+            <span class="prompt-cmd">whoami</span>
           </div>
-          <div class="prompt-output">
-            <a href="https://croquetclaude.com/quadrant/" class="quadrant-cta" data-edit-id="cw/index/quadrant-cta">
-              <span class="quadrant-cta-text">
-                <span class="quadrant-cta-title">Quadrant</span>
-                <span class="quadrant-cta-desc" data-edit-id="cw/index/quadrant-desc">A live, shared importance/urgency board for meeting brainstorms. Drop ideas in, drag them onto the grid.</span>
-              </span>
-              <span class="quadrant-cta-arrow" aria-hidden="true">↗</span>
-            </a>
+          <div class="prompt-output" data-edit-id="cw/index/whoami">
+            CroquetWade. Wade Hart. I build and run the digital infrastructure for Queensland croquet, so clubs and the association spend their time on the game, not the admin. Built for one state association, available to others.
           </div>
         </div>
 
         <div class="terminal-block">
           <div class="prompt-line">
             <span class="prompt-dollar">$</span>
-            <span class="prompt-cmd">whoami</span>
+            <span class="prompt-cmd">cat ideals</span>
           </div>
-          <div class="prompt-output" data-edit-id="cw/index/whoami">
-            CroquetWade. Wade Hart, building the digital infrastructure for Queensland croquet so clubs and the association spend their time on the game, not the admin.
+          <div class="prompt-output">
+            <ul class="built-list" role="list" data-edit-id="cw/index/ideals">
+              <li class="built-item">
+                <span class="built-name">Enjoy croquet.</span>
+                <span class="built-desc">Whatever you're doing as a player, volunteer, coach or referee, enjoy it with enthusiasm.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Keep it simple.</span>
+                <span class="built-desc">Outcomes over complexity. Do less admin and play more croquet.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Hit our aims.</span>
+                <span class="built-desc">Purposeful decisions. What positive outcome will this bring? Do things that advance croquet.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Cooperate for croquet.</span>
+                <span class="built-desc">Tolerance is expected. Not all people get along, but well mannered people can cope with that. We are here to enjoy croquet.</span>
+              </li>
+            </ul>
+            <p class="built-foot"><a href="/ideals-and-aims.html">the ideals and the six aims &rarr;</a></p>
+          </div>
+        </div>
+
+        <div class="terminal-block">
+          <div class="prompt-line">
+            <span class="prompt-dollar">$</span>
+            <span class="prompt-cmd">ls built/</span>
+          </div>
+          <div class="prompt-output">
+            <!-- registry:begin built -->
+            <!-- generated from apps/data/site-registry.json — do not hand-edit; run: node apps/render-site-registry.mjs -->
+            <ul class="built-list" role="list">
+              <li class="built-group"># strengthen admin and internal operations</li>
+              <li class="built-item">
+                <a class="built-name" href="https://my.croquetqld.org">MyCroquet</a>
+                <span class="built-desc">The member portal for Queensland croquet: passwordless login, handicaps, events and club pages. For members, clubs and the association. It gives a member their croquet details in one place, with no password to forget.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Membership system</span>
+                <span class="built-desc">The statewide member list: who belongs to which club, kept current. For the association and every club. It gives one accurate list instead of a spreadsheet per club.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Document storage</span>
+                <span class="built-desc">A club's constitution, policies and minutes kept in one place. For club committees. The documents survive the secretary's laptop.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Meeting transcription</span>
+                <span class="built-desc">Record a committee meeting and receive structured notes. For club secretaries. It gives minutes without an evening at the keyboard.</span>
+              </li>
+              <li class="built-group"># promote croquet externally</li>
+              <li class="built-item">
+                <a class="built-name" href="https://news.croquetqld.org">News site</a>
+                <span class="built-desc">The public news home for Queensland croquet, structured for search. For anyone following the game, and clubs wanting their stories carried. Club news reaches past the clubhouse noticeboard.</span>
+              </li>
+              <li class="built-item">
+                <a class="built-name" href="https://newsroom.croquetwade.com">Newsroom</a>
+                <span class="built-desc">A submission and editing desk with an approval step. For volunteers who write, and the editors who check. Anyone can submit; nothing publishes unreviewed.</span>
+              </li>
+              <li class="built-item">
+                <a class="built-name" href="https://share.croquetqld.org">Share tool</a>
+                <span class="built-desc">Dictate a match report or upload photos from the lawn; the voice-to-text knows croquet terms. For players and club reporters. It gives a match report without the retyping.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Newsletters</span>
+                <span class="built-desc">Email newsletters assembled from the news site, sorted by member postcode. For members; each club can also send its own. News arrives sorted by where the reader lives.</span>
+              </li>
+              <li class="built-item">
+                <a class="built-name" href="https://croquetvideos.com">CroquetTV</a>
+                <span class="built-desc">The video home: matches, coaching and club footage. For players and clubs. Croquet video in one place, not scattered across personal accounts.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Gala day pipeline</span>
+                <span class="built-desc">A club submits a gala day once. For clubs running events. The article, the email campaign and the flyer follow from that one submission.</span>
+              </li>
+              <li class="built-group"># grow and engage members</li>
+              <li class="built-item">
+                <a class="built-name" href="https://comeandtrycroquet.com">Come &amp; Try</a>
+                <span class="built-desc">One sign-up website covering every Queensland club, matched by postcode, with SMS reminders and a follow-up email sequence. For people deciding to try croquet, and the clubs that receive them. It gives a shared front door; no club needs to run its own page.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Advertising</span>
+                <span class="built-desc">Paid social campaigns for player recruitment, tracked from the ad to the sign-up. For associations that need new members. It gives a measured cost per new player, not a guess.</span>
+              </li>
+              <li class="built-group"># support clubs</li>
+              <li class="built-item">
+                <a class="built-name" href="https://websites.croquetwade.com">Club websites</a>
+                <span class="built-desc">A website built for a club from a short discovery conversation and a set of templates. For clubs without a webmaster. It gives a current website with no volunteer required to maintain it.</span>
+              </li>
+              <li class="built-item">
+                <a class="built-name" href="https://wiki.croquetwade.com">Committee wiki</a>
+                <span class="built-desc">Governance, legal, insurance and role guides for club committees. For secretaries, presidents and treasurers. The answer exists before the crisis does.</span>
+              </li>
+              <li class="built-item">
+                <a class="built-name" href="https://clubhub.croquetqld.org">ClubHub</a>
+                <span class="built-desc">A forum connecting club committees across the state. For committee members. Clubs learn from each other instead of working alone.</span>
+              </li>
+              <li class="built-item">
+                <a class="built-name" href="https://grants.croquetwade.com">Grants portal</a>
+                <span class="built-desc">Grants indexed with application help and the local contacts for each club's area. For clubs seeking funding. The grant search is already done.</span>
+              </li>
+              <li class="built-group"># develop skilled play</li>
+              <li class="built-item">
+                <span class="built-name">World rankings</span>
+                <span class="built-desc">World croquet rankings integrated with grade-over-time charts. For competitive players and selectors. It gives a player their history in one chart.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Handicap system</span>
+                <span class="built-desc">Handicap submission and tracking with trend charts; large movements are flagged. For players and handicappers. It gives handicaps with a paper trail.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Tactics &amp; commentary corpus</span>
+                <span class="built-desc">Match commentary recorded, transcribed and indexed, with the tactical advice extracted; includes a written notation for recording play. For players studying the game, and coaches. Tactical knowledge that lived in commentators' heads, made searchable.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Coaching courses</span> <span class="built-status">in development</span>
+                <span class="built-desc">Online training courses for coaches and referees. For associations facing a coaching and refereeing shortage. Accreditation that doesn't wait for a face-to-face weekend.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Bamford simulator</span>
+                <span class="built-desc">A playable croquet physics simulator with a practice opponent. For anyone curious, and players preparing for competition. Play on a screen; study tactics against an engine.</span>
+              </li>
+            </ul>
+            <!-- registry:end built -->
           </div>
         </div>
 
@@ -624,7 +808,51 @@
             <span class="prompt-cmd">purpose</span>
           </div>
           <div class="prompt-output" data-edit-id="cw/index/purpose">
-            One connected ecosystem, not nine standalone systems. A Facebook ad becomes a member. A voice note becomes a news article. A gala day becomes an email campaign. Every piece feeds the next.
+            One connected ecosystem, not a pile of standalone tools. A Facebook ad becomes a member. A voice note becomes a news article. A gala day becomes an email campaign. Every piece feeds the next. Queensland is the working case study; everything here runs there today.
+          </div>
+        </div>
+
+        <div class="terminal-block">
+          <div class="prompt-line">
+            <span class="prompt-dollar">$</span>
+            <span class="prompt-cmd">services</span>
+          </div>
+          <div class="prompt-output">
+            <ul class="built-list" role="list" data-edit-id="cw/index/services">
+              <li class="built-item">
+                <span class="built-name">Membership &amp; participation growth</span>
+                <span class="built-desc">Analysis of who you have now and a plan to grow it.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Marketing &amp; communications</span>
+                <span class="built-desc">How an association reaches new people on a volunteer budget.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Digital presence &amp; websites</span>
+                <span class="built-desc">An assessment of your current footprint and a plan that runs without technical staff.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Grant application support</span>
+                <span class="built-desc">Finding the right funding source and writing a competitive application.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Governance review</span>
+                <span class="built-desc">An independent look at board structures, practices and documents, with findings in writing.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Strategic planning</span>
+                <span class="built-desc">A structured process that ends in a plan the organisation actually uses.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Event &amp; tournament operations</span>
+                <span class="built-desc">Planning, risk and volunteer coordination for a significant event.</span>
+              </li>
+              <li class="built-item">
+                <span class="built-name">Player, referee &amp; coaching pathway design</span>
+                <span class="built-desc">A structured progression from beginner to accredited.</span>
+              </li>
+            </ul>
+            <p class="built-foot"><a href="mailto:hello@croquetwade.com">talk it over: hello@croquetwade.com</a></p>
           </div>
         </div>
 
