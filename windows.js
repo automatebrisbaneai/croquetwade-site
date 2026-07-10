@@ -36,13 +36,13 @@ var WINDOWS = [
       + '<p style="font-size:0.85rem;color:var(--fg-muted);margin-top:1.5rem;">\u{1F4E7} <a href="mailto:me@croquetwade.com">me@croquetwade.com</a> — I\'d love to hear from you.</p>'
   },
   {
-    id: 'mycroquet-win', title: 'MyCroquet — Netscape', icon: 'netscape',
+    id: 'mycroquet-win', title: 'myCroquet — Netscape', icon: 'netscape',
     top: 50, left: 150, width: 620,
     menu: ['File','Edit','View','Help'],
-    body: '<h2>MyCroquet — Membership Portal</h2>'
-      + '<p class="project-meta">41 clubs \u00b7 all active members \u00b7 6 alpha sessions</p>'
-      + '<p>Passwordless membership portal. Replaces handwritten forms and direct database access with a clean interface that validates, logs, and audits every change.</p>'
-      + '<p>Club secretaries enter data once. It flows through the system. Zero double-entry. Every change logged with full audit trail.</p>'
+    body: '<h2>myCroquet — A Modular Platform</h2>'
+      + '<p class="project-meta">41 clubs \u00b7 all active members \u00b7 live now</p>'
+      + '<p>The member platform for Queensland croquet. The core is deliberately small — sign in, see your own details — and everything else is a module, switched on per person, visible only to the people it serves.</p>'
+      + '<p>A member sees a quiet little site. A secretary sees membership tools. A committee member sees the decision register. Each person\'s myCroquet is exactly as large as their responsibilities, and no larger.</p>'
       + '<a href="mycroquet.html" class="btn">Open Full Detail</a>'
   },
   {

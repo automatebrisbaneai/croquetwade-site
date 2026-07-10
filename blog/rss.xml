@@ -9,6 +9,14 @@
     <language>en-au</language>
     <atom:link href="https://new.croquetwade.com/blog/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
+      <title>myCroquet: A Modular Platform</title>
+      <link>https://croquetwade.com/blog/mycroquet-a-modular-platform/</link>
+      <guid isPermaLink="false">https://croquetwade.com/blog/mycroquet-a-modular-platform/</guid>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[The platform itself is small, and everything else is a module. How myCroquet stays simple for members while gaining capability indefinitely.]]></description>
+      <content:encoded><![CDATA[<p>Member platforms tend to fail in one of two directions. Either they do too little, and clubs end up running a scatter of separate tools, or they do too much, and every member faces a crowded screen of functions they never asked for. myCroquet is built on a different premise: the platform itself is small, and everything else is a module.</p>]]></content:encoded>
+    </item>
+    <item>
       <title>The news website is finished</title>
       <link>https://croquetwade.com/blog/the-news-website-is-finished/</link>
       <guid isPermaLink="false">https://croquetwade.com/blog/the-news-website-is-finished/</guid>

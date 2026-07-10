@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>myCroquet: A Modular Platform — CroquetWade</title>
+  <meta name="description" content="The platform itself is small, and everything else is a module. How myCroquet stays simple for members while gaining capability indefinitely.">
+  <meta property="og:title" content="myCroquet: A Modular Platform — CroquetWade">
+  <meta property="og:description" content="The platform itself is small, and everything else is a module. How myCroquet stays simple for members while gaining capability indefinitely.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://croquetwade.com/blog/mycroquet-a-modular-platform/">
+  <meta property="og:image" content="https://croquetwade.com/wade-waving-cut.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://croquetwade.com/blog/mycroquet-a-modular-platform/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/blog.css">
+</head>
+<body>
+  <header class="term-bar">
+    <a class="term-cmd" href="/"><span class="term-prompt">croquetwade:~$</span> cat mycroquet-a-modular-platform.md<span class="term-cursor"></span></a>
+    <nav class="term-nav">
+      <a href="/blog/">writing</a>
+      <a href="/#contact">contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <header class="article-header">
+        <div class="article-eyebrow">~/writing &middot; 10 Jul 2026 &middot; 5 min read</div>
+        <h1>myCroquet: A Modular Platform</h1>
+      </header>
+
+      <div class="article-body">
+<h2>The problem it solves</h2>
+<p>Member platforms tend to fail in one of two directions. Either they do too little, and clubs end up running a scatter of separate tools — one for membership, one for handicaps, one for events — or they do too much, and every member faces a crowded screen of functions they never asked for. The software that suits the association secretary managing 2,000 records is rarely the software that suits a club secretary managing 60, or a member who wants to check their own handicap and nothing more.</p>
+<p>myCroquet is built on a different premise: the platform itself is small, and everything else is a module.</p>
+<p>The purpose it serves is the association's own ideals, applied to software. Keep it simple — outcomes over complexity, do less admin and play more croquet. Hit our aims — purposeful decisions, do things that advance croquet.</p>
+<hr>
+<h2>How it works</h2>
+<p>The permanent core of myCroquet is deliberately minimal — signing in, viewing and editing your own details, and that's it. Every other feature is an optional, self-contained module: membership administration, the photo gallery, approvals, committee decision voting, Come &amp; Try management, and so on.</p>
+<p>Each module declares three things about itself: what its purpose is, the myCroquet services it uses, and who is allowed to see it. From that single declaration, the platform works out everything else. If a module is switched on and you are among its intended audience, it appears in your menu and its pages open normally. If it is switched off, or you are not in its audience, it is absent — not greyed out, not present-but-broken, but absent, as though it had never existed.</p>
+<p>A club membership officer sees the membership tools, with the features they need for their club. The association's membership officer sees the same tools, scaled to the whole state. Everyone else sees nothing to do with memberships. A club captain sees captain's tools; a committee member sees the decision register; an ordinary member sees none of these, but can update their details, check their handicap, and enter events. Where a module is useful to a handful of specific people — the newsletter editor, a document publisher, a grants assistant — it is shown to those people and nobody else.</p>
+<hr>
+<h2>Both large and small at once</h2>
+<p>The practical consequence is that myCroquet has no single size. To a member who wants only their own details, it is a small, quiet site: a login, a profile, perhaps the gallery. To the club person running Come &amp; Try sessions, it is also a booking system. To the committee, it is also a voting register. Each person's myCroquet is exactly as large as their responsibilities, and no larger.</p>
+<p>This resolves the usual trade-off between capability and simplicity. The same platform is capable for high-use people and easy for low-use people, at the same time, without compromise in either direction. It can keep gaining substantial features indefinitely without ever becoming more complicated for the people who don't use them, because a feature someone cannot see costs them no attention. That is what the modularity allows, and it is the reason the platform is built this way.</p>
+<p>It also changes the economics of trying things. A new module can be built, installed on the live platform, and left invisible until it is ready — then shown first to a handful of people, then a wider group, then everyone, by widening its audience rather than by re-engineering anything. A feature that doesn't earn its keep is removed as cleanly as it arrived.</p>
+<hr>
+<h2>An open platform</h2>
+<p>Because a module's obligations are written down as a standard, other builders can create modules that plug straight in. The standard explains what a module must declare, which myCroquet services it may use, and what it takes to pass the go-live tests. Anything that meets the standard plugs in; anything that doesn't, doesn't run.</p>
+<p>This matters most for assistant tools. CroquetClaude, the association's AI assistant, builds and maintains modules this way today — the committee decision register and the Come &amp; Try management tools were both added as modules, switched on when ready, visible only to the people who use them. Other AI assistants, whether the association's own in future or ones brought by third parties, can contribute on exactly the same terms. Their work is plugged in when wanted and pulled out when not, and either way the platform around it is untouched.</p>
+<p>The same openness extends to people: a member with software skills, a club with a particular need, or a third party with an existing product. An existing tool need not even be rewritten to join — the standard provides for presenting an outside application as a module, appearing within myCroquet and following the same audience rules as everything else. The contributor builds to the standard; the platform guarantees that their work appears only to the people it is meant for, cannot reach other clubs' data, and switches off as cleanly as any native feature.</p>
+<p>Every module, whatever its origin, arrives switched off. Turning it on is a deliberate decision, made after review and testing, and only for its selected audience.</p>
+<hr>
+<h2>In short</h2>
+<p>myCroquet is not one application but a small, trusted core carrying a changing set of modules, each visible only to the people it serves. That is what allows it to be both hugely capable and genuinely simple at the same time, and to accept good work from anyone — human or AI — prepared to build to its standard. The core stays small and stable; everything else can come and go as the association's needs change. Simple now, and built to stay that way.</p>
+<p>Keep it simple: every member does less admin, sees less clutter, and the platform never grows harder to use. Hit our aims: each module exists because it advances croquet — stronger administration, better-supported clubs, and room for new ideas to be tried safely and kept only if they are useful.</p>
+      </div>
+
+      <aside class="subscribe-cta">
+        <h2>keep reading</h2>
+        <p>Have new posts delivered to your inbox.</p>
+        <iframe src="https://croquetwade.substack.com/embed" width="100%" height="150"
+                frameborder="0" scrolling="no" title="Subscribe to CroquetWade"></iframe>
+      </aside>
+      <div class="further-reading">
+        <h2>more from the blog</h2>
+        <div class="post-links">
+          <a href="/blog/the-news-website-is-finished/" class="post-link">
+            <div class="post-link-title">The news website is finished</div>
+            <div class="post-link-date">4 Jun 2026</div>
+          </a>
+          <a href="/blog/leisure-in-the-age-of-technology/" class="post-link">
+            <div class="post-link-title">Leisure in the Age of Technology</div>
+            <div class="post-link-date">25 Mar 2026</div>
+          </a>
+          <a href="/blog/youre-sold-complexity-as-a-solution/" class="post-link">
+            <div class="post-link-title">You&rsquo;re Sold Complexity as a Solution</div>
+            <div class="post-link-date">10 Feb 2026</div>
+          </a>
+          <a href="/blog/nobody-wants-to-be-treasurer/" class="post-link">
+            <div class="post-link-title">Nobody Wants to Be Treasurer</div>
+            <div class="post-link-date">8 Feb 2026</div>
+          </a>
+        </div>
+        <a href="/blog/" class="back-link">cd ~/writing &rarr;</a>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>CroquetWade &mdash; Wade Hart. Brisbane, Queensland. Also on <a href="https://croquetwade.substack.com">Substack</a>.</p>
+  </footer>
+  <!-- Site editor — activates on ?edit&t=<token>; zero impact otherwise. -->
+  <script src="https://edit.croquetwade.com/edit.js"
+          data-stack="git"
+          data-site="cw"
+          defer></script>
+</body>
+</html>
