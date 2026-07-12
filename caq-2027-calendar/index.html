@@ -86,8 +86,11 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,44px);
 .row.anchor{background:color-mix(in srgb,var(--ca) 8%,transparent);border-radius:8px}
 .row.avoid{opacity:.85}
 .row.avoid .name{color:var(--ink-soft);font-style:italic}
-.clubtag{display:inline-block;margin-left:8px;font-style:normal;font-size:11px;
+.clubtag,.subtag{display:inline-block;margin-left:8px;font-style:normal;font-size:11px;
   text-transform:uppercase;letter-spacing:.06em;color:var(--avoid);font-weight:600}
+.row.secondary{opacity:.72}
+.row.secondary .name{font-style:italic;color:var(--ink-soft)}
+.row.secondary .date{color:var(--ink-soft);font-weight:500}
 .chip{display:inline-block;margin-left:7px;font-size:11px;font-weight:600;
   border-radius:999px;padding:2px 9px;white-space:nowrap;vertical-align:middle}
 .chip-lw{background:var(--chip-lw-bg);color:var(--chip-lw-ink)}
@@ -118,10 +121,10 @@ footer.foot p{margin:0 0 7px}
 <div class="anchorcard">
   <div>
     <p class="k">The fixed point of 2027</p>
-    <p class="v">The Eire Cup and AC National Singles come to Queensland in March. Every other
-    date is arranged around this.</p>
+    <p class="v">The AC Nationals — Gold Medal, Singles and Eire Cup — come to Queensland (Brisbane)
+    in March. Every other date is arranged around this.</p>
   </div>
-  <div class="big">13&ndash;21 Mar</div>
+  <div class="big">10&ndash;21 Mar</div>
 </div>
 
 <div class="legend">
@@ -130,24 +133,24 @@ footer.foot p{margin:0 0 7px}
   <span class="li"><span class="dot dot-ric"></span>Ricochet</span>
   <span class="li"><span class="dot dot-gb"></span>Gateball</span>
   <span class="li"><span class="dot dot-ca"></span>National (Croquet Australia)</span>
-  <span class="li"><span class="dot dot-avoid"></span>Major club event — keep clear</span>
+  <span class="li"><span class="dot dot-avoid"></span>Club event or state squad session (secondary)</span>
 </div>
 <section class="month"><h2>January</h2><div class="rows">
-<div class="row"><span class="dot dot-gc"></span><span class="date">17 Jan</span><span class="name">GC State Squad Training Day </span><span class="venue">TBC</span></div>
+<div class="row secondary"><span class="dot dot-avoid"></span><span class="date">17 Jan</span><span class="name">GC State Squad Training Day<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>February</h2><div class="rows">
-<div class="row"><span class="dot dot-gc"></span><span class="date">14 Feb</span><span class="name">GC State Squad Training Day </span><span class="venue">TBC</span></div>
+<div class="row secondary"><span class="dot dot-avoid"></span><span class="date">14 Feb</span><span class="name">GC State Squad Training Day<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>March</h2><div class="rows">
-<div class="row"><span class="dot dot-ca"></span><span class="date">10–12 Mar</span><span class="name">CA AC Gold Medal </span><span class="venue">TBC</span></div>
+<div class="row"><span class="dot dot-ca"></span><span class="date">10–12 Mar</span><span class="name">CA AC Gold Medal </span><span class="venue">Brisbane</span></div>
 <div class="row"><span class="dot dot-ca"></span><span class="date">13–16 Mar</span><span class="name">CA AC Men's & Women's Singles </span><span class="venue">Brisbane (various clubs)</span></div>
-<div class="row"><span class="dot dot-gc"></span><span class="date">14 Mar</span><span class="name">GC State Squad Training Day </span><span class="venue">Wynnum</span></div>
+<div class="row secondary"><span class="dot dot-avoid"></span><span class="date">14 Mar</span><span class="name">GC State Squad Training Day<span class="subtag">state squad — secondary</span></span><span class="venue">Wynnum</span></div>
 <div class="row anchor"><span class="dot dot-ca"></span><span class="date">17–21 Mar</span><span class="name">CA AC Eire Cup </span><span class="venue">Brisbane (various clubs)</span></div>
 <div class="row avoid"><span class="dot dot-avoid"></span><span class="date">26–30 Mar</span><span class="name">Stephens Easter AC & GC<span class="clubtag">club event — keep clear</span></span><span class="venue">Stephens</span></div>
 </div></section>
 <section class="month"><h2>April</h2><div class="rows">
 <div class="row"><span class="dot dot-gc"></span><span class="date">2–4 Apr</span><span class="name">GC Women's Open Singles </span><span class="venue">Wynnum</span></div>
-<div class="row"><span class="dot dot-gc"></span><span class="date">11 Apr</span><span class="name">GC State Squad Training Day </span><span class="venue">TBC</span></div>
+<div class="row secondary"><span class="dot dot-avoid"></span><span class="date">11 Apr</span><span class="name">GC State Squad Training Day<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">11–12 Apr</span><span class="name">AC Division 2 Medal <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-gc"></span><span class="date">18–19 Apr</span><span class="name">GC Eights </span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-gc"></span><span class="date">30 Apr – 3 May</span><span class="name">GC Men's Open Singles <span class="chip chip-lw">Labour Day long weekend</span></span><span class="venue">TBC</span></div>
@@ -162,12 +165,12 @@ footer.foot p{margin:0 0 7px}
 <div class="row"><span class="dot dot-ric"></span><span class="date">12–13 Jun</span><span class="name">Ricochet Open Singles </span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">19–20 Jun</span><span class="name">AC Men's Open Singles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">19–20 Jun</span><span class="name">AC Women's Open Singles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
-<div class="row"><span class="dot dot-gc"></span><span class="date">27 Jun</span><span class="name">GC State Team Practice </span><span class="venue">TBC</span></div>
+<div class="row secondary"><span class="dot dot-avoid"></span><span class="date">27 Jun</span><span class="name">GC State Team Practice<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
 <div class="row avoid"><span class="dot dot-avoid"></span><span class="date">Late Jun – early Jul</span><span class="name">MSOB — Mallet Sports on the Broadwater (all codes)<span class="clubtag">club event — keep clear</span></span><span class="venue">Southport</span></div>
 </div></section>
 <section class="month"><h2>July</h2><div class="rows">
 <div class="row"><span class="dot dot-gc"></span><span class="date">9–10 Jul</span><span class="name">GC President's Medal </span><span class="venue">TBC</span></div>
-<div class="row"><span class="dot dot-gc"></span><span class="date">17 Jul</span><span class="name">GC State Team Practice </span><span class="venue">TBC</span></div>
+<div class="row secondary"><span class="dot dot-avoid"></span><span class="date">17 Jul</span><span class="name">GC State Team Practice<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">17–18 Jul</span><span class="name">AC Division 3 Medal <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">17–18 Jul</span><span class="name">AC Division 4 Medal <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 <div class="row avoid"><span class="dot dot-avoid"></span><span class="date">23 Jul – 2 Aug</span><span class="name">Redcliffe Peninsula Croquet Carnival<span class="clubtag">club event — keep clear</span></span><span class="venue">Eildon, Redcliffe</span></div>
@@ -178,10 +181,11 @@ footer.foot p{margin:0 0 7px}
 <div class="row"><span class="dot dot-gc"></span><span class="date">14–15 Aug</span><span class="name">GC Open Mixed Doubles </span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-gb"></span><span class="date">15–17 Aug</span><span class="name">Gateball Doubles Championships </span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">21–22 Aug</span><span class="name">AC Mixed Doubles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
-<div class="row"><span class="dot dot-gc"></span><span class="date">28 Aug</span><span class="name">GC State Team Practice </span><span class="venue">TBC</span></div>
-<div class="row"><span class="dot dot-gc"></span><span class="date">29 Aug</span><span class="name">GC State Team Practice </span><span class="venue">TBC</span></div>
+<div class="row secondary"><span class="dot dot-avoid"></span><span class="date">28 Aug</span><span class="name">GC State Team Practice<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
+<div class="row secondary"><span class="dot dot-avoid"></span><span class="date">29 Aug</span><span class="name">GC State Team Practice<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>September</h2><div class="rows">
+<div class="row anchor"><span class="dot dot-ca"></span><span class="date">Sept (TBC)</span><span class="name">GC Nationals & Interstate Shield (ISS) </span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">11–12 Sep</span><span class="name">AC Open Singles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">25–26 Sep</span><span class="name">AC Open Doubles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 </div></section>
@@ -202,9 +206,10 @@ footer.foot p{margin:0 0 7px}
   Willy Silk. GC, Ricochet and Gateball follow the events coordinator's proposed schedule. National
   dates are proposed — Croquet Australia has not yet published its 2027 calendar (the Eire Cup coming
   to Queensland is confirmed).</p>
-  <p><strong>Venues.</strong> Only the venues confirmed in the source are shown; the rest read
-  <strong>TBC</strong> while host clubs are still being allocated. The <strong>AC Gold Medal</strong>
-  venue is unconfirmed. "AC Division 1 Medal" is not yet dated for 2027.</p>
+  <p><strong>Venues.</strong> Only venues confirmed in the source are shown; the rest read
+  <strong>TBC</strong> while host clubs are still being allocated. State squad training and team-practice
+  days are shown greyed, as secondary to the competitions. "AC Division 1 Medal" is not yet dated, and
+  the September GC Nationals / Interstate Shield still needs its dates.</p>
   <p>Prepared for Megan Stuart and Willy Silk &middot; July 2026 &middot; first draft for comment
   &middot; all dates subject to confirmation.</p>
 </footer>
