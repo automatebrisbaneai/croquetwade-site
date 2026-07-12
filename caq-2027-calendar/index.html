@@ -97,6 +97,15 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,44px);
 .chip-src{background:var(--chip-src-bg);color:var(--chip-src-ink)}
 .chip-warn{background:rgba(194,84,47,.15);color:#cf5a34;font-weight:700}
 
+.explainer{border:1px solid var(--line);border-radius:10px;margin:22px 0 8px;background:var(--card);overflow:hidden}
+.explainer summary{cursor:pointer;padding:15px 18px;font-family:var(--serif);font-size:15.5px;font-weight:700;
+  color:var(--lawn-deep);list-style:none;display:flex;align-items:center;gap:10px}
+.explainer summary::-webkit-details-marker{display:none}
+.explainer summary::before{content:"\25B8";color:var(--lawn);font-size:13px;transition:transform .15s ease}
+.explainer[open] summary::before{transform:rotate(90deg)}
+.explainer summary:hover{background:rgba(46,107,65,.05)}
+.expbody{padding:0 18px 16px}
+.expbody p{font-size:13.5px;margin:11px 0;color:var(--ink)}
 .confirmbox{background:rgba(194,84,47,.06);border:1px solid var(--line);border-left:3px solid #cf5a34;
   border-radius:10px;padding:16px 20px;margin:24px 0 8px}
 .confirmbox h3{font-family:var(--serif);font-size:17px;margin:0 0 4px;color:var(--ink)}
@@ -137,6 +146,33 @@ footer.foot p{margin:0 0 7px}
   <div class="big">10&ndash;21 Mar</div>
 </div>
 
+<details class="explainer">
+  <summary>How this calendar was put together — and how clashes were resolved</summary>
+  <div class="expbody">
+    <p><strong>What this is.</strong> One 2027 calendar for all four codes. The Association Croquet
+    dates are the AC committee's, supplied by Willy Silk. Golf Croquet, Ricochet and Gateball follow the
+    events coordinator's proposed schedule. The national fixtures are set, arranged around the AC
+    Nationals coming to Brisbane in March.</p>
+    <p><strong>How the dates were chosen.</strong> The AC committee's dates were taken exactly as sent —
+    they know their events and their people best. The other codes use the coordinator's proposed dates.
+    Everything is arranged around the one fixed point: the Eire Cup and AC Nationals in Brisbane,
+    10–21 March.</p>
+    <p><strong>How clashes were resolved.</strong> Every date was checked against every other, against
+    the national fixtures, and against the big club competitions. Where the two lists put the same event
+    on different dates, the AC committee's date was used (the five listed below). Two of those choices
+    also prevent a double-booking: keeping the May date for the Division 2 Medal would have collided with
+    the committee's new Alternate Strokes Doubles on the same weekend, and keeping the late-October date
+    for the Division 2 Championship would have collided with the Bronze Medal. A few events deliberately
+    share a weekend — Men's and Women's Open Singles, the Division 3 and 4 Medals, and the Division 1 and
+    2 Championships — because they run as pairs, so those aren't clashes. Nothing lands on the major club
+    draws (MSOB on the Broadwater, Stephens Easter, the Redcliffe carnival), and no medal or championship
+    falls on a public-holiday long weekend — the one exception being GC Men's Open Singles, which
+    deliberately uses the Labour Day long weekend as a four-day event.</p>
+    <p><strong>Venues.</strong> Most 2027 host clubs aren't allocated yet, so all but a few venues read
+    TBC. The box below lists everything still to confirm.</p>
+  </div>
+</details>
+
 <div class="confirmbox">
   <h3>Before it's final — to confirm</h3>
   <p class="lead">This is a first draft for the two of you to check. These are the points still open.</p>
@@ -152,11 +188,9 @@ footer.foot p{margin:0 0 7px}
   <ul>
     <li><strong>Division 1 Championship</strong> <span class="who">— on the coordinator's sheet but not the committee's list; does it stand?</span></li>
     <li><strong>Division 1 Medal</strong> <span class="who">— no date yet (postponed in 2026)</span></li>
-    <li><strong>Gold Medal</strong> <span class="who">— taken as Brisbane with the Nationals; confirm</span></li>
     <li><strong>GC Nationals &amp; Interstate Shield</strong> <span class="who">— September, dates still needed</span></li>
     <li><strong>State-team naming dates</strong> <span class="who">— include them? (practices are in, naming is not)</span></li>
     <li><strong>Host venues</strong> <span class="who">— mostly still to be allocated (most read TBC)</span></li>
-    <li><strong>Windsor's regular comps</strong> <span class="who">— still to come from Willy</span></li>
   </ul>
 </div>
 
