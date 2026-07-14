@@ -91,6 +91,10 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,44px);
 .row.national{background:var(--ca-bg);border-radius:8px}
 .row.national .name{font-style:italic;color:var(--ca-ink)}
 .row.national .date{color:var(--ca-ink)}
+.row:has(.dot-ac) .date{color:var(--ac);font-weight:700}
+.row:has(.dot-gc) .date{color:var(--gc);font-weight:700}
+.row:has(.dot-gb) .date{color:var(--gb);font-weight:700}
+.row:has(.dot-ric) .date{color:var(--ric);font-weight:700}
 .row.avoid{opacity:.85}
 .row.avoid .name{color:var(--ink-soft);font-style:italic}
 .clubtag,.subtag{display:inline-block;margin-left:8px;font-style:normal;font-size:11px;
@@ -170,8 +174,8 @@ footer.foot p{margin:0 0 7px}
     also prevent a double-booking: keeping the May date for the Division 2 Medal would have collided with
     the committee's new Alternate Strokes Doubles on the same weekend, and keeping the late-October date
     for the Division 2 Championship would have collided with the Bronze Medal. A few events deliberately
-    share a weekend — Men's and Women's Open Singles, the Division 3 and 4 Medals, and the Division 1 and
-    2 Championships — because they run as pairs, so those aren't clashes. Nothing lands on the major club
+    share a weekend — Men's and Women's Open Singles, and the Division 3 and 4 Medals — because they run
+    as pairs, so those aren't clashes. Nothing lands on the major club
     draws (MSOB on the Broadwater, Stephens Easter, the Redcliffe carnival), and no medal or championship
     falls on a public-holiday long weekend — the one exception being GC Men's Open Singles, which
     deliberately uses the Labour Day long weekend as a four-day event.</p>
@@ -193,9 +197,7 @@ footer.foot p{margin:0 0 7px}
   </ul>
   <p class="grp">Still open</p>
   <ul>
-    <li><strong>AC Division 1 Championship</strong> <span class="who">— on the coordinator's sheet but not the AC committee's list; does it stand?</span></li>
-    <li><strong>AC Division 1 Medal</strong> <span class="who">— no date yet (postponed in 2026)</span></li>
-    <li><strong>GC Nationals &amp; Interstate Shield</strong> <span class="who">— now confirmed by Croquet Australia: GC Gold Medal 8–10 Sep, Presidents GC Eights 11–13 Sep (both Cairnlea VIC), GC Men's &amp; Women's Singles 8–11 Oct, Interstate Shield 13–17 Oct (both TAS)</span></li>
+    <li><strong>Qld GC Open Doubles</strong> <span class="who">— 9–10 Oct falls inside the national GC Men's &amp; Women's Singles / Interstate Shield week (8–11 Oct). Lead-in event, or move the date?</span></li>
     <li><strong>State-team selection</strong> <span class="who">— when are the teams named?</span></li>
     <li><strong>Host venues</strong> <span class="who">— mostly still to be allocated (most read TBC)</span></li>
   </ul>
@@ -211,6 +213,9 @@ footer.foot p{margin:0 0 7px}
 </div>
 <section class="month"><h2>January</h2><div class="rows">
 <div class="row national"><span class="dot dot-ca"></span><span class="date">8–10 Jan</span><span class="name">CA AC Gold Medal </span><span class="venue">Sandy Bay, TAS</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">11 Jan</span><span class="name">CA U21 Practice/Training Day </span><span class="venue">Cairnlea, VIC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">12 Jan</span><span class="name">CA U21 Golf Croquet Doubles </span><span class="venue">Cairnlea, VIC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">13 Jan</span><span class="name">CA U21 Golf Croquet Singles </span><span class="venue">Cairnlea, VIC</span></div>
 <div class="row secondary"><span class="dot dot-avoid"></span><span class="date">17 Jan</span><span class="name">GC State Squad Training Day<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>February</h2><div class="rows">
@@ -230,6 +235,8 @@ footer.foot p{margin:0 0 7px}
 <div class="row"><span class="dot dot-gc"></span><span class="date">30 Apr – 3 May</span><span class="name">CAQ GC Men's Open Singles <span class="chip chip-lw">Labour Day long weekend</span></span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>May</h2><div class="rows">
+<div class="row national"><span class="dot dot-ca"></span><span class="date">9–11 May</span><span class="name">CA Golf Croquet Open Doubles Championship </span><span class="venue">Cairnlea, VIC</span></div>
+<div class="row anchor national"><span class="dot dot-ca"></span><span class="date">12–16 May</span><span class="name">CA Golf Croquet Open Singles Championship </span><span class="venue">Cairnlea, VIC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">15–16 May</span><span class="name">CAQ AC Alternate Strokes Doubles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-gc"></span><span class="date">21–23 May</span><span class="name">CAQ GC Open Singles </span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ric"></span><span class="date">29–30 May</span><span class="name">CAQ Ricochet Open Doubles </span><span class="venue">Bundaberg</span></div>
@@ -265,28 +272,32 @@ footer.foot p{margin:0 0 7px}
 <div class="row"><span class="dot dot-ac"></span><span class="date">25–26 Sep</span><span class="name">CAQ AC Open Doubles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>October</h2><div class="rows">
+<div class="row national"><span class="dot dot-ca"></span><span class="date">1–4 Oct</span><span class="name">CA President's Association Croquet Eights </span><span class="venue">Cairnlea, VIC</span></div>
 <div class="row national"><span class="dot dot-ca"></span><span class="date">8–11 Oct</span><span class="name">CA GC Men's &amp; Women's Singles </span><span class="venue">Devonport, Latrobe, Launceston, TAS</span></div>
 <div class="row"><span class="dot dot-gc"></span><span class="date">9–10 Oct</span><span class="name">CAQ GC Open Doubles <span class="chip chip-warn">clashes with national ISS week — move?</span></span><span class="venue">TBC</span></div>
 <div class="row national"><span class="dot dot-ca"></span><span class="date">13–17 Oct</span><span class="name">CA GC Interstate Shield </span><span class="venue">Launceston, TAS</span></div>
-<div class="row national"><span class="dot dot-ca"></span><span class="date">14–15 Oct</span><span class="name">CA National Gateball Doubles </span><span class="venue">TBC</span></div>
-<div class="row national"><span class="dot dot-ca"></span><span class="date">16–17 Oct</span><span class="name">CA National Gateball Teams </span><span class="venue">TBC</span></div>
-<div class="row"><span class="dot dot-ac"></span><span class="date">16–17 Oct</span><span class="name">CAQ AC Division 1 Championship <span class="chip chip-warn">not on AC list — confirm</span></span><span class="venue">TBC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">14–15 Oct</span><span class="name">National Gateball Doubles <span class="chip chip-warn">not on the CA calendar — separate national body, dates unverified</span></span><span class="venue">TBC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">16–17 Oct</span><span class="name">National Gateball Teams <span class="chip chip-warn">not on the CA calendar — separate national body, dates unverified</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">16–17 Oct</span><span class="name">CAQ AC Division 2 Championship <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 <div class="row national"><span class="dot dot-ca"></span><span class="date">22–24 Oct</span><span class="name">CA AC Bronze Medal (Qld) </span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>November</h2><div class="rows">
-<div class="row"><span class="dot dot-ac"></span><span class="date">13–14 Nov</span><span class="name">CAQ AC Division 3 & 4 Championships <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
+<div class="row"><span class="dot dot-ac"></span><span class="date">13–14 Nov</span><span class="name">CAQ AC Division 3 & 4 Championships <span class="chip chip-src">AC committee date</span> <span class="chip chip-warn">overlaps CA AC Open Doubles by 1 day</span></span><span class="venue">TBC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">14–16 Nov</span><span class="name">CA Association Croquet Open Doubles Championship </span><span class="venue">Cairnlea, VIC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">17–21 Nov</span><span class="name">CA Association Croquet Open Singles Championship </span><span class="venue">Cairnlea, VIC</span></div>
 <div class="row"><span class="dot dot-gc"></span><span class="date">27–28 Nov</span><span class="name">CAQ GC Division 2 Singles Championship </span><span class="venue">TBC</span></div>
 </div></section>
 <footer class="foot">
   <p><strong>Where the dates come from.</strong> AC dates are the AC committee's, as supplied by
-  Willy Silk. GC, Ricochet and Gateball follow the events coordinator's proposed schedule. National
-  dates are proposed — Croquet Australia has not yet published its 2027 calendar (the Eire Cup coming
-  to Queensland is confirmed).</p>
+  Willy Silk. GC and Ricochet follow the events coordinator's proposed schedule. National AC/GC dates
+  are Croquet Australia's confirmed 2027 calendar. The two national Gateball dates are shown separately
+  as unverified — Gateball nationals sit under a different governing body and aren't on the CA
+  calendar.</p>
   <p><strong>Venues.</strong> Only venues confirmed in the source are shown; the rest read
   <strong>TBC</strong> while host clubs are still being allocated. State squad training and team-practice
-  days are shown greyed, as secondary to the competitions. "AC Division 1 Medal" is not yet dated, and
-  the GC Nationals / Interstate Shield dates are now confirmed by Croquet Australia (8 Sep&ndash;17 Oct, VIC/TAS).</p>
+  days are shown greyed, as secondary to the competitions. There is no AC Division 1 Medal or
+  Championship in 2027. The GC Nationals / Interstate Shield dates are now confirmed by Croquet
+  Australia (8 Sep&ndash;17 Oct, VIC/TAS).</p>
   <p>Prepared for Megan Stuart and Willy Silk &middot; July 2026 &middot; first draft for comment
   &middot; all dates subject to confirmation.</p>
 </footer>
