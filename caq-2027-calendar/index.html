@@ -5,35 +5,39 @@
   --paper:#f6f5f0; --card:#fffffe; --ink:#1a2a21; --ink-soft:#4c5a52;
   --line:#e0e0d6; --line-soft:#ecece4;
   --lawn:#2e6b41; --lawn-deep:#1f4e2e;
-  --ac:#6d28d9; --gc:#2563eb; --gb:#d9791a; --ric:#c9765d; --ca:#a8850f;
+  --ac:#7a1f2b; --gc:#9c2b3a; --gb:#b5453a; --ric:#a85a5f; --ca:#b8860b;
+  --ca-bg:#f2e6c4; --ca-ink:#4f6b52;
   --avoid:#98a19a;
   --chip-lw-bg:#fbeecf; --chip-lw-ink:#8a6413;
-  --chip-src-bg:#efe7fb; --chip-src-ink:#5b2ca6;
+  --chip-src-bg:#f3e3e5; --chip-src-ink:#7a1f2b;
 }
 @media (prefers-color-scheme:dark){
   :root{
     --paper:#111a14; --card:#18231b; --ink:#e9ede9; --ink-soft:#a4b0a8;
     --line:#2b382f; --line-soft:#222d26;
     --lawn:#6fbf84; --lawn-deep:#8fd6a1;
-    --ac:#a78bfa; --gc:#7da7ff; --gb:#e6a35a; --ric:#e0a08c; --ca:#d7b654;
+    --ac:#c96a78; --gc:#d98a95; --gb:#e0958a; --ric:#d9a3a6; --ca:#d7b654;
+    --ca-bg:#3a3018; --ca-ink:#8fae8f;
     --avoid:#6d7871;
     --chip-lw-bg:#3a2f10; --chip-lw-ink:#e9c877;
-    --chip-src-bg:#2a2140; --chip-src-ink:#c3aef4;
+    --chip-src-bg:#3a2226; --chip-src-ink:#e6b0b8;
   }
 }
 :root[data-theme="light"]{
   --paper:#f6f5f0; --card:#fffffe; --ink:#1a2a21; --ink-soft:#4c5a52;
   --line:#e0e0d6; --line-soft:#ecece4; --lawn:#2e6b41; --lawn-deep:#1f4e2e;
-  --ac:#6d28d9; --gc:#2563eb; --gb:#d9791a; --ric:#c9765d; --ca:#a8850f;
+  --ac:#7a1f2b; --gc:#9c2b3a; --gb:#b5453a; --ric:#a85a5f; --ca:#b8860b;
+  --ca-bg:#f2e6c4; --ca-ink:#4f6b52;
   --avoid:#98a19a; --chip-lw-bg:#fbeecf; --chip-lw-ink:#8a6413;
-  --chip-src-bg:#efe7fb; --chip-src-ink:#5b2ca6;
+  --chip-src-bg:#f3e3e5; --chip-src-ink:#7a1f2b;
 }
 :root[data-theme="dark"]{
   --paper:#111a14; --card:#18231b; --ink:#e9ede9; --ink-soft:#a4b0a8;
   --line:#2b382f; --line-soft:#222d26; --lawn:#6fbf84; --lawn-deep:#8fd6a1;
-  --ac:#a78bfa; --gc:#7da7ff; --gb:#e6a35a; --ric:#e0a08c; --ca:#d7b654;
+  --ac:#c96a78; --gc:#d98a95; --gb:#e0958a; --ric:#d9a3a6; --ca:#d7b654;
+  --ca-bg:#3a3018; --ca-ink:#8fae8f;
   --avoid:#6d7871; --chip-lw-bg:#3a2f10; --chip-lw-ink:#e9c877;
-  --chip-src-bg:#2a2140; --chip-src-ink:#c3aef4;
+  --chip-src-bg:#3a2226; --chip-src-ink:#e6b0b8;
 }
 *{box-sizing:border-box}
 body{margin:0}
@@ -84,6 +88,9 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,44px);
 .venue{font-size:13px;color:var(--ink-soft);text-align:right;white-space:nowrap}
 .row.anchor .name{font-weight:700}
 .row.anchor{background:color-mix(in srgb,var(--ca) 8%,transparent);border-radius:8px}
+.row.national{background:var(--ca-bg);border-radius:8px}
+.row.national .name{font-style:italic;color:var(--ca-ink)}
+.row.national .date{color:var(--ca-ink)}
 .row.avoid{opacity:.85}
 .row.avoid .name{color:var(--ink-soft);font-style:italic}
 .clubtag,.subtag{display:inline-block;margin-left:8px;font-style:normal;font-size:11px;
@@ -140,10 +147,10 @@ footer.foot p{margin:0 0 7px}
 <div class="anchorcard">
   <div>
     <p class="k">The highlight of 2027</p>
-    <p class="v">The AC Nationals — Gold Medal, Singles and Eire Cup — come to Queensland (Brisbane)
-    in March.</p>
+    <p class="v">The AC Nationals — the Men's &amp; Women's Singles and the Eire Cup — come to
+    Queensland (Brisbane) in March.</p>
   </div>
-  <div class="big">10&ndash;21 Mar</div>
+  <div class="big">13&ndash;21 Mar</div>
 </div>
 
 <details class="explainer" open>
@@ -188,7 +195,7 @@ footer.foot p{margin:0 0 7px}
   <ul>
     <li><strong>AC Division 1 Championship</strong> <span class="who">— on the coordinator's sheet but not the AC committee's list; does it stand?</span></li>
     <li><strong>AC Division 1 Medal</strong> <span class="who">— no date yet (postponed in 2026)</span></li>
-    <li><strong>GC Nationals &amp; Interstate Shield</strong> <span class="who">— September, dates still needed</span></li>
+    <li><strong>GC Nationals &amp; Interstate Shield</strong> <span class="who">— now confirmed by Croquet Australia: GC Gold Medal 8–10 Sep, Presidents GC Eights 11–13 Sep (both Cairnlea VIC), GC Men's &amp; Women's Singles 8–11 Oct, Interstate Shield 13–17 Oct (both TAS)</span></li>
     <li><strong>State-team selection</strong> <span class="who">— when are the teams named?</span></li>
     <li><strong>Host venues</strong> <span class="who">— mostly still to be allocated (most read TBC)</span></li>
   </ul>
@@ -203,16 +210,16 @@ footer.foot p{margin:0 0 7px}
   <span class="li"><span class="dot dot-avoid"></span>Club event or state squad session (secondary)</span>
 </div>
 <section class="month"><h2>January</h2><div class="rows">
+<div class="row national"><span class="dot dot-ca"></span><span class="date">8–10 Jan</span><span class="name">CA AC Gold Medal </span><span class="venue">Sandy Bay, TAS</span></div>
 <div class="row secondary"><span class="dot dot-avoid"></span><span class="date">17 Jan</span><span class="name">GC State Squad Training Day<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>February</h2><div class="rows">
 <div class="row secondary"><span class="dot dot-avoid"></span><span class="date">14 Feb</span><span class="name">GC State Squad Training Day<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>March</h2><div class="rows">
-<div class="row"><span class="dot dot-ca"></span><span class="date">10–12 Mar</span><span class="name">CA AC Gold Medal </span><span class="venue">Brisbane</span></div>
-<div class="row"><span class="dot dot-ca"></span><span class="date">13–16 Mar</span><span class="name">CA AC Men's & Women's Singles </span><span class="venue">Brisbane (various clubs)</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">13–16 Mar</span><span class="name">CA AC Men's & Women's Singles </span><span class="venue">Brisbane (various clubs)</span></div>
 <div class="row secondary"><span class="dot dot-avoid"></span><span class="date">7 Mar</span><span class="name">GC State Squad Training Day<span class="subtag">state squad — secondary</span></span><span class="venue">Wynnum</span></div>
-<div class="row anchor"><span class="dot dot-ca"></span><span class="date">17–21 Mar</span><span class="name">CA AC Eire Cup </span><span class="venue">Brisbane (various clubs)</span></div>
+<div class="row anchor national"><span class="dot dot-ca"></span><span class="date">17–21 Mar</span><span class="name">CA AC Eire Cup </span><span class="venue">Brisbane (various clubs)</span></div>
 <div class="row avoid"><span class="dot dot-avoid"></span><span class="date">26–30 Mar</span><span class="name">Stephens Easter AC & GC<span class="clubtag">club event — keep clear</span></span><span class="venue">Stephens</span></div>
 </div></section>
 <section class="month"><h2>April</h2><div class="rows">
@@ -228,7 +235,7 @@ footer.foot p{margin:0 0 7px}
 <div class="row"><span class="dot dot-ric"></span><span class="date">29–30 May</span><span class="name">CAQ Ricochet Open Doubles </span><span class="venue">Bundaberg</span></div>
 </div></section>
 <section class="month"><h2>June</h2><div class="rows">
-<div class="row"><span class="dot dot-ca"></span><span class="date">4–6 Jun</span><span class="name">CA Qld GC Bronze Medal </span><span class="venue">TBC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">4–6 Jun</span><span class="name">CA Qld GC Bronze Medal </span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ric"></span><span class="date">12–13 Jun</span><span class="name">CAQ Ricochet Open Singles </span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">19–20 Jun</span><span class="name">CAQ AC Men's Open Singles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">19–20 Jun</span><span class="name">CAQ AC Women's Open Singles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
@@ -252,17 +259,20 @@ footer.foot p{margin:0 0 7px}
 <div class="row secondary"><span class="dot dot-avoid"></span><span class="date">29 Aug</span><span class="name">GC State Team Practice<span class="subtag">state squad — secondary</span></span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>September</h2><div class="rows">
-<div class="row anchor"><span class="dot dot-ca"></span><span class="date">Sept (TBC)</span><span class="name">GC Nationals & Interstate Shield (ISS) </span><span class="venue">TBC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">8–10 Sep</span><span class="name">CA GC Gold Medal </span><span class="venue">Cairnlea, VIC</span></div>
+<div class="row anchor national"><span class="dot dot-ca"></span><span class="date">11–13 Sep</span><span class="name">CA Presidents GC Eights </span><span class="venue">Cairnlea, VIC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">11–12 Sep</span><span class="name">CAQ AC Open Singles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">25–26 Sep</span><span class="name">CAQ AC Open Doubles <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>October</h2><div class="rows">
-<div class="row"><span class="dot dot-gc"></span><span class="date">9–10 Oct</span><span class="name">CAQ GC Open Doubles </span><span class="venue">TBC</span></div>
-<div class="row"><span class="dot dot-ca"></span><span class="date">14–15 Oct</span><span class="name">CA National Gateball Doubles </span><span class="venue">TBC</span></div>
-<div class="row"><span class="dot dot-ca"></span><span class="date">16–17 Oct</span><span class="name">CA National Gateball Teams </span><span class="venue">TBC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">8–11 Oct</span><span class="name">CA GC Men's &amp; Women's Singles </span><span class="venue">Devonport, Latrobe, Launceston, TAS</span></div>
+<div class="row"><span class="dot dot-gc"></span><span class="date">9–10 Oct</span><span class="name">CAQ GC Open Doubles <span class="chip chip-warn">clashes with national ISS week — move?</span></span><span class="venue">TBC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">13–17 Oct</span><span class="name">CA GC Interstate Shield </span><span class="venue">Launceston, TAS</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">14–15 Oct</span><span class="name">CA National Gateball Doubles </span><span class="venue">TBC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">16–17 Oct</span><span class="name">CA National Gateball Teams </span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">16–17 Oct</span><span class="name">CAQ AC Division 1 Championship <span class="chip chip-warn">not on AC list — confirm</span></span><span class="venue">TBC</span></div>
 <div class="row"><span class="dot dot-ac"></span><span class="date">16–17 Oct</span><span class="name">CAQ AC Division 2 Championship <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
-<div class="row"><span class="dot dot-ca"></span><span class="date">22–24 Oct</span><span class="name">CA AC Bronze Medal (Qld) </span><span class="venue">TBC</span></div>
+<div class="row national"><span class="dot dot-ca"></span><span class="date">22–24 Oct</span><span class="name">CA AC Bronze Medal (Qld) </span><span class="venue">TBC</span></div>
 </div></section>
 <section class="month"><h2>November</h2><div class="rows">
 <div class="row"><span class="dot dot-ac"></span><span class="date">13–14 Nov</span><span class="name">CAQ AC Division 3 & 4 Championships <span class="chip chip-src">AC committee date</span></span><span class="venue">TBC</span></div>
@@ -276,7 +286,7 @@ footer.foot p{margin:0 0 7px}
   <p><strong>Venues.</strong> Only venues confirmed in the source are shown; the rest read
   <strong>TBC</strong> while host clubs are still being allocated. State squad training and team-practice
   days are shown greyed, as secondary to the competitions. "AC Division 1 Medal" is not yet dated, and
-  the September GC Nationals / Interstate Shield still needs its dates.</p>
+  the GC Nationals / Interstate Shield dates are now confirmed by Croquet Australia (8 Sep&ndash;17 Oct, VIC/TAS).</p>
   <p>Prepared for Megan Stuart and Willy Silk &middot; July 2026 &middot; first draft for comment
   &middot; all dates subject to confirmation.</p>
 </footer>
