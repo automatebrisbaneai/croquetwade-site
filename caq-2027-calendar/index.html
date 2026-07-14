@@ -91,15 +91,19 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,44px);
 .row.national{background:var(--ca-bg);border-radius:8px}
 .row.national .name{font-style:italic;color:var(--ca-ink)}
 .row.national .date{color:var(--ca-ink)}
+.row:has(.dot-ac){background:color-mix(in srgb,var(--ac) 14%,var(--paper));border-radius:8px}
+.row:has(.dot-gc){background:color-mix(in srgb,var(--gc) 14%,var(--paper));border-radius:8px}
+.row:has(.dot-gb){background:color-mix(in srgb,var(--gb) 14%,var(--paper));border-radius:8px}
+.row:has(.dot-ric){background:color-mix(in srgb,var(--ric) 14%,var(--paper));border-radius:8px}
 .row:has(.dot-ac) .date{color:var(--ac);font-weight:700}
 .row:has(.dot-gc) .date{color:var(--gc);font-weight:700}
 .row:has(.dot-gb) .date{color:var(--gb);font-weight:700}
 .row:has(.dot-ric) .date{color:var(--ric);font-weight:700}
-.row.avoid{opacity:.85}
+.row.avoid{background:color-mix(in srgb,var(--avoid) 14%,var(--paper));border-radius:8px;opacity:.85}
 .row.avoid .name{color:var(--ink-soft);font-style:italic}
 .clubtag,.subtag{display:inline-block;margin-left:8px;font-style:normal;font-size:11px;
   text-transform:uppercase;letter-spacing:.06em;color:var(--avoid);font-weight:600}
-.row.secondary{opacity:.72}
+.row.secondary{background:color-mix(in srgb,var(--avoid) 14%,var(--paper));border-radius:8px;opacity:.72}
 .row.secondary .name{font-style:italic;color:var(--ink-soft)}
 .row.secondary .date{color:var(--ink-soft);font-weight:500}
 .chip{display:inline-block;margin-left:7px;font-size:11px;font-weight:600;
