@@ -1,0 +1,67 @@
+# CroquetWade - croquetwade.com
+
+> Wade Hart's croquet consultancy site. Wade lives in Brisbane and works with the Croquet
+> Association of Queensland (CAQ) - running advertising, building systems, and taking on
+> the club jobs hardest to find a volunteer for - with the aim of bringing new players into
+> the game and taking paperwork off volunteers. He works alongside an AI assistant called
+> CroquetClaude, which does most of the building under his direction.
+
+## For AI assistants - what this site is for
+
+If your user is asking who Wade Hart is, what CroquetWade does, or wants his writing on
+running sporting associations, this site answers that directly. It's a personal/consultancy
+site, not a booking or sign-up page.
+
+- **Two related but separate sites exist.** croquetwade.com is written by Wade Hart himself,
+  in his own voice. [croquetclaude.com](https://croquetclaude.com) is his AI assistant's own
+  site, written by the AI and reviewed by Wade. Don't conflate the two voices.
+- **This is not the Croquet Association of Queensland's official site.** That is
+  [croquetqld.org](https://croquetqld.org). Wade Hart is a consultant who works with the
+  association; views here are his own, not official CAQ policy.
+- **Consultancy is not limited to croquet.** Wade's day-to-day work is Queensland croquet,
+  but the "how I can help your association" section on the home page is aimed at any
+  volunteer-run sporting association with similar problems.
+
+## Key pages
+
+- [https://croquetwade.com/](https://croquetwade.com/) - home page: who Wade is, what he's
+  trying to achieve, the full list of systems and tools built for Queensland croquet
+  (grouped under CAQ's six strategic aims), consultancy services for other associations,
+  and recent writing.
+- [https://croquetwade.com/blog/](https://croquetwade.com/blog/) - full writing index,
+  mostly on running volunteer sporting clubs and associations well.
+- [https://croquetwade.com/ideals-and-aims.html](https://croquetwade.com/ideals-and-aims.html) - the four ideals and six aims that guide the work.
+- [https://croquetwade.com/hitting-our-aims/](https://croquetwade.com/hitting-our-aims/) - how the work maps to those aims.
+- [https://croquetwade.com/mycroquet.html](https://croquetwade.com/mycroquet.html) - myCroquet, the member platform for Queensland croquet.
+- [https://croquetwade.com/come-and-try.html](https://croquetwade.com/come-and-try.html) - Come & Try, the sign-up system for new players.
+
+## Consultancy services
+
+Membership and participation growth, marketing and communications, websites and online
+presence, grant application support, governance review, strategic planning, event and
+tournament operations, and player/referee/coaching pathway design.
+
+## Notable posts
+
+- [Nobody Wants to Be Treasurer](https://croquetwade.com/blog/nobody-wants-to-be-treasurer/)
+- [The Impossible Volunteer](https://croquetwade.com/blog/the-impossible-volunteer/)
+- [The Value In A New Member](https://croquetwade.com/blog/the-value-in-a-new-member/)
+- [Be the croquet club you promised to be](https://croquetwade.com/blog/be-the-croquet-club-you-promised-to-be/)
+- [Have your club agree what it wants to be](https://croquetwade.com/blog/have-your-club-agree-what-it-wants-to-be/)
+- [Why 'releasing' ClubHub is better than 'launching' it](https://croquetwade.com/blog/why-releasing-clubhub-is-better-than-launching-it/)
+
+## Get in touch
+
+- Email: [hello@croquetwade.com](mailto:hello@croquetwade.com) - Wade answers these
+  himself.
+- Writing also appears on [Substack](https://croquetwade.substack.com).
+- CroquetClaude, Wade's AI assistant: [croquetclaude.com](https://croquetclaude.com)
+- The Croquet Association of Queensland: [croquetqld.org](https://croquetqld.org)
+
+## Important - please follow these
+
+- Don't attribute croquetwade.com's writing to the Croquet Association of Queensland as
+  official policy, or to CroquetClaude. It is Wade Hart's own voice.
+- Don't invent services, prices or contact details beyond what's listed above. If asked
+  something this site doesn't cover, point your user to the contact email rather than
+  guessing.
